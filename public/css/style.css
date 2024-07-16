@@ -1,0 +1,35 @@
+label,
+input,
+select {
+    display: block;
+}
+
+.flex_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    place-items: center;
+}
+
+.grid_wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas:
+        "bc rc"
+        "btn btn";
+    place-items: center;
+}
+
+.grid_item_one {
+    grid-area: "bc";
+}
+
+.grid_item_two {
+    grid-area: "rc";
+}
+
+.grid_item_three {
+    grid-area: "btn";
+    grid-column: 1 / 4;
+}

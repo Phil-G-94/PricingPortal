@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        <title>Pricing Portal</title>
+        <link
+            rel="stylesheet"
+            href="css/style.css"
+        />
+    </head>
+    <body>
+        <main>
+            <h1 style="text-align: center">Home Page</h1>
+            <!--
+                form
+                    base components
+                    resource components
+            -->
+
+            <form
+                id="build"
+                class="grid_wrapper"
+                method="post"
+                action="/"
+            >
+                <div class="grid_item_one">
+                    <h2>Base Components</h2>
+                    <label>
+                        Chassis
+                        <select
+                            name="chassis"
+                            id="chassis"
+                        >
+                            <option value="600">2U</option>
+                            <option value="810">3U</option>
+                        </select>
+                    </label>
+                    <label>
+                        Motherboard
+                        <select
+                            name="motherboard"
+                            id="motherboard"
+                        >
+                            <option value="620">ASRock WRX80D8-2T</option>
+                            <option value="870">ASRock WRX90 WS EVO</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        PCIe 40G iSLC m.2
+                        <input
+                            type="number"
+                            value="68"
+                            name="islc"
+                            id="islc"
+                            min="68"
+                            max="68"
+                            step="0"
+                        />
+                    </label>
+
+                    <label>
+                        Cooling/Cabling
+                        <input
+                            type="number"
+                            value="75"
+                            name="cooling_cabling"
+                            id="cooling_cabling"
+                            min="75"
+                            max="75"
+                            step="0"
+                        />
+                    </label>
+                </div>
+                <div class="grid_item_two">
+                    <h2>Resource Components</h2>
+
+                    <label for="cpu">
+                        CPU
+                        <select
+                            name="cpu"
+                            id="cpu"
+                        >
+                            <option value="1000">Threadripper 5955WX</option>
+                            <option value="2100">Threadripper 5975WX</option>
+                            <option value="5000">Threadripper 5995WX</option>
+                            <option value="2150">Threadripper 7965WX</option>
+                            <option value="3050">Threadripper 7975WX</option>
+                            <option value="6000">Threadripper 7985WX</option>
+                            <option value="8500">Threadripper 7995WX</option>
+                        </select>
+                    </label>
+
+                    <label for="gpu">
+                        GPU
+                        <select
+                            name="gpu"
+                            id="gpu"
+                        >
+                            <option value="1900">Intel Datacenter Flex 170 GPU</option>
+                            <option value="280">Nvidia T1000 8G GPU</option>
+                            <option value="325">Nvidia A1000 8G GPU</option>
+                            <option value="830">Nvidia A4000 16G GPU</option>
+                            <option value="1100">Nvidia 4000 ADA 16G GPU</option>
+                            <option value="3215">Nvidia 5000 ADA 16G GPU</option>
+                        </select>
+                    </label>
+
+                    <label for="ram">
+                        RAM
+                        <select
+                            name="ram"
+                            id="ram"
+                        >
+                            <option value="137">64G 3200Mhz RDIMM RAM</option>
+                            <option value="650">128G 3200mhz RDIMM RAM</option>
+                            <option value="200">64G 4800Mhz RDIMM RAM</option>
+                            <option value="370">96G 4800Mhz RDIMM RAM</option>
+                            <option value="900">128G 4800Mhz RDIMM RAM</option>
+                        </select>
+                    </label>
+
+                    <label for="ssd">
+                        SSD
+                        <select
+                            name="ssd"
+                            id="ssd"
+                        >
+                            <option value="131">960G SSD</option>
+                            <option value="250">1.92T SSD</option>
+                            <option value="470">3.84T SSD</option>
+                            <option value="800">7.68T SSD</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="grid_item_three">
+                    <button type="submit">Create spec!</button>
+                </div>
+            </form>
+
+            <div class="flex_container">
+                <h2>Your Chosen Spec</h2>
+                <ul>
+                    <% for (const [key, value] of Object.entries(spec)) { %>
+                    <li><%= key %> : £<%= value %></li>
+                    <% } %>
+                </ul>
+            </div>
+        </main>
+    </body>
+</html>
