@@ -14,13 +14,7 @@
     </head>
     <body>
         <main>
-            <h1 style="text-align: center">Home Page</h1>
-            <!--
-                form
-                    base components
-                    resource components
-            -->
-
+            <h1 style="text-align: center">Ineviprice</h1>
             <form
                 id="build"
                 class="grid_wrapper"
@@ -146,9 +140,8 @@
             <div class="flex_container">
                 <h2>Your Chosen Spec</h2>
                 <ul>
-                    <% for (const [key, value] of Object.entries(spec)) { %>
-                    <li><%= key %> : £<%= value %></li>
-                    <% } %>
+                    <li>Retail: <%= totalRetailCost %></li>
+                    <li>Reseller: <%= totalResellerCost %></li>
                 </ul>
             </div>
         </main>
