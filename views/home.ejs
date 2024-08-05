@@ -94,9 +94,9 @@
                         <select
                             name="gpu"
                             id="gpu"
+                            aria-selected="Nvidia A1000 8G GPU"
                         >
                             <option value="1900">Intel Datacenter Flex 170 GPU</option>
-                            <option value="280">Nvidia T1000 8G GPU</option>
                             <option value="325">Nvidia A1000 8G GPU</option>
                             <option value="830">Nvidia A4000 16G GPU</option>
                             <option value="1100">Nvidia 4000 ADA 16G GPU</option>
@@ -138,10 +138,11 @@
             </form>
 
             <div class="flex_container">
-                <h2>Your Chosen Spec</h2>
+                <h2>Pricing for your chosen spec</h2>
+
                 <ul>
-                    <li>Retail Price: <%= totalRetailCost %></li>
-                    <li>Reseller Price: <%= totalResellerCost %></li>
+                    <li>Retail Price: £ <%= totalRetailCost %></li>
+                    <li>Reseller Price: £ <%= totalResellerCost %></li>
                 </ul>
             </div>
         </main>

@@ -32,9 +32,9 @@ const postHome = (req, res, next) => {
     const totalResellerCost = (baseComponentCost + resourceComponentCost) + margin;
 
     return res.status(200).render("home", {
-        spec: spec,
-        totalRetailCost: totalRetailCost,
-        totalResellerCost: totalResellerCost,
+        spec,
+        totalRetailCost,
+        totalResellerCost,
     });
 
 };
