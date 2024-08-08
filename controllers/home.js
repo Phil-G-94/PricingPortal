@@ -1,4 +1,7 @@
+import { getDb } from "../database/connection.js";
+
 const getHome = (req, res, next) => {
+
     res.status(200).render("home", {
         spec: {},
         totalRetailCost: 0,

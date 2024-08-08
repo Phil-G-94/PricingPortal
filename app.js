@@ -1,5 +1,6 @@
 import express from "express";
 import { router as homeRoutes } from "./routes/home.js";
+import { dbConnect } from "./database/connection.js";
 
 const app = express();
 const port = 3000;
@@ -13,6 +14,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(homeRoutes);
 
-app.listen(port, () => {
-    console.log(`Listening on port ${port}`);
+dbConnect(() => {
+    app.listen(port);
 });
