@@ -1,15 +1,13 @@
 import { MongoClient } from "mongodb";
 import dotenv from 'dotenv';
 
+let _db = undefined;
 
-
-async function dbConnect(callback) {
+function dbConnect(callback) {
 
     dotenv.config();
 
     /* add connection code */
-
-    let _db = undefined;
 
     const uri = `mongodb+srv://${process.env.MDB_USER}:${process.env.MDB_PASS}@pricingportal.knzuben.mongodb.net/?retryWrites=true&w=majority&appName=pricingPortal`;
 
@@ -17,7 +15,7 @@ async function dbConnect(callback) {
         .connect(uri)
         .then(client => {
             console.log("Connected to db!");
-            _db = client.db();
+            _db = client.db("pricingPortal");
             callback();
         })
         .catch(err => {
@@ -33,5 +31,4 @@ function getDb() {
 
     throw "No database found!";
 }
-
 export { dbConnect, getDb };

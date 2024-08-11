@@ -1,17 +1,35 @@
 import { getDb } from "../database/connection.js";
 
+const getComponents = () => {
+    const db = getDb();
+
+    return db
+        .collection("components")
+        .find()
+        .toArray()
+        .then(cmps => cmps)
+        .catch(err => console.log(err));
+};
+
 const getHome = (req, res, next) => {
 
-    res.status(200).render("home", {
-        spec: {},
-        totalRetailCost: 0,
-        totalResellerCost: 0,
+    getComponents().then(components => {
+
+        console.log("Logging from getComponents(), inside of getHome() controller");
+        console.log(components);
+
+        res.status(200).render("home", {
+            spec: {},
+            totalRetailCost: 0,
+            totalResellerCost: 0,
+            components,
+        });
     });
 };
 
 const postHome = (req, res, next) => {
 
-    // input values received as strings, coerce to number
+    // input values received as strings, coerce to number;
     const spec = {
         baseComponents: {
             chassis: +req.body.chassis,
@@ -38,6 +56,7 @@ const postHome = (req, res, next) => {
         spec,
         totalRetailCost,
         totalResellerCost,
+
     });
 
 };
