@@ -15,9 +15,6 @@ const getHome = (req, res, next) => {
 
     getComponents().then(components => {
 
-        console.log("Logging from getComponents(), inside of getHome() controller");
-        console.log(components);
-
         res.status(200).render("home", {
             spec: {},
             totalRetailCost: 0,
@@ -56,6 +53,7 @@ const postHome = (req, res, next) => {
         spec,
         totalRetailCost,
         totalResellerCost,
+        components: []
 
     });
 

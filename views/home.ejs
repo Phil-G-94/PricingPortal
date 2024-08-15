@@ -21,6 +21,8 @@
                 method="post"
                 action="/"
             >
+                <% for (let component of components) { %> <% console.log(component) %>
+
                 <div class="grid_item_one">
                     <h2>Base Components</h2>
                     <label>
@@ -29,8 +31,11 @@
                             name="chassis"
                             id="chassis"
                         >
-                            <option value="600">2U</option>
-                            <option value="810">3U</option>
+                            <!-- -->
+                            <% for (const [key, value] of
+                            Object.entries(component.baseComponents.chassis)) { %>
+                            <option value="<%= value %>"><%= key %></option>
+                            <% } %>
                         </select>
                     </label>
                     <label>
@@ -39,16 +44,18 @@
                             name="motherboard"
                             id="motherboard"
                         >
-                            <option value="620">ASRock WRX80D8-2T</option>
-                            <option value="870">ASRock WRX90 WS EVO</option>
+                            <% for (const [key, value] of
+                            Object.entries(component.baseComponents.motherboard)) {%>
+                            <option value="<%= value %>"><%= key %></option>
+                            <% } %>
                         </select>
                     </label>
 
                     <label>
                         PCIe 40G iSLC m.2
                         <input
-                            type="number"
-                            value="68"
+                            type="text"
+                            value="<%= component.baseComponents.pcie %>"
                             name="islc"
                             id="islc"
                             min="68"
@@ -60,8 +67,8 @@
                     <label>
                         Cooling/Cabling
                         <input
-                            type="number"
-                            value="75"
+                            type="text"
+                            value="<%= component.baseComponents['cooling_and_cabling']  %>"
                             name="cooling_cabling"
                             id="cooling_cabling"
                             min="75"
@@ -79,13 +86,10 @@
                             name="cpu"
                             id="cpu"
                         >
-                            <option value="1000">Threadripper 5955WX</option>
-                            <option value="2100">Threadripper 5975WX</option>
-                            <option value="5000">Threadripper 5995WX</option>
-                            <option value="2150">Threadripper 7965WX</option>
-                            <option value="3050">Threadripper 7975WX</option>
-                            <option value="6000">Threadripper 7985WX</option>
-                            <option value="8500">Threadripper 7995WX</option>
+                            <% for (const [key, value] of
+                            Object.entries(component.resourceComponents["CPU"])) { %>
+                            <option value="<%= value %>"><%= key %></option>
+                            <% } %>
                         </select>
                     </label>
 
@@ -96,11 +100,10 @@
                             id="gpu"
                             aria-selected="Nvidia A1000 8G GPU"
                         >
-                            <option value="1900">Intel Datacenter Flex 170 GPU</option>
-                            <option value="325">Nvidia A1000 8G GPU</option>
-                            <option value="830">Nvidia A4000 16G GPU</option>
-                            <option value="1100">Nvidia 4000 ADA 16G GPU</option>
-                            <option value="3215">Nvidia 5000 ADA 16G GPU</option>
+                            <% for (const [key, value] of
+                            Object.entries(component.resourceComponents["GPU"])) { %>
+                            <option value="<%= value %>"><%= key %></option>
+                            <% } %>
                         </select>
                     </label>
 
@@ -110,11 +113,10 @@
                             name="ram"
                             id="ram"
                         >
-                            <option value="137">64G 3200Mhz RDIMM RAM</option>
-                            <option value="650">128G 3200mhz RDIMM RAM</option>
-                            <option value="200">64G 4800Mhz RDIMM RAM</option>
-                            <option value="370">96G 4800Mhz RDIMM RAM</option>
-                            <option value="900">128G 4800Mhz RDIMM RAM</option>
+                            <% for (const [key, value] of
+                            Object.entries(component.resourceComponents["RAM"])) { %>
+                            <option value="<%= value %>"><%= key %></option>
+                            <% } %>
                         </select>
                     </label>
 
@@ -124,10 +126,10 @@
                             name="ssd"
                             id="ssd"
                         >
-                            <option value="131">960G SSD</option>
-                            <option value="250">1.92T SSD</option>
-                            <option value="470">3.84T SSD</option>
-                            <option value="800">7.68T SSD</option>
+                            <% for (const [key, value] of
+                            Object.entries(component.resourceComponents["SSD"])) { %>
+                            <option value="<%= value %>"><%= key %></option>
+                            <% } %>
                         </select>
                     </label>
                 </div>
@@ -135,6 +137,8 @@
                 <div class="grid_item_three">
                     <button type="submit">Get pricing</button>
                 </div>
+
+                <% } %>
             </form>
 
             <div class="flex_container">
@@ -148,3 +152,9 @@
         </main>
     </body>
 </html>
+
+<!--
+
+
+
+-->
