@@ -16,7 +16,8 @@ const getHome = (req, res, next) => {
     getComponents()
         .then(components => {
 
-            res.status(200).render("home", {
+            res.status(200).json({
+                message: "Successful fetch.",
                 spec: {},
                 totalRetailCost: 0,
                 totalResellerCost: 0,
@@ -55,7 +56,7 @@ const postHome = (req, res, next) => {
 
     getComponents()
         .then(components => {
-            return res.status(200).render("home", {
+            return res.status(200).json({
                 spec,
                 totalRetailCost,
                 totalResellerCost,
@@ -63,7 +64,7 @@ const postHome = (req, res, next) => {
 
             });
         })
-        .catch();
+        .catch(err => console.log(err));
 
 };
 
