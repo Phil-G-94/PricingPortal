@@ -18,9 +18,6 @@ const getHome = (req, res, next) => {
 
             res.status(200).json({
                 message: "Successful fetch.",
-                spec: {},
-                totalRetailCost: 0,
-                totalResellerCost: 0,
                 components,
             });
         })
