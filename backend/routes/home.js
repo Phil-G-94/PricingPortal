@@ -3,8 +3,8 @@ import * as homeController from "../controllers/home.js";
 
 const router = express.Router();
 
-router.get("/", homeController.getHome);
+router.get("/", homeController.getComponents);
 
-router.post("/", homeController.postHome);
+router.post("/", homeController.postComponents);
 
 export { router };
