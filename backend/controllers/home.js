@@ -26,48 +26,34 @@ const getComponents = (req, res, next) => {
 
 const postComponents = (req, res, next) => {
 
-    // input values received as strings, coerce to number;
-    // const spec = {
-    //     baseComponents: {
-    //         chassis: +req.body.chassis,
-    //         motherboard: +req.body.motherboard,
-    //         islc: +req.body.islc,
-    //         cooling_cabling: +req.body["cooling_cabling"],
-    //         cpu: +req.body.cpu,
-    //     },
-    //     resourceComponents: {
-    //         gpu: +req.body.gpu,
-    //         ram: +req.body.ram,
-    //         ssd: +req.body.ssd
-    //     }
-    // };
+    const spec = {
+        baseComponents: {
+            chassis: +req.body.chassis,
+            motherboard: +req.body.motherboard,
+            coolingCabling: +req.body.coolingCabling,
+            islc: +req.body.islc,
+        },
+        resourceComponents: {
+            CPU: +req.body.CPU,
+            GPU: +req.body.GPU,
+            RAM: +req.body.RAM,
+            SSD: +req.body.SSD,
+        }
 
-    // so that we can formulate totals for base components and resource components, respectively
-    // then add those up and pass the information to our view to be displayed
-    // const baseComponentCost = Object.values(spec.baseComponents).reduce((partialSum, a) => partialSum + a, 0);
-    // const resourceComponentCost = (4 * spec.resourceComponents.ram) + (3 * spec.resourceComponents.ssd) + (7 * spec.resourceComponents.gpu);
-    // const margin = 3500;
+    };
 
-    // const totalRetailCost = (baseComponentCost + resourceComponentCost) + (1000 + margin);
-    // const totalResellerCost = (baseComponentCost + resourceComponentCost) + margin;
+    const baseComponentCost = Object.values(spec.baseComponents).reduce((partialSum, accumulator) => partialSum + accumulator, 0);
+    const resourceComponentCost = spec.resourceComponents.CPU + (7 * spec.resourceComponents.GPU) + (4 * spec.resourceComponents.RAM) + (3 * spec.resourceComponents.SSD);
+    const margin = 3500;
 
-    // fetchComponents()
-    //     .then(components => {
-    //         return res.status(200).json({
-    //             message: "Successful post",
-    //             components
-
-    //         });
-    //     })
-    //     .catch(err => console.log(err));
-
-    console.log(req.body);
+    const totalResellerPrice = (baseComponentCost + resourceComponentCost) + margin;
+    const totalRetailPrice = (baseComponentCost + resourceComponentCost) + (1000 + margin);
 
     res.status(200).json({
         message: "Successful post",
-        spec: {
-            chassis: req.body.chassis,
-        }
+        spec,
+        totalResellerPrice,
+        totalRetailPrice
 
     });
 

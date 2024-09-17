@@ -3,12 +3,16 @@ import { useEffect, useState } from "react";
 
 function App() {
     const [componentData, setComponentData] = useState([]);
+    const [resellerPrice, setResellerPrice] = useState(0);
+    const [retailPrice, setRetailPrice] = useState(0);
 
-    const fetchData = async () => {
+    const fetchComponentData = async () => {
         const response = await fetch("http://localhost:8080");
 
         if (!response.ok) {
-            throw new Error("Something went wrong...");
+            throw new Error(
+                "Something went wrong...fetch component data"
+            );
         }
 
         const data = await response.json();
@@ -22,33 +26,42 @@ function App() {
 
     useEffect(() => {
         try {
-            fetchData();
+            fetchComponentData();
         } catch (err) {
             console.log(err);
         }
     }, []);
 
+    const onSubmitHandler = async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+
+        const formDataObject = Object.fromEntries(formData.entries());
+
+        const response = await fetch("http://localhost:8080", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formDataObject),
+        });
+
+        if (!response.ok) {
+            throw new Error("Something went wrong...submit handler");
+        }
+
+        const data = await response.json();
+
+        setResellerPrice(data.totalResellerPrice);
+        setRetailPrice(data.totalRetailPrice);
+    };
+
     return (
         <>
             <h2>Welcome to the Pricing Portal</h2>
 
-            <form action="/" method="GET">
-                {/*
-
-                        choose:
-
-                        chassis
-                        mobo
-                        cooling, cabling
-                        islc
-
-                        CPU
-                        GPU
-                        RAM
-                        SSD
-
-                        */}
-
+            <form action="/" method="POST" onSubmit={onSubmitHandler}>
                 {/* base components => outsource into own JSX cmp */}
 
                 <label htmlFor="chassis">
@@ -201,7 +214,14 @@ function App() {
                             })}
                     </select>
                 </label>
+
+                <button type="submit">Submit</button>
             </form>
+
+            <div>
+                <p> £{resellerPrice}</p>
+                <p> £{retailPrice}</p>
+            </div>
         </>
     );
 }
