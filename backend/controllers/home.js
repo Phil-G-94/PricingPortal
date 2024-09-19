@@ -26,6 +26,9 @@ const getComponents = (req, res, next) => {
 
 const postComponents = (req, res, next) => {
 
+    const ramQuantity = req.body["RAM_quantity"];
+    const ssdQuantity = req.body["SSD_quantity"];
+
     const spec = {
         baseComponents: {
             chassis: +req.body.chassis,
@@ -36,14 +39,14 @@ const postComponents = (req, res, next) => {
         resourceComponents: {
             CPU: +req.body.CPU,
             GPU: +req.body.GPU,
-            RAM: +req.body.RAM,
-            SSD: +req.body.SSD,
+            RAM: +req.body.RAM * ramQuantity,
+            SSD: +req.body.SSD * ssdQuantity,
         }
 
     };
 
     const baseComponentCost = Object.values(spec.baseComponents).reduce((partialSum, accumulator) => partialSum + accumulator, 0);
-    const resourceComponentCost = spec.resourceComponents.CPU + (7 * spec.resourceComponents.GPU) + (4 * spec.resourceComponents.RAM) + (3 * spec.resourceComponents.SSD);
+    const resourceComponentCost = spec.resourceComponents.CPU + (7 * spec.resourceComponents.GPU) + (spec.resourceComponents.RAM) + (spec.resourceComponents.SSD);
     const margin = 3500;
 
     const totalResellerPrice = (baseComponentCost + resourceComponentCost) + margin;
@@ -54,7 +57,6 @@ const postComponents = (req, res, next) => {
         spec,
         totalResellerPrice,
         totalRetailPrice
-
     });
 
 };

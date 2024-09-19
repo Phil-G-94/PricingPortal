@@ -59,7 +59,7 @@ function App() {
 
     return (
         <>
-            <h2>Welcome to the Pricing Portal</h2>
+            <h2>Ineviprice</h2>
 
             <form action="/" method="POST" onSubmit={onSubmitHandler}>
                 {/* base components => outsource into own JSX cmp */}
@@ -186,15 +186,28 @@ function App() {
                             .filter((cmp) => cmp.type === "RAM")
                             .map((cmp) => {
                                 return (
-                                    <option
-                                        value={cmp.cost}
-                                        key={crypto.randomUUID()}
-                                    >
-                                        {cmp.name}
-                                    </option>
+                                    <>
+                                        <option
+                                            value={cmp.cost}
+                                            key={crypto.randomUUID()}
+                                        >
+                                            {cmp.name}
+                                        </option>
+                                    </>
                                 );
                             })}
                     </select>
+                </label>
+                <label htmlFor="RAM_quantity">
+                    RAM Quantity
+                    <input
+                        type="number"
+                        name="RAM_quantity"
+                        id="RAM_quantity"
+                        min="1"
+                        max="8"
+                        defaultValue="4"
+                    />
                 </label>
 
                 <label htmlFor="SSD">
@@ -213,6 +226,17 @@ function App() {
                                 );
                             })}
                     </select>
+                </label>
+                <label htmlFor="SSD_quantity">
+                    SSD Quantity
+                    <input
+                        type="number"
+                        name="SSD_quantity"
+                        id="SSD_quantity"
+                        min="1"
+                        max="8"
+                        defaultValue="3"
+                    />
                 </label>
 
                 <button type="submit">Submit</button>
