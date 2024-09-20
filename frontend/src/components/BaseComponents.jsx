@@ -5,14 +5,15 @@ function BaseComponents({ componentData }) {
         <>
             <label htmlFor="chassis">
                 Chassis
-                <select name="chassis" id="chassis">
+                <select name="chassis">
                     {componentData
                         .filter((cmp) => cmp.type === "chassis")
                         .map((cmp) => {
                             return (
                                 <option
-                                    value={cmp.cost}
-                                    key={crypto.randomUUID()}
+                                    key={cmp._id}
+                                    label={cmp.name}
+                                    value={`${cmp.name} : ${cmp.cost}`}
                                 >
                                     {cmp.name}
                                 </option>
@@ -29,8 +30,9 @@ function BaseComponents({ componentData }) {
                         .map((cmp) => {
                             return (
                                 <option
-                                    value={cmp.cost}
-                                    key={crypto.randomUUID()}
+                                    label={cmp.name}
+                                    value={`${cmp.name} : ${cmp.cost}`}
+                                    key={cmp._id}
                                 >
                                     {cmp.name}
                                 </option>
@@ -48,11 +50,11 @@ function BaseComponents({ componentData }) {
                     .map((cmp) => {
                         return (
                             <input
-                                name="coolingCabling"
-                                id="coolingCabling"
+                                name={cmp.name}
+                                id={cmp.name}
                                 type="checkbox"
-                                key={crypto.randomUUID()}
-                                value={cmp.cost}
+                                key={cmp._id}
+                                value={`${cmp.name} : ${cmp.cost}`}
                                 placeholder={cmp.cost}
                             />
                         );
@@ -66,11 +68,11 @@ function BaseComponents({ componentData }) {
                     .map((cmp) => {
                         return (
                             <input
-                                name="islc"
-                                id="islc"
+                                name={cmp.name}
+                                id={cmp.name}
                                 type="checkbox"
-                                key={crypto.randomUUID()}
-                                value={cmp.cost}
+                                key={cmp._id}
+                                value={`${cmp.name} : ${cmp.cost}`}
                                 placeholder={cmp.cost}
                             />
                         );
@@ -81,7 +83,7 @@ function BaseComponents({ componentData }) {
 }
 
 BaseComponents.propTypes = {
-    componentData: PropTypes.object.isRequired,
+    componentData: PropTypes.array.isRequired,
 };
 
 export default BaseComponents;

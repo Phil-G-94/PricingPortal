@@ -11,8 +11,9 @@ function ResourceComponents({ componentData }) {
                         .map((cmp) => {
                             return (
                                 <option
-                                    value={cmp.cost}
-                                    key={crypto.randomUUID()}
+                                    label={cmp.name}
+                                    value={`${cmp.name} : ${cmp.cost}`}
+                                    key={cmp._id}
                                 >
                                     {cmp.name}
                                 </option>
@@ -29,8 +30,9 @@ function ResourceComponents({ componentData }) {
                         .map((cmp) => {
                             return (
                                 <option
-                                    value={cmp.cost}
-                                    key={crypto.randomUUID()}
+                                    label={cmp.name}
+                                    value={`${cmp.name} : ${cmp.cost}`}
+                                    key={cmp._id}
                                 >
                                     {cmp.name}
                                 </option>
@@ -46,18 +48,18 @@ function ResourceComponents({ componentData }) {
                         .filter((cmp) => cmp.type === "RAM")
                         .map((cmp) => {
                             return (
-                                <>
-                                    <option
-                                        value={cmp.cost}
-                                        key={crypto.randomUUID()}
-                                    >
-                                        {cmp.name}
-                                    </option>
-                                </>
+                                <option
+                                    label={cmp.name}
+                                    value={`${cmp.name} : ${cmp.cost}`}
+                                    key={cmp._id}
+                                >
+                                    {cmp.name}
+                                </option>
                             );
                         })}
                 </select>
             </label>
+
             <label htmlFor="RAM_quantity">
                 RAM Quantity
                 <input
@@ -78,8 +80,8 @@ function ResourceComponents({ componentData }) {
                         .map((cmp) => {
                             return (
                                 <option
-                                    value={cmp.cost}
-                                    key={crypto.randomUUID()}
+                                    value={`${cmp.name} : ${cmp.cost}`}
+                                    key={cmp._id}
                                 >
                                     {cmp.name}
                                 </option>
@@ -103,7 +105,7 @@ function ResourceComponents({ componentData }) {
 }
 
 ResourceComponents.propTypes = {
-    componentData: PropTypes.object.isRequired,
+    componentData: PropTypes.array.isRequired,
 };
 
 export default ResourceComponents;

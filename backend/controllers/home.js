@@ -29,21 +29,34 @@ const postComponents = (req, res, next) => {
     const ramQuantity = req.body["RAM_quantity"];
     const ssdQuantity = req.body["SSD_quantity"];
 
+    const chassisCost = +req.body.chassis?.split(" : ")[1];
+    const motherboardCost = +req.body.motherboard?.split(" : ")[1];
+    const coolingCablingCost = +req.body.coolingCabling?.split(" : ")[1];
+    const islcCost = +req.body.islc?.split(" : ")[1];
+    const cpuCost = +req.body.CPU?.split(" : ")[1];
+    const gpuCost = +req.body.GPU?.split(" : ")[1];
+    const ramCost = +req.body.RAM?.split(" : ")[1];
+    const ssdCost = +req.body.SSD?.split(" : ")[1];
+
+    /* WIP: coolingCabling and islc showing undefined */
+
     const spec = {
         baseComponents: {
-            chassis: +req.body.chassis,
-            motherboard: +req.body.motherboard,
-            coolingCabling: +req.body.coolingCabling,
-            islc: +req.body.islc,
+            chassis: chassisCost,
+            motherboard: motherboardCost,
+            coolingCabling: coolingCablingCost,
+            islc: islcCost,
         },
         resourceComponents: {
-            CPU: +req.body.CPU,
-            GPU: +req.body.GPU,
-            RAM: +req.body.RAM * ramQuantity,
-            SSD: +req.body.SSD * ssdQuantity,
+            CPU: cpuCost,
+            GPU: gpuCost,
+            RAM: ramCost * ramQuantity,
+            SSD: ssdCost * ssdQuantity,
         }
 
     };
+
+    console.log(spec);
 
     const baseComponentCost = Object.values(spec.baseComponents).reduce((partialSum, accumulator) => partialSum + accumulator, 0);
     const resourceComponentCost = spec.resourceComponents.CPU + (7 * spec.resourceComponents.GPU) + (spec.resourceComponents.RAM) + (spec.resourceComponents.SSD);
