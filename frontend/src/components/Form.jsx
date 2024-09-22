@@ -4,6 +4,7 @@ import ResourceComponents from "./ResourceComponents.jsx";
 
 function Form() {
     const [componentData, setComponentData] = useState([]);
+    const [specData, setSpecData] = useState([]);
     const [resellerPrice, setResellerPrice] = useState(0);
     const [retailPrice, setRetailPrice] = useState(0);
 
@@ -39,7 +40,6 @@ function Form() {
         const formData = new FormData(event.target);
 
         const formDataObject = Object.fromEntries(formData.entries());
-        console.log(formDataObject);
 
         const response = await fetch("http://localhost:8080", {
             method: "POST",
@@ -55,9 +55,30 @@ function Form() {
 
         const data = await response.json();
 
+        setSpecData(data.spec);
         setResellerPrice(data.totalResellerPrice);
         setRetailPrice(data.totalRetailPrice);
     };
+
+    const baseComponentData = Object.entries(
+        specData.baseComponents ?? []
+    ).map(([key, value]) => {
+        return (
+            <li key={key}>
+                {value.name} - £{value.cost}
+            </li>
+        );
+    });
+
+    const resourceComponentData = Object.entries(
+        specData.resourceComponents ?? []
+    ).map(([key, value]) => {
+        return (
+            <li key={key}>
+                {value.name} - £{value.cost}
+            </li>
+        );
+    });
 
     return (
         <>
@@ -68,6 +89,12 @@ function Form() {
 
                 <button type="submit">Submit</button>
             </form>
+
+            <div>
+                <ul>{baseComponentData}</ul>
+                <ul>{resourceComponentData}</ul>
+            </div>
+
             <div>
                 <p> £{resellerPrice}</p>
                 <p> £{retailPrice}</p>

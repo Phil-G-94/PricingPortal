@@ -5,7 +5,7 @@ function BaseComponents({ componentData }) {
         <>
             <label htmlFor="chassis">
                 Chassis
-                <select name="chassis">
+                <select name="chassis" id="chassis">
                     {componentData
                         .filter((cmp) => cmp.type === "chassis")
                         .map((cmp) => {
@@ -50,8 +50,8 @@ function BaseComponents({ componentData }) {
                     .map((cmp) => {
                         return (
                             <input
-                                name={cmp.name}
-                                id={cmp.name}
+                                name="coolingCabling"
+                                id="coolingCabling"
                                 type="checkbox"
                                 key={cmp._id}
                                 value={`${cmp.name} : ${cmp.cost}`}
@@ -68,8 +68,8 @@ function BaseComponents({ componentData }) {
                     .map((cmp) => {
                         return (
                             <input
-                                name={cmp.name}
-                                id={cmp.name}
+                                name="islc"
+                                id="islc"
                                 type="checkbox"
                                 key={cmp._id}
                                 value={`${cmp.name} : ${cmp.cost}`}

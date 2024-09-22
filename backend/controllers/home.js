@@ -29,37 +29,76 @@ const postComponents = (req, res, next) => {
     const ramQuantity = req.body["RAM_quantity"];
     const ssdQuantity = req.body["SSD_quantity"];
 
-    const chassisCost = +req.body.chassis?.split(" : ")[1];
-    const motherboardCost = +req.body.motherboard?.split(" : ")[1];
-    const coolingCablingCost = +req.body.coolingCabling?.split(" : ")[1];
-    const islcCost = +req.body.islc?.split(" : ")[1];
-    const cpuCost = +req.body.CPU?.split(" : ")[1];
-    const gpuCost = +req.body.GPU?.split(" : ")[1];
-    const ramCost = +req.body.RAM?.split(" : ")[1];
-    const ssdCost = +req.body.SSD?.split(" : ")[1];
+    const chassis = {
+        name: req.body.chassis?.split(" : ")[0],
+        cost: +req.body.chassis?.split(" : ")[1]
+    };
 
-    /* WIP: coolingCabling and islc showing undefined */
+    const motherboard = {
+        name: req.body.motherboard?.split(" : ")[0],
+        cost: +req.body.motherboard?.split(" : ")[1],
+    };
+
+    const coolingCabling = {
+        name: req.body.coolingCabling?.split(" : ")[0],
+        cost: +req.body.coolingCabling?.split(" : ")[1],
+    };
+
+    const islc = {
+        name: req.body.islc?.split(" : ")[0],
+        cost: +req.body.islc?.split(" : ")[1],
+    };
+
+    const CPU = {
+        name: req.body.CPU?.split(" : ")[0],
+        cost: +req.body.CPU?.split(" : ")[1],
+    };
+
+    const GPU = {
+        name: req.body.GPU?.split(" : ")[0],
+        cost: +req.body.GPU?.split(" : ")[1],
+    };
+
+    const RAM = {
+        name: req.body.RAM?.split(" : ")[0],
+        cost: +req.body.RAM?.split(" : ")[1] * ramQuantity,
+    };
+
+    const SSD = {
+        name: req.body.SSD?.split(" : ")[0],
+        cost: +req.body.SSD?.split(" : ")[1] * ssdQuantity,
+    };
 
     const spec = {
         baseComponents: {
-            chassis: chassisCost,
-            motherboard: motherboardCost,
-            coolingCabling: coolingCablingCost,
-            islc: islcCost,
+            chassis,
+            motherboard,
+            coolingCabling,
+            islc,
         },
         resourceComponents: {
-            CPU: cpuCost,
-            GPU: gpuCost,
-            RAM: ramCost * ramQuantity,
-            SSD: ssdCost * ssdQuantity,
+            CPU,
+            GPU,
+            RAM,
+            SSD,
         }
 
     };
 
-    console.log(spec);
+    const costSorter = (dataObject) => {
+        const costData = [];
 
-    const baseComponentCost = Object.values(spec.baseComponents).reduce((partialSum, accumulator) => partialSum + accumulator, 0);
-    const resourceComponentCost = spec.resourceComponents.CPU + (7 * spec.resourceComponents.GPU) + (spec.resourceComponents.RAM) + (spec.resourceComponents.SSD);
+        for (const c of Object.values(dataObject)) {
+            costData.push(c.cost);
+        }
+
+        return costData;
+    };
+
+    const baseComponentCost = costSorter(spec.baseComponents).reduce((partialSum, accumulator) => partialSum + accumulator, 0);
+
+    const resourceComponentCost = spec.resourceComponents.CPU.cost + (7 * spec.resourceComponents.GPU.cost) + (spec.resourceComponents.RAM.cost) + (spec.resourceComponents.SSD.cost);
+
     const margin = 3500;
 
     const totalResellerPrice = (baseComponentCost + resourceComponentCost) + margin;
