@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import BaseComponents from "./BaseComponents.jsx";
 import ResourceComponents from "./ResourceComponents.jsx";
+import SpecDisplay from "./SpecDisplay.jsx";
 
 function Form() {
     const [componentData, setComponentData] = useState([]);
@@ -60,26 +61,6 @@ function Form() {
         setRetailPrice(data.totalRetailPrice);
     };
 
-    const baseComponentData = Object.entries(
-        specData.baseComponents ?? []
-    ).map(([key, value]) => {
-        return (
-            <li key={key}>
-                {value.name} - £{value.cost}
-            </li>
-        );
-    });
-
-    const resourceComponentData = Object.entries(
-        specData.resourceComponents ?? []
-    ).map(([key, value]) => {
-        return (
-            <li key={key}>
-                {value.name} - £{value.cost}
-            </li>
-        );
-    });
-
     return (
         <>
             <form action="/" method="POST" onSubmit={onSubmitHandler}>
@@ -90,10 +71,7 @@ function Form() {
                 <button type="submit">Submit</button>
             </form>
 
-            <div>
-                <ul>{baseComponentData}</ul>
-                <ul>{resourceComponentData}</ul>
-            </div>
+            <SpecDisplay specData={specData} />
 
             <div>
                 <p> £{resellerPrice}</p>
