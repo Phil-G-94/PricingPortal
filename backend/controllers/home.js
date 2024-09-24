@@ -1,27 +1,43 @@
 import { getDb } from "../database/connection.js";
 
-const fetchComponents = () => {
-    const db = getDb();
+const fetchComponents = async () => {
+    const db = await getDb();
 
-    return db
+    const components = await db
         .collection("components")
         .find()
-        .toArray()
-        .then(cmps => cmps)
-        .catch(err => console.log(err));
+        .toArray();
+
+    try {
+        return components;
+    } catch (err) {
+        if (!err.statusCode) {
+            err.statusCode = 500;
+        }
+
+        next(err);
+    }
+
 };
 
-const getComponents = (req, res, next) => {
+const getComponents = async (req, res, next) => {
+    try {
 
-    fetchComponents()
-        .then(components => {
+        const components = await fetchComponents();
 
-            res.status(200).json({
-                message: "Successful fetch.",
-                components,
-            });
-        })
-        .catch(err => console.log(err));
+        res.status(200).json({
+            message: "Successful fetch.",
+            components,
+        });
+
+    } catch (err) {
+        if (!err.statusCode) {
+            err.statusCode = 500;
+        }
+
+        next(err);
+    }
+
 };
 
 const postComponents = (req, res, next) => {

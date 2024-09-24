@@ -30,7 +30,7 @@ function SpecDisplay({ specData }) {
 }
 
 SpecDisplay.propTypes = {
-    specData: PropTypes.object.isRequired,
+    specData: PropTypes.array.isRequired,
 };
 
 export default SpecDisplay;

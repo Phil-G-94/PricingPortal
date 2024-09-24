@@ -23,6 +23,18 @@ app.use((req, res, next) => {
 
 app.use(homeRoutes);
 
+app.use((err, req, res, next) => {
+    console.error(err);
+
+    const status = err.statusCode || 500;
+
+    const message = err.message;
+
+    const data = err.data;
+
+    res.status(status).json({ message, data });
+});
+
 dbConnect(() => {
     app.listen(port);
 });
