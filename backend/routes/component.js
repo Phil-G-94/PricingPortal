@@ -1,13 +1,13 @@
 import express from "express";
-import * as homeController from "../controllers/home.js";
+import * as componentController from "../controllers/component.js";
 import validator from "express-validator";
 
 const router = express.Router();
 
-router.get("/", homeController.getComponents);
+router.get("/components", componentController.getComponents);
 
 router.post(
-    "/",
+    "/components",
     [
         validator
             .body([
@@ -25,7 +25,7 @@ router.post(
             .escape(),
         validator.body("coolingCabling").notEmpty(),
     ],
-    homeController.postComponents
+    componentController.postComponents
 );
 
 export { router };
