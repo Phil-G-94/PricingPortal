@@ -1,4 +1,5 @@
 import { getDb } from "../database/connection.js";
+import { validationResult } from "express-validator";
 
 const fetchComponents = async () => {
     const db = await getDb();
@@ -14,22 +15,18 @@ const fetchComponents = async () => {
         if (!err.statusCode) {
             err.statusCode = 500;
         }
-
         next(err);
     }
-
 };
 
 const getComponents = async (req, res, next) => {
     try {
-
         const components = await fetchComponents();
 
         res.status(200).json({
             message: "Successful fetch.",
             components,
         });
-
     } catch (err) {
         if (!err.statusCode) {
             err.statusCode = 500;
@@ -37,17 +34,27 @@ const getComponents = async (req, res, next) => {
 
         next(err);
     }
-
 };
 
 const postComponents = (req, res, next) => {
+    const errorResult = validationResult(req);
+
+    console.log(errorResult.isEmpty());
+
+    if (!errorResult.isEmpty()) {
+        const error = new Error(
+            "Validation failed. Please check your input values"
+        );
+        error.statusCode = 422;
+        error.message = errorResult.array();
+    }
 
     const ramQuantity = req.body["RAM_quantity"];
     const ssdQuantity = req.body["SSD_quantity"];
 
     const chassis = {
         name: req.body.chassis?.split(" : ")[0],
-        cost: +req.body.chassis?.split(" : ")[1]
+        cost: +req.body.chassis?.split(" : ")[1],
     };
 
     const motherboard = {
@@ -97,8 +104,7 @@ const postComponents = (req, res, next) => {
             GPU,
             RAM,
             SSD,
-        }
-
+        },
     };
 
     const costSorter = (dataObject) => {
@@ -111,22 +117,31 @@ const postComponents = (req, res, next) => {
         return costData;
     };
 
-    const baseComponentCost = costSorter(spec.baseComponents).reduce((partialSum, accumulator) => partialSum + accumulator, 0);
+    const baseComponentCost = costSorter(spec.baseComponents).reduce(
+        (partialSum, accumulator) => partialSum + accumulator,
+        0
+    );
 
-    const resourceComponentCost = spec.resourceComponents.CPU.cost + (7 * spec.resourceComponents.GPU.cost) + (spec.resourceComponents.RAM.cost) + (spec.resourceComponents.SSD.cost);
+    const resourceComponentCost =
+        spec.resourceComponents.CPU.cost +
+        7 * spec.resourceComponents.GPU.cost +
+        spec.resourceComponents.RAM.cost +
+        spec.resourceComponents.SSD.cost;
 
     const margin = 3500;
 
-    const totalResellerPrice = (baseComponentCost + resourceComponentCost) + margin;
-    const totalRetailPrice = (baseComponentCost + resourceComponentCost) + (1000 + margin);
+    const totalResellerPrice =
+        baseComponentCost + resourceComponentCost + margin;
+    const totalRetailPrice =
+        baseComponentCost + resourceComponentCost + (1000 + margin);
 
     res.status(200).json({
         message: "Successful post",
         spec,
         totalResellerPrice,
-        totalRetailPrice
+        totalRetailPrice,
+        errors: errorResult.array(),
     });
-
 };
 
 export { getComponents, postComponents };
