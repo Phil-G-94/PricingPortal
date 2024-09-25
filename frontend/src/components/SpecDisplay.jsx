@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 function SpecDisplay({ specData }) {
     const baseComponentData = Object.entries(
-        specData.baseComponents ?? []
+        specData.baseComponents ?? {}
     ).map(([key, value]) => {
         return (
             <li key={key}>
@@ -12,7 +12,7 @@ function SpecDisplay({ specData }) {
     });
 
     const resourceComponentData = Object.entries(
-        specData.resourceComponents ?? []
+        specData.resourceComponents ?? {}
     ).map(([key, value]) => {
         return (
             <li key={key}>
@@ -30,7 +30,7 @@ function SpecDisplay({ specData }) {
 }
 
 SpecDisplay.propTypes = {
-    specData: PropTypes.array.isRequired,
+    specData: PropTypes.object.isRequired,
 };
 
 export default SpecDisplay;

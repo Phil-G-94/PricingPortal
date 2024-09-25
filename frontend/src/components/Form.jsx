@@ -5,9 +5,10 @@ import SpecDisplay from "./SpecDisplay.jsx";
 
 function Form() {
     const [componentData, setComponentData] = useState([]);
-    const [specData, setSpecData] = useState([]);
+    const [specData, setSpecData] = useState({});
     const [resellerPrice, setResellerPrice] = useState(0);
     const [retailPrice, setRetailPrice] = useState(0);
+    const [errorData, setErrorData] = useState([]);
 
     const fetchComponentData = async () => {
         const response = await fetch("http://localhost:8080");
@@ -56,10 +57,19 @@ function Form() {
 
         const data = await response.json();
 
+        setErrorData(data.errors);
         setSpecData(data.spec);
         setResellerPrice(data.totalResellerPrice);
         setRetailPrice(data.totalRetailPrice);
     };
+
+    const errors = errorData.map((error) => {
+        return (
+            <div key={error.path}>
+                <p>{`${error.msg} for ${error.path} input`}</p>
+            </div>
+        );
+    });
 
     return (
         <>
@@ -71,12 +81,16 @@ function Form() {
                 <button type="submit">Submit</button>
             </form>
 
-            <SpecDisplay specData={specData} />
-
-            <div>
-                <p> £{resellerPrice}</p>
-                <p> £{retailPrice}</p>
-            </div>
+            {errorData && errors}
+            {!errorData && (
+                <>
+                    <SpecDisplay specData={specData} />
+                    <div>
+                        <p> £{resellerPrice}</p>
+                        <p> £{retailPrice}</p>
+                    </div>
+                </>
+            )}
         </>
     );
 }
