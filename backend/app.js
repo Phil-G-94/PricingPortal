@@ -1,5 +1,6 @@
 import express, { urlencoded, json } from "express";
-import { router as homeRoutes } from "./routes/home.js";
+import { router as componentRoutes } from "./routes/component.js";
+import { router as authRoutes } from "./routes/auth.js";
 import { dbConnect } from "./database/connection.js";
 
 const app = express();
@@ -27,7 +28,8 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(homeRoutes);
+app.use(componentRoutes);
+app.use(authRoutes);
 
 app.use((err, req, res, next) => {
     console.error(err);

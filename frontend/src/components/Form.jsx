@@ -11,7 +11,9 @@ function Form() {
     const [errorData, setErrorData] = useState([]);
 
     const fetchComponentData = async () => {
-        const response = await fetch("http://localhost:8080");
+        const response = await fetch(
+            "http://localhost:8080/components"
+        );
 
         if (!response.ok) {
             throw new Error(
@@ -43,13 +45,16 @@ function Form() {
 
         const formDataObject = Object.fromEntries(formData.entries());
 
-        const response = await fetch("http://localhost:8080", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formDataObject),
-        });
+        const response = await fetch(
+            "http://localhost:8080/components",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formDataObject),
+            }
+        );
 
         if (!response.ok) {
             throw new Error("Something went wrong...submit handler");
@@ -71,8 +76,11 @@ function Form() {
         );
     });
 
+    console.log(errorData);
+
     return (
         <>
+            <h2>Component Selection</h2>
             <form action="/" method="POST" onSubmit={onSubmitHandler}>
                 <BaseComponents componentData={componentData} />
 
@@ -82,7 +90,7 @@ function Form() {
             </form>
 
             {errorData && errors}
-            {!errorData && (
+            {errorData.length == 0 && (
                 <>
                     <SpecDisplay specData={specData} />
                     <div>

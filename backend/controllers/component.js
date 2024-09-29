@@ -1,23 +1,5 @@
-import { getDb } from "../database/connection.js";
 import { validationResult } from "express-validator";
-
-const fetchComponents = async () => {
-    const db = await getDb();
-
-    const components = await db
-        .collection("components")
-        .find()
-        .toArray();
-
-    try {
-        return components;
-    } catch (err) {
-        if (!err.statusCode) {
-            err.statusCode = 500;
-        }
-        next(err);
-    }
-};
+import { fetchComponents } from "../database/components.js";
 
 const getComponents = async (req, res, next) => {
     try {
@@ -38,8 +20,6 @@ const getComponents = async (req, res, next) => {
 
 const postComponents = (req, res, next) => {
     const errorResult = validationResult(req);
-
-    console.log(errorResult.isEmpty());
 
     if (!errorResult.isEmpty()) {
         const error = new Error(
