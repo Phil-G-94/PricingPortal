@@ -4,11 +4,11 @@ import {
 } from "react-router-dom";
 import "./App.css";
 import Form from "./components/Form.jsx";
-import Signup from "./components/Signup.jsx";
-import Login from "./components/Login.jsx";
 
 import Navigation from "./components/Navigation.jsx";
 import RootLayout from "./pages/RootLayout.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
+import SignupPage from "./pages/SignupPage.jsx";
 
 function App() {
     const router = createBrowserRouter([
@@ -16,14 +16,15 @@ function App() {
             path: "/",
             element: <RootLayout />,
             children: [
-                { path: "/components", element: <Form /> },
+                { index: true, element: <LoginPage /> },
+                { path: "components", element: <Form /> },
                 {
                     path: "signup",
-                    element: <Signup />,
+                    element: <SignupPage />,
                 },
                 {
                     path: "login",
-                    element: <Login />,
+                    element: <LoginPage />,
                 },
             ],
         },
