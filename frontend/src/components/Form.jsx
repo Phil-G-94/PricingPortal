@@ -16,9 +16,7 @@ function Form() {
         );
 
         if (!response.ok) {
-            throw new Error(
-                "Something went wrong...fetch component data"
-            );
+            throw new Error("Could not fetch component data.");
         }
 
         const data = await response.json();

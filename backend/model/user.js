@@ -24,15 +24,13 @@ class User {
         }
     }
 
-    static async fetchUserById(userId) {
+    static async findUserByEmail(userEmail) {
         const db = await getDb();
 
         try {
-            const user = await db
-                .collection("users")
-                .findOne({
-                    _id: ObjectId.createFromHexString(userId),
-                });
+            const user = await db.collection("users").findOne({
+                email: userEmail,
+            });
 
             return user;
         } catch (err) {
