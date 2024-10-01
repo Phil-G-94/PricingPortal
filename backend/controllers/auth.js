@@ -5,12 +5,10 @@ import { User } from "../model/user.js";
 import { ObjectId } from "mongodb";
 
 const putSignup = async (req, res, next) => {
-
     const email = req.body.email;
     const password = req.body.password;
 
     try {
-
         const hashedPassword = await bcrypt.hash(password, 13);
 
         const user = new User(email, hashedPassword, new ObjectId());
@@ -20,7 +18,6 @@ const putSignup = async (req, res, next) => {
         res.status(201).json({
             message: "Signup successful - user added to database",
         });
-
     } catch (err) {
         if (!err.statusCode) {
             err.statusCode = 500;
@@ -30,16 +27,16 @@ const putSignup = async (req, res, next) => {
 };
 
 const postLogin = async (req, res, next) => {
-
     const email = req.body.email;
     const password = req.body.password;
 
-
     try {
-
         const user = await User.findUserByEmail(email);
 
-        const passwordComparison = await bcrypt.compare(password, user.password);
+        const passwordComparison = await bcrypt.compare(
+            password,
+            user.password
+        );
 
         if (!passwordComparison) {
             const error = new Error("Incorrect credentials.");
@@ -47,12 +44,17 @@ const postLogin = async (req, res, next) => {
             throw error;
         }
 
-        const token = jwt.sign({ email: user.email, userId: user._id.toString() }, process.env.JWT_SECRET, { expiresIn: "1h" });
+        const token = jwt.sign(
+            { email: user.email, userId: user._id.toString() },
+            process.env.JWT_SECRET,
+            { expiresIn: "1h" }
+        );
 
         res.status(200).json({
             message: "Login successful",
+            token,
+            userId: user._id.toString(),
         });
-
     } catch (err) {
         if (!err.statusCode) {
             err.statusCode = 500;
@@ -60,7 +62,6 @@ const postLogin = async (req, res, next) => {
 
         next(err);
     }
-
 };
 
 export { putSignup, postLogin };

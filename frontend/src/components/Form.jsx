@@ -74,8 +74,6 @@ function Form() {
         );
     });
 
-    console.log(errorData);
-
     return (
         <>
             <h2>Component Selection</h2>
