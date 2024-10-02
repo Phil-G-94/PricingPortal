@@ -16,14 +16,16 @@ function App() {
     const [isAuth, setIsAuth] = useState(undefined);
 
     const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
 
     useEffect(() => {
-        if (!token) {
-            setJwtToken(token);
+        if (!token && !isAuth) {
+            return;
         }
 
+        setJwtToken(token);
         setIsAuth(true);
-    }, [token]);
+    }, [token, isAuth]);
 
     console.log(isAuth);
     console.log(jwtToken);
@@ -33,7 +35,15 @@ function App() {
             path: "/",
             element: <RootLayout />,
             children: [
-                { index: true, element: <LoginPage /> },
+                {
+                    index: true,
+                    element: <LoginPage />,
+                    loader: () => {
+                        if (isAuth && token && userId)
+                            return redirect("/components");
+                        return null;
+                    },
+                },
 
                 {
                     path: "signup",
@@ -47,7 +57,8 @@ function App() {
                     path: "components",
                     element: <Form />,
                     loader: () => {
-                        if (!isAuth) return redirect("/");
+                        if (!isAuth && !token && !userId)
+                            return redirect("/");
                         return null;
                     },
                 },

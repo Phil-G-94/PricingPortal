@@ -1,10 +1,10 @@
 import { useRef } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 function Login() {
     const emailRef = useRef();
     const passwordRef = useRef();
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const onSubmitHandler = async (event) => {
         event.preventDefault();
@@ -31,13 +31,11 @@ function Login() {
             // retrieve token and userId
             const data = await response.json();
 
-            console.log(data);
-
             // set in localStorage with corresponding keys
             localStorage.setItem("token", data.token);
             localStorage.setItem("userId", data.userId);
 
-            navigate("/components");
+            // navigate("/components");
 
             return data;
         } catch (err) {
