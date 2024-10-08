@@ -1,12 +1,11 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { validationResult } from "express-validator";
+import { body, validationResult } from "express-validator";
 import { User } from "../model/user.js";
 import { ObjectId } from "mongodb";
 
 const putSignup = async (req, res, next) => {
-    const email = req.body.email;
-    const password = req.body.password;
+    const { email, password } = req.body;
 
     try {
         const hashedPassword = await bcrypt.hash(password, 13);
@@ -27,8 +26,7 @@ const putSignup = async (req, res, next) => {
 };
 
 const postLogin = async (req, res, next) => {
-    const email = req.body.email;
-    const password = req.body.password;
+    const { email, password } = req.body;
 
     try {
         const user = await User.findUserByEmail(email);

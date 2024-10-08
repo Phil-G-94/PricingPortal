@@ -1,10 +1,15 @@
 import { useRef } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
     const emailRef = useRef();
     const passwordRef = useRef();
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
+
+    const remainingMilliseconds = 60 * 60 * 1000;
+    const tokenExpiryDate = new Date(
+        new Date().getTime() + remainingMilliseconds
+    );
 
     const onSubmitHandler = async (event) => {
         event.preventDefault();
@@ -34,8 +39,12 @@ function Login() {
             // set in localStorage with corresponding keys
             localStorage.setItem("token", data.token);
             localStorage.setItem("userId", data.userId);
+            localStorage.setItem(
+                "tokenExpiry",
+                tokenExpiryDate.toISOString()
+            );
 
-            // navigate("/components");
+            navigate("/components");
 
             return data;
         } catch (err) {

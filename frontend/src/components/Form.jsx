@@ -103,8 +103,8 @@ function Form() {
                 <>
                     <SpecDisplay specData={specData} />
                     <div>
-                        <p> £{resellerPrice}</p>
-                        <p> £{retailPrice}</p>
+                        <p> Reseller price: £{resellerPrice}</p>
+                        <p> Retail price: £{retailPrice}</p>
                     </div>
                 </>
             )}
