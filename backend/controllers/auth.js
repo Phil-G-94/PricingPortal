@@ -47,8 +47,14 @@ const postLogin = async (req, res, next) => {
         const token = jwt.sign(
             { email: user.email, userId: user._id.toString() },
             process.env.JWT_SECRET,
-            { expiresIn: "1h" }
+            { expiresIn: "1hr" }
         );
+
+        res.status(200).json({
+            message: "Login successful",
+            token,
+            userId: user._id.toString(),
+        });
     } catch (err) {
         if (!err.statusCode) {
             err.statusCode = 500;
@@ -56,10 +62,6 @@ const postLogin = async (req, res, next) => {
 
         next(err);
     }
-
-    res.status(200).json({
-        message: "Login successful",
-    });
 };
 
 export { putSignup, postLogin };

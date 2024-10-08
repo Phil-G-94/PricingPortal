@@ -1,13 +1,15 @@
 import express from "express";
 import * as componentController from "../controllers/component.js";
 import validator from "express-validator";
+import { isAuth } from "../middleware/isAuth.js";
 
 const router = express.Router();
 
-router.get("/components", componentController.getComponents);
+router.get("/components", isAuth, componentController.getComponents);
 
 router.post(
     "/components",
+    isAuth,
     [
         validator
             .body([

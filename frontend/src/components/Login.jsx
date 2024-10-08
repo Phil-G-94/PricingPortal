@@ -1,8 +1,10 @@
 import { useRef } from "react";
+// import { useNavigate } from "react-router-dom";
 
 function Login() {
     const emailRef = useRef();
     const passwordRef = useRef();
+    // const navigate = useNavigate();
 
     const onSubmitHandler = async (event) => {
         event.preventDefault();
@@ -26,7 +28,14 @@ function Login() {
                 throw new Error("Could not complete login.");
             }
 
+            // retrieve token and userId
             const data = await response.json();
+
+            // set in localStorage with corresponding keys
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("userId", data.userId);
+
+            // navigate("/components");
 
             return data;
         } catch (err) {
