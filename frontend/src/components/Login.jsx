@@ -70,6 +70,7 @@ function Login() {
                         name="email"
                         id="email"
                         placeholder="email..."
+                        autoComplete="on"
                         ref={emailRef}
                     />
                 </label>
@@ -80,6 +81,7 @@ function Login() {
                         name="password"
                         id="password"
                         placeholder="password..."
+                        autoComplete="on"
                         ref={passwordRef}
                     />
                 </label>

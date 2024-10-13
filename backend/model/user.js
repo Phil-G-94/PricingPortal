@@ -1,4 +1,3 @@
-import { ObjectId } from "mongodb";
 import { getDb } from "../database/connection.js";
 
 class User {
@@ -14,8 +13,6 @@ class User {
         try {
             return db.collection("users").insertOne(this);
         } catch (err) {
-            console.log(err);
-
             if (!err.statusCode) {
                 err.statusCode = 500;
             }

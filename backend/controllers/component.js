@@ -1,5 +1,7 @@
 import { validationResult } from "express-validator";
 import { fetchComponents } from "../database/components.js";
+import { Pod } from "../model/pod.js";
+import { ObjectId } from "mongodb";
 
 const getComponents = async (req, res, next) => {
     try {
@@ -18,7 +20,7 @@ const getComponents = async (req, res, next) => {
     }
 };
 
-const postComponents = (req, res, next) => {
+const postComponents = async (req, res, next) => {
     const errorResult = validationResult(req);
 
     if (!errorResult.isEmpty()) {
@@ -115,13 +117,31 @@ const postComponents = (req, res, next) => {
     const totalRetailPrice =
         baseComponentCost + resourceComponentCost + (1000 + margin);
 
-    res.status(200).json({
-        message: "Successful post",
-        spec,
-        totalResellerPrice,
-        totalRetailPrice,
-        errors: errorResult.array(),
-    });
+    try {
+        const pod = new Pod(
+            spec,
+            new ObjectId(),
+            totalResellerPrice,
+            totalRetailPrice,
+            req.userId
+        );
+
+        await pod.save();
+
+        res.status(200).json({
+            message: "Successful post",
+            spec,
+            totalResellerPrice,
+            totalRetailPrice,
+            errors: errorResult.array(),
+        });
+    } catch (err) {
+        if (!err.statusCode) {
+            err.statusCode = 500;
+        }
+
+        next(err);
+    }
 };
 
 export { getComponents, postComponents };
