@@ -33,10 +33,8 @@ function Login() {
                 throw new Error("Could not complete login.");
             }
 
-            // retrieve token and userId
             const data = await response.json();
 
-            // set in localStorage with corresponding keys
             localStorage.setItem("token", data.token);
             localStorage.setItem("userId", data.userId);
             localStorage.setItem(

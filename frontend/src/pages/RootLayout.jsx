@@ -2,13 +2,21 @@ import { Outlet } from "react-router-dom";
 import Navigation from "../components/Navigation";
 
 function RootLayout() {
-    return (
-        <>
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+        return (
             <main>
                 <Navigation />
                 <Outlet />
             </main>
-        </>
+        );
+    }
+
+    return (
+        <main>
+            <Outlet />
+        </main>
     );
 }
 

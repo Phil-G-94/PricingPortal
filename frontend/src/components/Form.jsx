@@ -90,7 +90,12 @@ function Form() {
     return (
         <>
             <h2>Component Selection</h2>
-            <form action="/" method="POST" onSubmit={onSubmitHandler}>
+            <form
+                action="/"
+                method="POST"
+                className="component_selection_form"
+                onSubmit={onSubmitHandler}
+            >
                 <BaseComponents componentData={componentData} />
 
                 <ResourceComponents componentData={componentData} />
