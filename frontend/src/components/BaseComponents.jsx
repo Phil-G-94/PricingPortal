@@ -65,13 +65,11 @@ function BaseComponents({ componentData }) {
                 ISLC
                 {componentData
                     .filter((cmp) => cmp.type === "islc")
-                    .map((cmp, index) => {
-                        const inputId = `islc_${index}`;
-
+                    .map((cmp) => {
                         return (
                             <input
                                 name="islc"
-                                id={inputId}
+                                id="islc"
                                 type="checkbox"
                                 key={cmp._id}
                                 value={`${cmp.name} : ${cmp.cost}`}

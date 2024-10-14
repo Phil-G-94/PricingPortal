@@ -81,9 +81,9 @@ function Form() {
 
     const errors = errorData.map((error) => {
         return (
-            <div key={error.path}>
-                <p>{`${error.msg} for ${error.path} input`}</p>
-            </div>
+            <li key={error.path}>
+                {`${error.msg} for ${error.path} input `}
+            </li>
         );
     });
 
@@ -103,16 +103,15 @@ function Form() {
                 <button type="submit">Submit</button>
             </form>
 
-            {errorData && errors}
+            {errors}
             {errorData.length == 0 && (
-                <>
-                    <SpecDisplay specData={specData} />
-                    <div>
-                        <p> Reseller price: £{resellerPrice}</p>
-                        <p> Retail price: £{retailPrice}</p>
-                    </div>
-                </>
+                <SpecDisplay specData={specData} />
             )}
+
+            <div>
+                <p> Reseller price: £{resellerPrice}</p>
+                <p> Retail price: £{retailPrice}</p>
+            </div>
         </>
     );
 }

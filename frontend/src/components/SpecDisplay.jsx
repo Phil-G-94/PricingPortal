@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
 
 function SpecDisplay({ specData }) {
+    console.log(specData);
+
     const baseComponentData = Object.entries(
         specData.baseComponents ?? {}
     ).map(([key, value]) => {
