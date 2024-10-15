@@ -1,9 +1,8 @@
 import { getDb } from "../database/connection.js";
 
 class Pod {
-    constructor(spec, id, resellerPrice, retailPrice, userId) {
+    constructor(spec, resellerPrice, retailPrice, userId) {
         this.spec = spec;
-        this._id = id;
         this.resellerPrice = resellerPrice;
         this.retailPrice = retailPrice;
         this.userId = userId;

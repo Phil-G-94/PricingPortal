@@ -5,7 +5,7 @@ function BaseComponents({ componentData }) {
         <>
             <label htmlFor="chassis">
                 Chassis
-                <select name="chassis" id="chassis">
+                <select name="chassis" id="chassis" required>
                     {componentData
                         .filter((cmp) => cmp.type === "chassis")
                         .map((cmp) => {
@@ -24,7 +24,7 @@ function BaseComponents({ componentData }) {
 
             <label htmlFor="motherboard">
                 Motherboard
-                <select name="motherboard" id="motherboard">
+                <select name="motherboard" id="motherboard" required>
                     {componentData
                         .filter((cmp) => cmp.type === "motherboard")
                         .map((cmp) => {
@@ -56,6 +56,7 @@ function BaseComponents({ componentData }) {
                                 key={cmp._id}
                                 value={`${cmp.name} : ${cmp.cost}`}
                                 placeholder={cmp.cost}
+                                required
                             />
                         );
                     })}
@@ -74,6 +75,7 @@ function BaseComponents({ componentData }) {
                                 key={cmp._id}
                                 value={`${cmp.name} : ${cmp.cost}`}
                                 placeholder={cmp.cost}
+                                required
                             />
                         );
                     })}

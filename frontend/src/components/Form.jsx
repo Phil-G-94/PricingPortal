@@ -64,7 +64,7 @@ function Form() {
 
             if (!response.ok) {
                 throw new Error(
-                    "Something went wrong...submit handler"
+                    "Could not submit your component selection."
                 );
             }
 
@@ -87,6 +87,8 @@ function Form() {
         );
     });
 
+    console.log(errorData);
+
     return (
         <>
             <h2>Component Selection</h2>
@@ -103,9 +105,11 @@ function Form() {
                 <button type="submit">Submit</button>
             </form>
 
-            {errors}
+            <ul>{errors}</ul>
             {errorData.length == 0 && (
-                <SpecDisplay specData={specData} />
+                <>
+                    <SpecDisplay specData={specData} />
+                </>
             )}
 
             <div>

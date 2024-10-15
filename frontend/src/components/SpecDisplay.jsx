@@ -1,8 +1,6 @@
 import PropTypes from "prop-types";
 
 function SpecDisplay({ specData }) {
-    console.log(specData);
-
     const baseComponentData = Object.entries(
         specData.baseComponents ?? {}
     ).map(([key, value]) => {
@@ -25,6 +23,7 @@ function SpecDisplay({ specData }) {
 
     return (
         <div>
+            <h3>Your Spec</h3>
             <ul>{baseComponentData}</ul>
             <ul>{resourceComponentData}</ul>
         </div>

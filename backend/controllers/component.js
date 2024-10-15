@@ -23,13 +23,6 @@ const getComponents = async (req, res, next) => {
 const postComponents = async (req, res, next) => {
     const errorResult = validationResult(req);
 
-    if (!errorResult.isEmpty()) {
-        const error = new Error(
-            "Validation failed. Please check your input values"
-        );
-        error.statusCode = 422;
-        error.message = errorResult.array();
-    }
 
     const ramQuantity = req.body["RAM_quantity"];
     const ssdQuantity = req.body["SSD_quantity"];
@@ -117,10 +110,18 @@ const postComponents = async (req, res, next) => {
     const totalRetailPrice =
         baseComponentCost + resourceComponentCost + (1000 + margin);
 
+    if (!errorResult.isEmpty()) {
+        const error = new Error(
+            "Validation failed. Please check your input values"
+        );
+        error.statusCode = 422;
+        error.message = errorResult.array();
+    }
+
     try {
+
         const pod = new Pod(
             spec,
-            new ObjectId(),
             totalResellerPrice,
             totalRetailPrice,
             req.userId
@@ -135,13 +136,16 @@ const postComponents = async (req, res, next) => {
             totalRetailPrice,
             errors: errorResult.array(),
         });
+
     } catch (err) {
+
         if (!err.statusCode) {
             err.statusCode = 500;
         }
 
         next(err);
     }
+
 };
 
 export { getComponents, postComponents };
