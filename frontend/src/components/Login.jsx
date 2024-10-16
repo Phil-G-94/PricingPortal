@@ -61,7 +61,11 @@ function Login() {
     return (
         <>
             <h2>Log in</h2>
-            <form action="/login" onSubmit={onSubmitHandler}>
+            <form
+                action="/login"
+                className="flex_col_items_content_center"
+                onSubmit={onSubmitHandler}
+            >
                 <label htmlFor="email">
                     <input
                         type="email"

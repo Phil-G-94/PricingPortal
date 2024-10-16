@@ -6,7 +6,7 @@ function RootLayout() {
 
     if (!token) {
         return (
-            <main>
+            <main className="flex_col">
                 <Navigation />
                 <Outlet />
             </main>
@@ -14,7 +14,7 @@ function RootLayout() {
     }
 
     return (
-        <main>
+        <main className="flex_col">
             <Outlet />
         </main>
     );

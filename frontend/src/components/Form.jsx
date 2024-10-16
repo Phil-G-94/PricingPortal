@@ -95,7 +95,7 @@ function Form() {
             <form
                 action="/"
                 method="POST"
-                className="component_selection_form"
+                className="flex_col"
                 onSubmit={onSubmitHandler}
             >
                 <BaseComponents componentData={componentData} />

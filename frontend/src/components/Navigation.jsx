@@ -4,14 +4,7 @@ function Navigation() {
     return (
         <header>
             <nav>
-                <ul
-                    style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        placeContent: "center",
-                        gap: "2em",
-                    }}
-                >
+                <ul className="nav flex_row_center">
                     <li>
                         <NavLink to="/signup"> Sign up </NavLink>
                     </li>

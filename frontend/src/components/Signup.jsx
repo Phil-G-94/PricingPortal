@@ -45,7 +45,11 @@ function Signup() {
     return (
         <>
             <h2>Sign up</h2>
-            <form action="/signup" onSubmit={onSubmitHandler}>
+            <form
+                action="/signup"
+                className="flex_col_items_content_center"
+                onSubmit={onSubmitHandler}
+            >
                 <label htmlFor="email">
                     <input
                         type="email"
