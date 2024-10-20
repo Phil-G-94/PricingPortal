@@ -25,7 +25,6 @@ router.post(
             ])
             .notEmpty()
             .escape(),
-        validator.body("coolingCabling").notEmpty(),
     ],
     componentController.postComponents
 );

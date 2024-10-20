@@ -23,7 +23,6 @@ const getComponents = async (req, res, next) => {
 const postComponents = async (req, res, next) => {
     const errorResult = validationResult(req);
 
-
     const ramQuantity = req.body["RAM_quantity"];
     const ssdQuantity = req.body["SSD_quantity"];
 
@@ -119,7 +118,6 @@ const postComponents = async (req, res, next) => {
     }
 
     try {
-
         const pod = new Pod(
             spec,
             totalResellerPrice,
@@ -136,16 +134,13 @@ const postComponents = async (req, res, next) => {
             totalRetailPrice,
             errors: errorResult.array(),
         });
-
     } catch (err) {
-
         if (!err.statusCode) {
             err.statusCode = 500;
         }
 
         next(err);
     }
-
 };
 
 export { getComponents, postComponents };

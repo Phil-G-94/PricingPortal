@@ -1,6 +1,15 @@
+/* variables */
+
 :root {
     --metric-box-spacing: 1rem;
+    --inevi-dark-purple: #3c1277;
+    --inevi-dark-purple-accent: #542f88;
+    --inevi-white: #ffffff;
+    --inevi-lavender: #dfd8e8;
+    --inevi-gray: #717171;
 }
+
+/* element styles */
 
 body {
     margin: 0;
@@ -94,6 +103,9 @@ select {
     main form {
         flex: 2;
         gap: 1.2em;
+        background-color: #dfd8e8;
+        color: #3c1277;
+        font-weight: 500;
     }
     main div {
         flex: 2;

@@ -13,11 +13,7 @@ class User {
         try {
             return db.collection("users").insertOne(this);
         } catch (err) {
-            if (!err.statusCode) {
-                err.statusCode = 500;
-            }
-
-            next(err);
+            console.error(err);
         }
     }
 
@@ -31,13 +27,7 @@ class User {
 
             return user;
         } catch (err) {
-            console.log(err);
-
-            if (!err.statusCode) {
-                err.statusCode = 500;
-            }
-
-            next(err);
+            console.error(err);
         }
     }
 }

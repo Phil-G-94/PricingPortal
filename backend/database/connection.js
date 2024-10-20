@@ -17,19 +17,18 @@ async function dbConnect(callback) {
 
         callback();
     } catch (err) {
-        if (!err.statusCode) {
-            err.statusCode = 500;
-        }
-
-        next(err);
+        console.error(err);
     }
 }
 
-function getDb() {
-    if (_db) {
-        return _db;
+async function getDb() {
+    try {
+        await _db;
+        if (_db) {
+            return _db;
+        }
+    } catch (err) {
+        console.error(err);
     }
-
-    throw "No database found!";
 }
 export { dbConnect, getDb };
