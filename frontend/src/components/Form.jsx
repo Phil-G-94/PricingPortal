@@ -87,7 +87,7 @@ function Form() {
         );
     });
 
-    console.log(errorData);
+    console.log(typeof resellerPrice, typeof retailPrice);
 
     return (
         <>
@@ -102,20 +102,19 @@ function Form() {
 
                 <ResourceComponents componentData={componentData} />
 
-                <button type="submit">Submit</button>
+                <button type="submit">Get Price</button>
             </form>
 
             <ul>{errors}</ul>
             {errorData.length == 0 && (
                 <>
-                    <SpecDisplay specData={specData} />
+                    <SpecDisplay
+                        specData={specData}
+                        resellerPrice={resellerPrice}
+                        retailPrice={retailPrice}
+                    />
                 </>
             )}
-
-            <div>
-                <p> Reseller price: £{resellerPrice}</p>
-                <p> Retail price: £{retailPrice}</p>
-            </div>
         </>
     );
 }

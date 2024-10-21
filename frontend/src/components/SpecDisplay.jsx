@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-function SpecDisplay({ specData }) {
+function SpecDisplay({ specData, resellerPrice, retailPrice }) {
     const baseComponentData = Object.entries(
         specData.baseComponents ?? {}
     ).map(([key, value]) => {
@@ -26,12 +26,18 @@ function SpecDisplay({ specData }) {
             <h3>Your Spec</h3>
             <ul>{baseComponentData}</ul>
             <ul>{resourceComponentData}</ul>
+
+            <p>Reseller Price: £{resellerPrice}</p>
+
+            <p>Retail Price: £{retailPrice}</p>
         </div>
     );
 }
 
 SpecDisplay.propTypes = {
     specData: PropTypes.object.isRequired,
+    resellerPrice: PropTypes.number.isRequired,
+    retailPrice: PropTypes.number.isRequired,
 };
 
 export default SpecDisplay;
