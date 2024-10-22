@@ -32,7 +32,7 @@ app.use(componentRoutes);
 app.use(authRoutes);
 
 app.use((err, req, res, next) => {
-    console.error(err);
+    // console.error(err);
 
     const status = err.statusCode || 500;
 

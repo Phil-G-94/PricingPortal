@@ -31,16 +31,20 @@ footer {
 
 header {
     padding: var(--metric-box-spacing);
-    background-color: hsl(140deg 70% 95%);
+    background-color: var(--inevi-dark-purple);
     font-size: 1.4em;
+    border-radius: 0.6em;
 }
 
 form {
-    background-color: hsl(60deg 70% 95%);
+    background-color: var(--inevi-lavender);
 }
 
 form button {
     max-width: 25%;
+    padding-left: 2em;
+    padding-right: 2em;
+    border-radius: 0.6em;
 }
 
 form,
@@ -54,7 +58,7 @@ main {
 }
 
 main div {
-    background-color: hsl(0deg 70% 95%);
+    background-color: var(--inevi-lavender);
 }
 
 main h2 {
@@ -63,7 +67,7 @@ main h2 {
 
 footer {
     padding: calc(var(--metric-box-spacing) / 2);
-    background-color: hsl(200deg 70% 95%);
+    background-color: var(--inevi-lavender);
 }
 
 label,
@@ -77,6 +81,19 @@ select {
 .nav {
     gap: 2em;
     padding: 0px;
+    color: var(--inevi-white);
+}
+
+.nav a {
+    text-decoration: none;
+}
+
+.nav a:visited {
+    color: var(--inevi-lavender);
+}
+
+.nav a:hover {
+    color: var(--inevi-white);
 }
 
 /* containers */
@@ -103,8 +120,8 @@ select {
     main form {
         flex: 2;
         gap: 1.2em;
-        background-color: #dfd8e8;
-        color: #3c1277;
+        background-color: var(--inevi-lavender);
+        color: var(--inevi-dark-purple);
         font-weight: 500;
     }
     main div {

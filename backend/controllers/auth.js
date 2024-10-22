@@ -6,6 +6,17 @@ import { ObjectId } from "mongodb";
 
 const putSignup = async (req, res, next) => {
     const { email, password } = req.body;
+    const validationErrors = validationResult(req);
+    const errors = validationErrors.array();
+    const existingUser = await User.findUserByEmail(email);
+
+    if (existingUser) {
+        const error = new Error("Validation failed");
+        error.statusCode = 422;
+        error.data = errors;
+
+        return next(error);
+    }
 
     try {
         const hashedPassword = await bcrypt.hash(password, 13);
@@ -14,9 +25,7 @@ const putSignup = async (req, res, next) => {
 
         await user.save();
 
-        res.status(201).json({
-            message: "Signup successful - user added to database",
-        });
+        res.status(201).json();
     } catch (err) {
         if (!err.statusCode) {
             err.statusCode = 500;
@@ -37,9 +46,10 @@ const postLogin = async (req, res, next) => {
         );
 
         if (!passwordComparison) {
-            const error = new Error("Incorrect credentials.");
+            const error = new Error();
             error.statusCode = 401;
-            throw error;
+            error.message = "Incorrect credentials.";
+            return next(error);
         }
 
         const token = jwt.sign(

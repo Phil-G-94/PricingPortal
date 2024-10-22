@@ -1,8 +1,9 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 function Signup() {
     const emailRef = useRef();
     const passwordRef = useRef();
+    const [responseMessage, setResponseMessage] = useState([]);
 
     const onSubmitHandler = async (event) => {
         event.preventDefault();
@@ -23,18 +24,17 @@ function Signup() {
             );
 
             if (!response.ok) {
-                throw new Error("Could not complete signup.");
+                return response.json().then((err) => {
+                    const { data } = err;
+
+                    setResponseMessage(data[0].msg);
+                });
             }
 
             const data = await response.json();
 
             return data;
         } catch (err) {
-            if (!(err instanceof Error)) {
-                const error = new Error(err);
-
-                console.error(error.message);
-            }
             console.error(err);
         } finally {
             emailRef.current.value = "";
@@ -57,6 +57,7 @@ function Signup() {
                         id="email"
                         placeholder="email..."
                         ref={emailRef}
+                        required
                     />
                 </label>
 
@@ -67,8 +68,11 @@ function Signup() {
                         id="password"
                         placeholder="password..."
                         ref={passwordRef}
+                        required
                     />
                 </label>
+
+                <p style={{ color: "black" }}>{responseMessage}</p>
 
                 <button type="submit">Sign up</button>
             </form>
