@@ -21,9 +21,6 @@ function AuthRequired() {
 
     autoLogout(remainingTimeToExpiry);
 
-    console.log(remainingTimeToExpiry);
-    console.log(token);
-
     if (!token) {
         return <Navigate to="/login" />;
     }
@@ -32,20 +29,3 @@ function AuthRequired() {
 }
 
 export default AuthRequired;
-
-/*
-Removed code:
-
-// import { useEffect, useState } from "react";
-// const [jwtToken, setJwtToken] = useState(undefined);
-// const [isAuth, setIsAuth] = useState(undefined);
-
-// useEffect(() => {
-//     if (!token && !isAuth) {
-//         return;
-//     }
-
-//     setJwtToken(token);
-//     setIsAuth(true);
-// }, [token, isAuth]);
-*/

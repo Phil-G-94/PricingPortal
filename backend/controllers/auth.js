@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { body, validationResult } from "express-validator";
+import { validationResult } from "express-validator";
 import { User } from "../model/user.js";
 import { ObjectId } from "mongodb";
 
@@ -14,7 +14,6 @@ const putSignup = async (req, res, next) => {
         const error = new Error("Validation failed");
         error.statusCode = 422;
         error.data = errors;
-
         return next(error);
     }
 
@@ -25,7 +24,7 @@ const putSignup = async (req, res, next) => {
 
         await user.save();
 
-        res.status(201).json();
+        res.status(201).json({});
     } catch (err) {
         if (!err.statusCode) {
             err.statusCode = 500;

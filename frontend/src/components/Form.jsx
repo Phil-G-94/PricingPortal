@@ -87,8 +87,6 @@ function Form() {
         );
     });
 
-    console.log(typeof resellerPrice, typeof retailPrice);
-
     return (
         <>
             <h2>Component Selection</h2>

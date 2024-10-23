@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 function Signup() {
     const emailRef = useRef();
     const passwordRef = useRef();
-    const [responseMessage, setResponseMessage] = useState([]);
+    const [responseMessage, setResponseMessage] = useState("");
 
     const onSubmitHandler = async (event) => {
         event.preventDefault();
@@ -23,22 +23,27 @@ function Signup() {
                 }
             );
 
-            if (!response.ok) {
-                return response.json().then((err) => {
-                    const { data } = err;
+            const jsonResponse = await response.json();
 
+            if (!response.ok) {
+                const { data } = jsonResponse;
+
+                if (data && data[0].msg) {
                     setResponseMessage(data[0].msg);
-                });
+                }
+
+                console.log(data);
             }
 
-            const data = await response.json();
-
-            return data;
+            return jsonResponse;
         } catch (err) {
             console.error(err);
         } finally {
             emailRef.current.value = "";
             passwordRef.current.value = "";
+            setTimeout(() => {
+                setResponseMessage("");
+            }, 6000);
         }
     };
 
