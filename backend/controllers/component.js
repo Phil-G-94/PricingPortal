@@ -1,7 +1,6 @@
 import { validationResult } from "express-validator";
 import { fetchComponents } from "../database/components.js";
 import { Pod } from "../model/pod.js";
-import { ObjectId } from "mongodb";
 
 const getComponents = async (req, res, next) => {
     try {

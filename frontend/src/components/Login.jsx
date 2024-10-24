@@ -1,10 +1,11 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
     const emailRef = useRef();
     const passwordRef = useRef();
     const navigate = useNavigate();
+    const [responseMessage, setResponseMessage] = useState("");
 
     const remainingMilliseconds = 60 * 60 * 1000;
     const tokenExpiryDate = new Date(
@@ -29,14 +30,22 @@ function Login() {
                 }
             );
 
+            const jsonResponse = await response.json();
+
             if (!response.ok) {
-                throw new Error("Could not complete login.");
+                const { message } = jsonResponse;
+
+                if (message) {
+                    setResponseMessage(message);
+                }
+
+                console.log(message);
+
+                return;
             }
 
-            const data = await response.json();
-
-            localStorage.setItem("token", data.token);
-            localStorage.setItem("userId", data.userId);
+            localStorage.setItem("token", jsonResponse.token);
+            localStorage.setItem("userId", jsonResponse.userId);
             localStorage.setItem(
                 "tokenExpiry",
                 tokenExpiryDate.toISOString()
@@ -44,13 +53,8 @@ function Login() {
 
             navigate("/components");
 
-            return data;
+            return jsonResponse;
         } catch (err) {
-            if (!(err instanceof Error)) {
-                const error = new Error(err);
-
-                console.error(error.message);
-            }
             console.error(err);
         } finally {
             emailRef.current.value = "";
@@ -88,6 +92,7 @@ function Login() {
                     />
                 </label>
 
+                {responseMessage && <p>{responseMessage}</p>}
                 <button type="submit">Log in</button>
             </form>
         </>

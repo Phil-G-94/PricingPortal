@@ -1,6 +1,7 @@
 import express, { urlencoded, json } from "express";
 import { router as componentRoutes } from "./routes/component.js";
 import { router as authRoutes } from "./routes/auth.js";
+import { router as podsRoutes } from "./routes/pods.js";
 import { dbConnect } from "./database/connection.js";
 
 const app = express();
@@ -30,6 +31,7 @@ app.use((req, res, next) => {
 
 app.use(componentRoutes);
 app.use(authRoutes);
+app.use(podsRoutes);
 
 app.use((err, req, res, next) => {
     const status = err.statusCode || 500;

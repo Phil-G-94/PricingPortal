@@ -14,6 +14,7 @@
 body {
     margin: 0;
     padding: 0;
+    color: #3c1277;
 }
 
 p {
@@ -41,10 +42,10 @@ form {
 }
 
 form button {
-    max-width: 25%;
     padding-left: 2em;
     padding-right: 2em;
     border-radius: 0.6em;
+    text-align: center;
 }
 
 form,

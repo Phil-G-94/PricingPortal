@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import BaseComponents from "./BaseComponents.jsx";
 import ResourceComponents from "./ResourceComponents.jsx";
 import SpecDisplay from "./SpecDisplay.jsx";
+import PodsDisplay from "./PodsDisplay.jsx";
 
 function Form() {
     const [componentData, setComponentData] = useState([]);
@@ -13,29 +14,33 @@ function Form() {
     const token = localStorage.getItem("token");
 
     useEffect(() => {
-        const fetchComponentData = async () => {
-            const response = await fetch(
-                "http://localhost:8080/components",
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
-
-            if (!response.ok) {
-                throw new Error("Could not fetch component data.");
-            }
-
-            const data = await response.json();
-
-            const components = data.components;
-
-            setComponentData(components);
-
-            return components;
-        };
         try {
+            const fetchComponentData = async () => {
+                const response = await fetch(
+                    "http://localhost:8080/components",
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+
+                /* Improve error handling */
+                if (!response.ok) {
+                    throw new Error(
+                        "Could not fetch component data."
+                    );
+                }
+
+                const data = await response.json();
+
+                const components = data.components;
+
+                setComponentData(components);
+
+                return components;
+            };
+
             fetchComponentData();
         } catch (err) {
             console.error(err);
@@ -113,6 +118,10 @@ function Form() {
                     />
                 </>
             )}
+
+            <section>
+                <PodsDisplay />
+            </section>
         </>
     );
 }

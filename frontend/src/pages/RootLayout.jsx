@@ -15,6 +15,7 @@ function RootLayout() {
 
     return (
         <main className="flex_col">
+            <Navigation />
             <Outlet />
         </main>
     );

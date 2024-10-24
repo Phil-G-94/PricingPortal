@@ -23,7 +23,6 @@ router.post(
                 "SSD",
                 "SSD_quantity",
             ])
-            .notEmpty()
             .escape(),
     ],
     componentController.postComponents

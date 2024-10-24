@@ -17,6 +17,18 @@ class Pod {
             console.error(err);
         }
     }
+
+    static async fetchPodsByUserId(userId) {
+        const db = await getDb();
+
+        const query = { userId: userId };
+
+        try {
+            return db.collection("pods").find(query).toArray();
+        } catch (err) {
+            console.log(err);
+        }
+    }
 }
 
 export { Pod };

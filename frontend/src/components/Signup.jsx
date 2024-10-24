@@ -31,8 +31,6 @@ function Signup() {
                 if (data && data[0].msg) {
                     setResponseMessage(data[0].msg);
                 }
-
-                console.log(data);
             }
 
             return jsonResponse;
@@ -77,7 +75,7 @@ function Signup() {
                     />
                 </label>
 
-                <p style={{ color: "black" }}>{responseMessage}</p>
+                {responseMessage !== "" && <p>{responseMessage}</p>}
 
                 <button type="submit">Sign up</button>
             </form>
