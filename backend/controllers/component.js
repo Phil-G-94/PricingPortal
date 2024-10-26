@@ -1,6 +1,7 @@
 import { validationResult } from "express-validator";
 import { fetchComponents } from "../database/components.js";
 import { Pod } from "../model/pod.js";
+import { User } from "../model/user.js";
 
 const getComponents = async (req, res, next) => {
     try {
@@ -110,6 +111,12 @@ const postComponents = async (req, res, next) => {
     const totalRetailPrice =
         baseComponentCost + resourceComponentCost + (1000 + margin);
 
+    const user = await User.findUserById(req.userId);
+
+    if (!user) {
+        throw new Error("User does not exist.");
+    }
+
     if (!errorResult.isEmpty()) {
         const error = new Error(
             "Validation failed. Please check your input values"
@@ -123,7 +130,7 @@ const postComponents = async (req, res, next) => {
             spec,
             totalResellerPrice,
             totalRetailPrice,
-            req.userId
+            user
         );
 
         await pod.save();

@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 
 function Signup() {
+    const nameRef = useRef();
     const emailRef = useRef();
     const passwordRef = useRef();
     const [responseMessage, setResponseMessage] = useState("");
@@ -37,6 +38,7 @@ function Signup() {
         } catch (err) {
             console.error(err);
         } finally {
+            nameRef.current.value = "";
             emailRef.current.value = "";
             passwordRef.current.value = "";
             setTimeout(() => {
@@ -53,6 +55,16 @@ function Signup() {
                 className="flex_col_items_content_center"
                 onSubmit={onSubmitHandler}
             >
+                <label htmlFor="name">
+                    <input
+                        type="text"
+                        name="name"
+                        id="name"
+                        placeholder="name..."
+                        ref={nameRef}
+                        required
+                    />
+                </label>
                 <label htmlFor="email">
                     <input
                         type="email"
@@ -70,6 +82,7 @@ function Signup() {
                         name="password"
                         id="password"
                         placeholder="password..."
+                        autoComplete="on"
                         ref={passwordRef}
                         required
                     />

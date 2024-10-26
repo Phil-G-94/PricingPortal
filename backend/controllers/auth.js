@@ -5,7 +5,7 @@ import { User } from "../model/user.js";
 import { ObjectId } from "mongodb";
 
 const putSignup = async (req, res, next) => {
-    const { email, password } = req.body;
+    const { name, email, password } = req.body;
     const validationErrors = validationResult(req);
     const errors = validationErrors.array();
     const existingUser = await User.findUserByEmail(email);
@@ -20,7 +20,12 @@ const putSignup = async (req, res, next) => {
     try {
         const hashedPassword = await bcrypt.hash(password, 13);
 
-        const user = new User(email, hashedPassword, new ObjectId());
+        const user = new User(
+            name,
+            email,
+            hashedPassword,
+            new ObjectId()
+        );
 
         await user.save();
 

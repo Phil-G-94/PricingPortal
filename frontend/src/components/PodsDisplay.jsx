@@ -33,6 +33,8 @@ function PodsDisplay() {
 
                 setPodsData(jsonResponse.pods);
 
+                console.log(jsonResponse.pods);
+
                 return jsonResponse;
             };
 

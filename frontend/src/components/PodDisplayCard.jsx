@@ -1,5 +1,7 @@
 import PropTypes from "prop-types";
 function PodDisplayCard({ pod }) {
+    console.log(pod);
+
     return (
         <article>
             <div>
@@ -26,6 +28,9 @@ function PodDisplayCard({ pod }) {
                 </p>
                 <p>
                     <b>Retail price:</b> £{pod.retailPrice}
+                </p>
+                <p>
+                    <b>Created by:</b> {pod.user.name}
                 </p>
             </div>
         </article>

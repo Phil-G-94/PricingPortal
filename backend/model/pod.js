@@ -1,11 +1,12 @@
+import { ObjectId } from "mongodb";
 import { getDb } from "../database/connection.js";
 
 class Pod {
-    constructor(spec, resellerPrice, retailPrice, userId) {
+    constructor(spec, resellerPrice, retailPrice, user, userId) {
         this.spec = spec;
         this.resellerPrice = resellerPrice;
         this.retailPrice = retailPrice;
-        this.userId = userId;
+        this.user = user;
     }
 
     async save() {
@@ -21,7 +22,9 @@ class Pod {
     static async fetchPodsByUserId(userId) {
         const db = await getDb();
 
-        const query = { userId: userId };
+        const query = {
+            "user._id": ObjectId.createFromHexString(userId),
+        };
 
         try {
             return db.collection("pods").find(query).toArray();

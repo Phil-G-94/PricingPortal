@@ -4,6 +4,8 @@ const getPods = async (req, res, next) => {
     try {
         const pods = await Pod.fetchPodsByUserId(req.userId);
 
+        console.log(req.userId);
+
         if (!pods) {
             const error = new Error();
             error.message = "No pods to display";

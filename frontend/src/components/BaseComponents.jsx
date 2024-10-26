@@ -41,45 +41,47 @@ function BaseComponents({ componentData }) {
                 </select>
             </label>
 
-            <label htmlFor="coolingCabling">
-                Cooling/Cabling
-                {componentData
-                    .filter(
-                        (cmp) => cmp.type === "cooling and cabling"
-                    )
-                    .map((cmp) => {
-                        return (
+            {componentData
+                .filter((cmp) => cmp.type === "cooling and cabling")
+                .map((cmp) => {
+                    return (
+                        <label
+                            key={cmp._id}
+                            htmlFor={`coolingCabling_${cmp._id}`}
+                        >
+                            Cooling/Cabling
                             <input
                                 name="coolingCabling"
-                                id="coolingCabling"
+                                id={`coolingCabling_${cmp._id}`}
                                 type="checkbox"
-                                key={cmp._id}
                                 value={`${cmp.name} : ${cmp.cost}`}
                                 placeholder={cmp.cost}
                                 required
                             />
-                        );
-                    })}
-            </label>
+                        </label>
+                    );
+                })}
 
-            <label htmlFor="islc">
-                ISLC
-                {componentData
-                    .filter((cmp) => cmp.type === "islc")
-                    .map((cmp) => {
-                        return (
+            {componentData
+                .filter((cmp) => cmp.type === "islc")
+                .map((cmp) => {
+                    return (
+                        <label
+                            key={cmp._id}
+                            htmlFor={`islc_${cmp._id}`}
+                        >
+                            ISLC
                             <input
                                 name="islc"
-                                id="islc"
+                                id={`islc_${cmp._id}`}
                                 type="checkbox"
-                                key={cmp._id}
                                 value={`${cmp.name} : ${cmp.cost}`}
                                 placeholder={cmp.cost}
                                 required
                             />
-                        );
-                    })}
-            </label>
+                        </label>
+                    );
+                })}
         </>
     );
 }
