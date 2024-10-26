@@ -22,8 +22,8 @@ const getComponents = async (req, res, next) => {
 const postComponents = async (req, res, next) => {
     const errorResult = validationResult(req);
 
-    const ramQuantity = req.body["RAM_quantity"];
-    const ssdQuantity = req.body["SSD_quantity"];
+    const ramQuantity = +req.body["RAM_quantity"];
+    const ssdQuantity = +req.body["SSD_quantity"];
 
     const chassis = {
         name: req.body.chassis?.split(" : ")[0],
@@ -57,11 +57,13 @@ const postComponents = async (req, res, next) => {
 
     const RAM = {
         name: req.body.RAM?.split(" : ")[0],
+        quantity: ramQuantity,
         cost: +req.body.RAM?.split(" : ")[1] * ramQuantity,
     };
 
     const SSD = {
         name: req.body.SSD?.split(" : ")[0],
+        quantity: ssdQuantity,
         cost: +req.body.SSD?.split(" : ")[1] * ssdQuantity,
     };
 

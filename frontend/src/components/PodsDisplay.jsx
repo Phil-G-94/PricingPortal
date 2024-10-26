@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import PodDisplayCard from "./PodDisplayCard.jsx";
 
 function PodsDisplay() {
     const [podsData, setPodsData] = useState([]);
@@ -42,29 +43,14 @@ function PodsDisplay() {
     }, [token]);
 
     return (
-        <div>
+        <section>
             {responseMessage && <p>{responseMessage}</p>}
 
-            {/*
-
-                rework into card for each pod
-                don't forget spec has two properties, baseComponents and resourceComponents
-                which themselves contain nested objects...this will need to be extracted to be displayed properly...
-                consider outsourcing into own component and prop drilling the podsData down
-
-            */}
-            <div>
-                {podsData.map((pod) => {
-                    return (
-                        <div key={pod._id}>
-                            <p>ID: {pod._id}</p>
-                            <p>RESELLER PRICE: {pod.resellerPrice}</p>
-                            <p>RETAIL PRICE: {pod.retailPrice}</p>
-                        </div>
-                    );
-                })}
-            </div>
-        </div>
+            <h3 style={{ textAlign: "center" }}>Your Saved Pods</h3>
+            {podsData.map((pod) => {
+                return <PodDisplayCard key={pod._id} pod={pod} />;
+            })}
+        </section>
     );
 }
 
