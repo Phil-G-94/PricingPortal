@@ -6,7 +6,7 @@ let _db = undefined;
 async function dbConnect(callback) {
     dotenv.config();
 
-    const uri = `mongodb+srv://${process.env.MDB_USER}:${process.env.MDB_PASS}@pricingportal.knzuben.mongodb.net/?retryWrites=true&w=majority&appName=pricingPortal`;
+    const uri = `mongodb+srv://${process.env.MDB_USER}:${process.env.MDB_PASS}${process.env.MDB_HOST}/?retryWrites=true&w=majority&appName=${process.env.MDB_APP}`;
 
     try {
         const client = await MongoClient.connect(uri);

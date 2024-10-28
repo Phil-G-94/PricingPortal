@@ -1,11 +1,29 @@
+import fs from "node:fs";
+import path from "node:path";
 import express, { urlencoded, json } from "express";
+import helmet from "helmet";
+import compression from "compression";
+import morgan from "morgan";
+import rootDir from "./utils/path.js";
 import { router as componentRoutes } from "./routes/component.js";
 import { router as authRoutes } from "./routes/auth.js";
 import { router as podsRoutes } from "./routes/pods.js";
 import { dbConnect } from "./database/connection.js";
 
 const app = express();
-const port = 8080;
+
+const accessLogStream = fs.createWriteStream(
+    path.join(rootDir, "backend", "logs", "access.log"),
+    { flags: "a" }
+);
+
+console.log(rootDir);
+
+app.use(helmet());
+
+app.use(compression());
+
+app.use(morgan("combined", { stream: accessLogStream }));
 
 app.use(express.static("public"));
 
@@ -14,24 +32,20 @@ app.use(urlencoded({ extended: false }));
 app.use(json({}));
 
 app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "*"); // specify allowed CORS origin => all
+    res.setHeader("Access-Control-Allow-Origin", "*");
 
     res.setHeader(
         "Access-Control-Allow-Methods",
         "GET, POST, PUT, PATCH, DELETE"
-    ); // specify allowed methods
+    );
 
     res.setHeader(
         "Access-Control-Allow-Headers",
         "Content-Type, Authorization"
-    ); // specify allowed request headers
+    );
 
     next();
 });
-
-app.use(componentRoutes);
-app.use(authRoutes);
-app.use(podsRoutes);
 
 app.use((err, req, res, next) => {
     const status = err.statusCode || 500;
@@ -43,6 +57,10 @@ app.use((err, req, res, next) => {
     res.status(status).json({ message, data });
 });
 
+app.use(componentRoutes);
+app.use(authRoutes);
+app.use(podsRoutes);
+
 dbConnect(() => {
-    app.listen(port);
+    app.listen(process.env.PORT || 8080);
 });

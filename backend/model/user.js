@@ -37,11 +37,9 @@ class User {
         const db = await getDb();
 
         try {
-            const user = await db
-                .collection("users")
-                .findOne({
-                    _id: ObjectId.createFromHexString(userId),
-                });
+            const user = await db.collection("users").findOne({
+                _id: ObjectId.createFromHexString(userId),
+            });
 
             return user;
         } catch (err) {
