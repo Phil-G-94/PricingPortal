@@ -17,11 +17,11 @@ const app = express();
 //     { flags: "a" }
 // );
 
+// app.use(morgan("combined", { stream: accessLogStream }));
+
 app.use(helmet());
 
 app.use(compression());
-
-app.use(morgan("combined", { stream: accessLogStream }));
 
 app.use(express.static("public"));
 
