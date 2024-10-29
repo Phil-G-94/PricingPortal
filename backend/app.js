@@ -12,10 +12,10 @@ import { dbConnect } from "./database/connection.js";
 
 const app = express();
 
-const accessLogStream = fs.createWriteStream(
-    path.join(rootDir, "backend", "logs", "access.log"),
-    { flags: "a" }
-);
+// const accessLogStream = fs.createWriteStream(
+//     path.join(rootDir, "backend", "logs", "access.log"),
+//     { flags: "a" }
+// );
 
 app.use(helmet());
 
