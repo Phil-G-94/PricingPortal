@@ -46,6 +46,8 @@ form button {
     padding-right: 2em;
     border-radius: 0.6em;
     text-align: center;
+    max-width: fit-content;
+    align-self: center;
 }
 
 form,
@@ -95,6 +97,10 @@ select {
 
 .nav a:hover {
     color: var(--inevi-white);
+}
+
+.response-message {
+    text-align: center;
 }
 
 /* containers */

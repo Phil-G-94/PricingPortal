@@ -17,8 +17,6 @@ const accessLogStream = fs.createWriteStream(
     { flags: "a" }
 );
 
-console.log(rootDir);
-
 app.use(helmet());
 
 app.use(compression());
@@ -47,6 +45,10 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use(componentRoutes);
+app.use(authRoutes);
+app.use(podsRoutes);
+
 app.use((err, req, res, next) => {
     const status = err.statusCode || 500;
 
@@ -54,12 +56,10 @@ app.use((err, req, res, next) => {
 
     const data = err.data;
 
-    res.status(status).json({ message, data });
+    res.status(status)
+        .set("Content-Type", "application/json")
+        .json({ message, data });
 });
-
-app.use(componentRoutes);
-app.use(authRoutes);
-app.use(podsRoutes);
 
 dbConnect(() => {
     app.listen(process.env.PORT || 8080);

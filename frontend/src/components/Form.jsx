@@ -9,7 +9,7 @@ function Form() {
     const [specData, setSpecData] = useState({});
     const [resellerPrice, setResellerPrice] = useState(0);
     const [retailPrice, setRetailPrice] = useState(0);
-    const [errorData, setErrorData] = useState([]);
+    const [responseMessage, setResponseMessage] = useState("");
 
     const token = localStorage.getItem("token");
 
@@ -25,16 +25,17 @@ function Form() {
                     }
                 );
 
-                /* Improve error handling */
+                const jsonResponse = await response.json();
+
                 if (!response.ok) {
-                    throw new Error(
-                        "Could not fetch component data."
-                    );
+                    const { message } = jsonResponse;
+
+                    setResponseMessage(message);
+
+                    return;
                 }
 
-                const data = await response.json();
-
-                const components = data.components;
+                const components = jsonResponse.components;
 
                 setComponentData(components);
 
@@ -75,7 +76,6 @@ function Form() {
 
             const data = await response.json();
 
-            setErrorData(data.errors);
             setSpecData(data.spec);
             setResellerPrice(data.totalResellerPrice);
             setRetailPrice(data.totalRetailPrice);
@@ -83,14 +83,6 @@ function Form() {
             console.error(err);
         }
     };
-
-    const errors = errorData.map((error) => {
-        return (
-            <li key={error.path}>
-                {`${error.msg} for ${error.path} input `}
-            </li>
-        );
-    });
 
     return (
         <>
@@ -105,11 +97,18 @@ function Form() {
 
                 <ResourceComponents componentData={componentData} />
 
-                <button type="submit">Get Price</button>
+                {responseMessage === "" && (
+                    <button type="submit">Get Price</button>
+                )}
+
+                {responseMessage !== "" && (
+                    <p className="response-message">
+                        {responseMessage}
+                    </p>
+                )}
             </form>
 
-            <ul>{errors}</ul>
-            {errorData.length == 0 && (
+            {!responseMessage && (
                 <>
                     <SpecDisplay
                         specData={specData}

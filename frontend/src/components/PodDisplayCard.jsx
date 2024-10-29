@@ -1,7 +1,5 @@
 import PropTypes from "prop-types";
 function PodDisplayCard({ pod }) {
-    console.log(pod);
-
     return (
         <article>
             <div>

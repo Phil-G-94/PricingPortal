@@ -7,6 +7,14 @@ const getComponents = async (req, res, next) => {
     try {
         const components = await fetchComponents();
 
+        if (components.length === 0) {
+            const error = new Error();
+            error.message =
+                "Could not fetch components from the database.";
+            error.statusCode = 500;
+            return next(error);
+        }
+
         res.status(200).json({
             message: "Successful fetch.",
             components,

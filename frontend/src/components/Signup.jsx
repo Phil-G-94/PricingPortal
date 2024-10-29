@@ -88,7 +88,11 @@ function Signup() {
                     />
                 </label>
 
-                {responseMessage !== "" && <p>{responseMessage}</p>}
+                {responseMessage !== "" && (
+                    <p className="response-message">
+                        {responseMessage}
+                    </p>
+                )}
 
                 <button type="submit">Sign up</button>
             </form>

@@ -92,7 +92,11 @@ function Login() {
                     />
                 </label>
 
-                {responseMessage && <p>{responseMessage}</p>}
+                {responseMessage && (
+                    <p className="response-message">
+                        {responseMessage}
+                    </p>
+                )}
                 <button type="submit">Log in</button>
             </form>
         </>

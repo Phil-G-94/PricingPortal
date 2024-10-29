@@ -3,13 +3,9 @@ import { getDb } from "../database/connection.js";
 const fetchComponents = async () => {
     const db = await getDb();
 
-    const components = await db
-        .collection("components")
-        .find()
-        .toArray();
-
+    const componentsCollection = await db.collection("components");
     try {
-        return components;
+        return componentsCollection.find().toArray();
     } catch (err) {
         if (!err.statusCode) {
             err.statusCode = 500;
