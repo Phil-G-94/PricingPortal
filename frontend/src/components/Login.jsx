@@ -20,7 +20,7 @@ function Login() {
 
         try {
             const response = await fetch(
-                "http://localhost:8080/login",
+                "https://pricingportal.onrender.com/login",
                 {
                     method: "POST",
                     headers: {

@@ -14,7 +14,7 @@ function Signup() {
 
         try {
             const response = await fetch(
-                "http://localhost:8080/signup",
+                "https://pricingportal.onrender.com/signup",
                 {
                     method: "PUT",
                     headers: {

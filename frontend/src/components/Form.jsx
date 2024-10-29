@@ -17,7 +17,7 @@ function Form() {
         try {
             const fetchComponentData = async () => {
                 const response = await fetch(
-                    "http://localhost:8080/components",
+                    "https://pricingportal.onrender.com/components",
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -57,7 +57,7 @@ function Form() {
 
         try {
             const response = await fetch(
-                "http://localhost:8080/components",
+                "https://pricingportal.onrender.com/components",
                 {
                     method: "POST",
                     headers: {

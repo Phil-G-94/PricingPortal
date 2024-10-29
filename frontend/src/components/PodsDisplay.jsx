@@ -11,7 +11,7 @@ function PodsDisplay() {
         try {
             const fetchPodsData = async () => {
                 const response = await fetch(
-                    "http://localhost:8080/pods",
+                    "https://pricingportal.onrender.com/pods",
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
