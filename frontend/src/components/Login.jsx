@@ -57,7 +57,6 @@ function Login() {
         } catch (err) {
             console.error(err);
         } finally {
-            console.log(emailRef, passwordRef);
             emailRef.current.value = "";
             passwordRef.current.value = "";
         }

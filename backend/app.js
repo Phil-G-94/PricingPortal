@@ -9,6 +9,8 @@ import { dbConnect } from "./database/connection.js";
 
 const app = express();
 
+app.set('trust proxy', 1);
+
 const allowedOrigins = [
     "https://pricingportal.netlify.app",
     "http://localhost:5173"
