@@ -5,6 +5,6 @@ import { isAuth } from "../middleware/isAuth.js";
 const router = express.Router();
 
 router.get("/pods", isAuth, podController.getPods);
-router.delete("/pods", isAuth, podController.deletePod);
+router.delete("/pods/:podId", isAuth, podController.deletePod);
 
 export { router };

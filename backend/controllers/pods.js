@@ -25,7 +25,9 @@ const getPods = async (req, res, next) => {
 };
 
 const deletePod = async (req, res, next) => {
-    const pod = await Pod.fetchPodByPodIdAndDelete(req.body.podIdValue);
+    const { podId } = req.params;
+
+    const pod = await Pod.fetchPodByPodIdAndDelete(podId);
 
     if (!pod) {
         const error = new Error();
