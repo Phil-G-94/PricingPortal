@@ -14,16 +14,18 @@ const allowedOrigins = [
     "http://localhost:5173"
 ];
 
-app.options("*", cors({
-    origin: (origin, callback) => {
-        if (!origin) return callback(null, true);
+app.use(cors({
+    origin: "*",
 
-        if (allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
+    // (origin, callback) => {
+    //     if (!origin) return callback(null, true);
+
+    //     if (allowedOrigins.includes(origin)) {
+    //         callback(null, true);
+    //     } else {
+    //         callback(new Error('Not allowed by CORS'));
+    //     }
+    // },
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization', "Access-Control-Allow-Headers", "Access-Control-Allow-Origin"],
 
