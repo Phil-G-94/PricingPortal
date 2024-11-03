@@ -15,19 +15,18 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-    origin: "*",
+    origin: (origin, callback) => {
+        if (!origin) return callback(null, true);
 
-    // (origin, callback) => {
-    //     if (!origin) return callback(null, true);
-
-    //     if (allowedOrigins.includes(origin)) {
-    //         callback(null, true);
-    //     } else {
-    //         callback(new Error('Not allowed by CORS'));
-    //     }
-    // },
+        if (allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization', "Access-Control-Allow-Headers", "Access-Control-Allow-Origin"],
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
 
 }));
 
