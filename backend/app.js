@@ -1,4 +1,5 @@
 import express, { urlencoded, json } from "express";
+import cors from "cors";
 import helmet from "helmet";
 import compression from "compression";
 import { router as componentRoutes } from "./routes/component.js";
