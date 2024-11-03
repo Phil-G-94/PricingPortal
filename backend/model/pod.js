@@ -36,8 +36,12 @@ class Pod {
     static async fetchPodByPodIdAndDelete(podId) {
         const db = await getDb();
 
+        const query = {
+            "_id": ObjectId.createFromHexString(podId)
+        };
+
         try {
-            return db.collection("pods").deleteOne(podId);
+            return db.collection("pods").deleteOne(query);
         } catch (err) {
             console.error(err);
         }
