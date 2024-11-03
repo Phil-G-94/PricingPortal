@@ -29,7 +29,17 @@ class Pod {
         try {
             return db.collection("pods").find(query).toArray();
         } catch (err) {
-            console.log(err);
+            console.error(err);
+        }
+    }
+
+    static async fetchPodByPodId(podId) {
+        const db = await getDb();
+
+        try {
+            return db.collection("pods").deleteOne(podId);
+        } catch (err) {
+            console.error(err);
         }
     }
 }

@@ -97,7 +97,9 @@ function Login() {
                         {responseMessage}
                     </p>
                 )}
-                <button type="submit">Log in</button>
+                <button className="btn" type="submit">
+                    Log in
+                </button>
             </form>
         </>
     );

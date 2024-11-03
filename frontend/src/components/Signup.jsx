@@ -94,7 +94,9 @@ function Signup() {
                     </p>
                 )}
 
-                <button type="submit">Sign up</button>
+                <button className="btn" type="submit">
+                    Sign up
+                </button>
             </form>
         </>
     );

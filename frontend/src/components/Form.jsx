@@ -98,7 +98,9 @@ function Form() {
                 <ResourceComponents componentData={componentData} />
 
                 {responseMessage === "" && (
-                    <button type="submit">Get Price</button>
+                    <button className="btn" type="submit">
+                        Get Price
+                    </button>
                 )}
 
                 {responseMessage !== "" && (
