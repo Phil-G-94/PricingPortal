@@ -3,6 +3,12 @@ function PodDisplayCard({ pod }) {
     const token = localStorage.getItem("token");
 
     const onDeletePodHandler = async () => {
+        const podId = {
+            podIdValue: pod._id,
+        };
+
+        console.log(podId);
+
         const response = await fetch(
             "https://pricingportal.onrender.com/pods",
             {
@@ -11,7 +17,7 @@ function PodDisplayCard({ pod }) {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,
                 },
-                body: JSON.stringify(pod._id),
+                body: JSON.stringify(podId),
             }
         );
 

@@ -25,7 +25,7 @@ app.options("*", cors({
         }
     },
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization', "Access-Control-Allow-Headers"],
+    allowedHeaders: ['Content-Type', 'Authorization', "Access-Control-Allow-Headers", "Access-Control-Allow-Origin"],
 
 }));
 
