@@ -33,7 +33,7 @@ class Pod {
         }
     }
 
-    static async fetchPodByPodId(podId) {
+    static async fetchPodByPodIdAndDelete(podId) {
         const db = await getDb();
 
         try {

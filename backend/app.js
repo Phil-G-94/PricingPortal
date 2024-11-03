@@ -14,34 +14,7 @@ const allowedOrigins = [
     "http://localhost:5173"
 ];
 
-app.use(helmet());
-
-app.use(compression());
-
-app.use(express.static("public"));
-
-app.use(urlencoded({ extended: false }));
-
-app.use(json({}));
-
-/* replaces own implementation of CORS middleware */
-// app.use((req, res, next) => {
-//     res.setHeader("Access-Control-Allow-Origin", "https://pricingportal.netlify.app");
-
-//     res.setHeader(
-//         "Access-Control-Allow-Methods",
-//         "GET, POST, PUT, PATCH, DELETE"
-//     );
-
-//     res.setHeader(
-//         "Access-Control-Allow-Headers",
-//         "Content-Type, Authorization"
-//     );
-
-//     next();
-// });
-
-app.use(cors({
+app.options("*", cors({
     origin: (origin, callback) => {
         if (!origin) return callback(null, true);
 
@@ -55,6 +28,16 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization', "Access-Control-Allow-Headers"],
 
 }));
+
+app.use(helmet());
+
+app.use(compression());
+
+app.use(express.static("public"));
+
+app.use(urlencoded({ extended: false }));
+
+app.use(json({}));
 
 app.use(componentRoutes);
 app.use(authRoutes);
