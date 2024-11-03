@@ -87,15 +87,15 @@ select {
     color: var(--inevi-white);
 }
 
-.nav a {
+.nav li a {
     text-decoration: none;
 }
 
-.nav a:visited {
+.nav li a:visited {
     color: var(--inevi-lavender);
 }
 
-.nav a:hover {
+.nav li a:hover {
     color: var(--inevi-white);
 }
 
