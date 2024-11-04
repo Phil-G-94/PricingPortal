@@ -2,9 +2,9 @@ import PropTypes from "prop-types";
 function PodDisplayCard({ pod }) {
     const token = localStorage.getItem("token");
 
-    const onDeletePodHandler = async () => {
+    const onDeletePodHandler = async (podId) => {
         const response = await fetch(
-            `https://pricingportal.onrender.com/pods/${pod._id}`,
+            `https://pricingportal.onrender.com/pods/${podId}`,
             {
                 method: "DELETE",
                 headers: {
@@ -55,7 +55,10 @@ function PodDisplayCard({ pod }) {
                     <b>Created by:</b> {pod.user.name}
                 </p>
 
-                <button className="btn" onClick={onDeletePodHandler}>
+                <button
+                    className="btn"
+                    onClick={() => onDeletePodHandler(pod._id)}
+                >
                     Delete pod
                 </button>
             </div>

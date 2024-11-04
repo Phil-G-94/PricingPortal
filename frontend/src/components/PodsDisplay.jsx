@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import PodDisplayCard from "./PodDisplayCard.jsx";
 
-function PodsDisplay() {
+function PodsDisplay({ podDataUpdateTrigger }) {
     const [podsData, setPodsData] = useState([]);
     const [responseMessage, setResponseMessage] = useState("");
 
@@ -40,7 +41,7 @@ function PodsDisplay() {
         } catch (err) {
             console.log(err);
         }
-    }, [token]);
+    }, [token, podDataUpdateTrigger]);
 
     return (
         <section>
@@ -53,5 +54,9 @@ function PodsDisplay() {
         </section>
     );
 }
+
+PodsDisplay.propTypes = {
+    podDataUpdateTrigger: PropTypes.bool.isRequired,
+};
 
 export default PodsDisplay;

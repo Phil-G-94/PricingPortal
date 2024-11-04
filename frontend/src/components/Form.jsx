@@ -10,6 +10,8 @@ function Form() {
     const [resellerPrice, setResellerPrice] = useState(0);
     const [retailPrice, setRetailPrice] = useState(0);
     const [responseMessage, setResponseMessage] = useState("");
+    const [podDataUpdateTrigger, setPodDataUpdateTrigger] =
+        useState(false);
 
     const token = localStorage.getItem("token");
 
@@ -75,7 +77,7 @@ function Form() {
             }
 
             const data = await response.json();
-
+            setPodDataUpdateTrigger((prev) => !prev);
             setSpecData(data.spec);
             setResellerPrice(data.totalResellerPrice);
             setRetailPrice(data.totalRetailPrice);
@@ -121,7 +123,9 @@ function Form() {
             )}
 
             <section>
-                <PodsDisplay />
+                <PodsDisplay
+                    podDataUpdateTrigger={podDataUpdateTrigger}
+                />
             </section>
         </>
     );
