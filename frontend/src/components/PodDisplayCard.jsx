@@ -56,7 +56,7 @@ function PodDisplayCard({ pod }) {
                 </p>
 
                 <button
-                    className="btn"
+                    className="btn-warning"
                     onClick={() => onDeletePodHandler(pod._id)}
                 >
                     Delete pod

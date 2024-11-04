@@ -7,6 +7,81 @@
     --inevi-white: #ffffff;
     --inevi-lavender: #dfd8e8;
     --inevi-gray: #717171;
+    --inevi-red: #f0473f;
+}
+
+/* font styles */
+
+.roboto-thin {
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+}
+
+.roboto-light {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.roboto-regular {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.roboto-medium {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.roboto-bold {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.roboto-black {
+    font-family: "Roboto", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+}
+
+.roboto-thin-italic {
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+    font-style: italic;
+}
+
+.roboto-light-italic {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: italic;
+}
+
+.roboto-regular-italic {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+}
+
+.roboto-medium-italic {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: italic;
+}
+
+.roboto-bold-italic {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-style: italic;
+}
+
+.roboto-black-italic {
+    font-family: "Roboto", sans-serif;
+    font-weight: 900;
+    font-style: italic;
 }
 
 /* element styles */
@@ -19,6 +94,10 @@ body {
 
 p {
     margin-block-start: var(--metric-box-spacing);
+}
+
+ul {
+    padding-left: 0;
 }
 
 li {
@@ -39,15 +118,6 @@ header {
 
 form {
     background-color: var(--inevi-lavender);
-}
-
-form button {
-    padding-left: 2em;
-    padding-right: 2em;
-    border-radius: 0.6em;
-    text-align: center;
-    max-width: fit-content;
-    align-self: center;
 }
 
 form,
@@ -82,6 +152,10 @@ select {
 
 /* class styles */
 
+.centred-text {
+    text-align: center;
+}
+
 .nav {
     gap: 2em;
     padding: 0px;
@@ -104,13 +178,25 @@ select {
     text-align: center;
 }
 
-.btn {
+.btn,
+.btn-warning {
     background-color: var(--inevi-white);
     color: var(--inevi-dark-purple-accent);
+    padding-left: 2em;
+    padding-right: 2em;
+    border-radius: 0.6em;
+    text-align: center;
+    max-width: fit-content;
+    align-self: center;
 }
 
 .btn:hover {
     background-color: var(--inevi-dark-purple-accent);
+    color: var(--inevi-white);
+}
+
+.btn-warning:hover {
+    background-color: var(--inevi-red);
     color: var(--inevi-white);
 }
 
@@ -140,9 +226,8 @@ select {
         gap: 1.2em;
         background-color: var(--inevi-lavender);
         color: var(--inevi-dark-purple);
-        font-weight: 500;
     }
     main div {
-        flex: 2;
+        flex: 1;
     }
 }

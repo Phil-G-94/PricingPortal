@@ -23,7 +23,7 @@ function SpecDisplay({ specData, resellerPrice, retailPrice }) {
 
     return (
         <div>
-            <h3>Your Spec</h3>
+            <h3 className="centred-text">Your Spec</h3>
             <ul>{baseComponentData}</ul>
             <ul>{resourceComponentData}</ul>
 

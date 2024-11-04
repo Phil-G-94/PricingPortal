@@ -47,7 +47,7 @@ function PodsDisplay({ podDataUpdateTrigger }) {
         <section>
             {responseMessage && <p>{responseMessage}</p>}
 
-            <h3 style={{ textAlign: "center" }}>Your Saved Pods</h3>
+            <h3 className="centred-text">Your Saved Pods</h3>
             {podsData.map((pod) => {
                 return <PodDisplayCard key={pod._id} pod={pod} />;
             })}

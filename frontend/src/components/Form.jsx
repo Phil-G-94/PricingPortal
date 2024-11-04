@@ -92,7 +92,7 @@ function Form() {
             <form
                 action="/"
                 method="POST"
-                className="flex_col"
+                className="flex_col roboto-medium"
                 onSubmit={onSubmitHandler}
             >
                 <BaseComponents componentData={componentData} />
@@ -113,16 +113,16 @@ function Form() {
             </form>
 
             {!responseMessage && (
-                <>
+                <section className="roboto-light">
                     <SpecDisplay
                         specData={specData}
                         resellerPrice={resellerPrice}
                         retailPrice={retailPrice}
                     />
-                </>
+                </section>
             )}
 
-            <section>
+            <section className="roboto-light">
                 <PodsDisplay
                     podDataUpdateTrigger={podDataUpdateTrigger}
                 />
