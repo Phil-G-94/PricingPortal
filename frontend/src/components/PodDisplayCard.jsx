@@ -1,29 +1,5 @@
 import PropTypes from "prop-types";
-function PodDisplayCard({ pod }) {
-    const token = localStorage.getItem("token");
-
-    const onDeletePodHandler = async (podId) => {
-        const response = await fetch(
-            `https://pricingportal.onrender.com/pods/${podId}`,
-            {
-                method: "DELETE",
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            }
-        );
-
-        if (!response.ok) {
-            throw new Error(
-                "Something went wrong trying to delete the pod..."
-            );
-        }
-
-        const jsonResponse = await response.json();
-
-        return jsonResponse;
-    };
-
+function PodDisplayCard({ pod, onDeletePodHandler }) {
     return (
         <article>
             <div>
@@ -68,6 +44,7 @@ function PodDisplayCard({ pod }) {
 
 PodDisplayCard.propTypes = {
     pod: PropTypes.object.isRequired,
+    onDeletePodHandler: PropTypes.func.isRequired,
 };
 
 export default PodDisplayCard;

@@ -5,8 +5,38 @@ import PodDisplayCard from "./PodDisplayCard.jsx";
 function PodsDisplay({ podDataUpdateTrigger }) {
     const [podsData, setPodsData] = useState([]);
     const [responseMessage, setResponseMessage] = useState("");
+    const hasSavedPods =
+        podsData !== undefined && podsData.length !== 0;
 
     const token = localStorage.getItem("token");
+
+    const onDeletePodHandler = async (podId) => {
+        try {
+            const response = await fetch(
+                `https://pricingportal.onrender.com/pods/${podId}`,
+                {
+                    method: "DELETE",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error(
+                    "Something went wrong trying to delete the pod..."
+                );
+            }
+
+            setPodsData((prevData) => {
+                prevData.filter((pod) => pod._id !== podId);
+            });
+            console.log(podsData);
+        } catch (error) {
+            console.error(error);
+            setResponseMessage("Error deleting pod.");
+        }
+    };
 
     useEffect(() => {
         try {
@@ -33,13 +63,11 @@ function PodsDisplay({ podDataUpdateTrigger }) {
                 }
 
                 setPodsData(jsonResponse.pods);
-
-                return jsonResponse;
             };
 
             fetchPodsData();
-        } catch (err) {
-            console.log(err);
+        } catch (error) {
+            console.error(error);
         }
     }, [token, podDataUpdateTrigger]);
 
@@ -48,9 +76,21 @@ function PodsDisplay({ podDataUpdateTrigger }) {
             {responseMessage && <p>{responseMessage}</p>}
 
             <h3 className="centred-text">Your Saved Pods</h3>
-            {podsData.map((pod) => {
-                return <PodDisplayCard key={pod._id} pod={pod} />;
-            })}
+            {hasSavedPods &&
+                podsData?.map((pod) => {
+                    return (
+                        <PodDisplayCard
+                            key={pod._id}
+                            pod={pod}
+                            onDeletePodHandler={onDeletePodHandler}
+                        />
+                    );
+                })}
+            {!hasSavedPods && (
+                <p className="centred-text">
+                    No pods saved. Choose a spec and get a price!
+                </p>
+            )}
         </section>
     );
 }
