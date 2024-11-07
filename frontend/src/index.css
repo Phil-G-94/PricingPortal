@@ -6,11 +6,11 @@
     --inevi-dark-purple-accent: #542f88;
     --inevi-white: #ffffff;
     --inevi-lavender: #dfd8e8;
-    --inevi-gray: #717171;
+    --inevi-gray: #757575;
     --inevi-red: #f0473f;
 }
 
-/* font styles */
+/* font style classes */
 
 .roboto-thin {
     font-family: "Roboto", sans-serif;
@@ -150,11 +150,9 @@ select {
     margin: 0.2em;
 }
 
-/* class styles */
+/* alignment util classes */
 
-.centred-text {
-    text-align: center;
-}
+/* element class styles */
 
 .nav {
     gap: 2em;
@@ -198,6 +196,18 @@ select {
 .btn-warning:hover {
     background-color: var(--inevi-red);
     color: var(--inevi-white);
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+.input-group .icon {
+    margin-left: -1.5em;
+    margin-right: 0.5em;
+    color: var(--inevi-gray);
 }
 
 /* containers */

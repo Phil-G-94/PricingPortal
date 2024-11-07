@@ -1,5 +1,7 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Icon from "@mdi/react";
+import { mdiAccount, mdiLock } from "@mdi/js";
 
 function Login() {
     const emailRef = useRef();
@@ -64,13 +66,19 @@ function Login() {
 
     return (
         <>
-            <h2>Log in</h2>
+            {/* <h2>Log in</h2> */}
             <form
                 action="/login"
                 className="flex_col_items_content_center"
                 onSubmit={onSubmitHandler}
             >
-                <label htmlFor="email">
+                <label htmlFor="email" className="input-group">
+                    <Icon
+                        path={mdiAccount}
+                        title="email"
+                        size={1}
+                        className="icon"
+                    ></Icon>
                     <input
                         type="email"
                         name="email"
@@ -81,7 +89,13 @@ function Login() {
                     />
                 </label>
 
-                <label htmlFor="password">
+                <label htmlFor="password" className="input-group">
+                    <Icon
+                        path={mdiLock}
+                        title="password"
+                        size={1}
+                        className="icon"
+                    ></Icon>
                     <input
                         type="password"
                         name="password"
