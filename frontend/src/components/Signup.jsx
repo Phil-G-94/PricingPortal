@@ -1,4 +1,6 @@
 import { useRef, useState } from "react";
+import Icon from "@mdi/react";
+import { mdiBadgeAccount, mdiAccount, mdiLock } from "@mdi/js";
 
 function Signup() {
     const nameRef = useRef();
@@ -49,13 +51,19 @@ function Signup() {
 
     return (
         <>
-            <h2>Sign up</h2>
+            {/* <h2>Sign up</h2> */}
             <form
                 action="/signup"
                 className="flex_col_items_content_center"
                 onSubmit={onSubmitHandler}
             >
-                <label htmlFor="name">
+                <label htmlFor="name" className="input-group">
+                    <Icon
+                        path={mdiBadgeAccount}
+                        title="email"
+                        size={1}
+                        className="icon"
+                    ></Icon>
                     <input
                         type="text"
                         name="name"
@@ -65,7 +73,13 @@ function Signup() {
                         required
                     />
                 </label>
-                <label htmlFor="email">
+                <label htmlFor="email" className="input-group">
+                    <Icon
+                        path={mdiAccount}
+                        title="email"
+                        size={1}
+                        className="icon"
+                    ></Icon>
                     <input
                         type="email"
                         name="email"
@@ -76,7 +90,13 @@ function Signup() {
                     />
                 </label>
 
-                <label htmlFor="password">
+                <label htmlFor="password" className="input-group">
+                    <Icon
+                        path={mdiLock}
+                        title="email"
+                        size={1}
+                        className="icon"
+                    ></Icon>
                     <input
                         type="password"
                         name="password"
