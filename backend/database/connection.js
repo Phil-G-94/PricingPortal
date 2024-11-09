@@ -8,16 +8,23 @@ async function dbConnect(callback) {
 
     const uri = `mongodb+srv://${process.env.MDB_USER}:${process.env.MDB_PASS}${process.env.MDB_HOST}/?retryWrites=true&w=majority&appName=${process.env.MDB_APP}`;
 
-    try {
-        const client = await MongoClient.connect(uri);
+    let client;
 
-        console.log("Connected to db!");
+    try {
+        client = await MongoClient.connect(uri);
+
+        console.log("Opened connection to db.");
 
         _db = client.db("pricingPortal");
 
-        callback();
+        await callback();
     } catch (err) {
         console.error(err);
+    } finally {
+        if (client) {
+            await client.close();
+            console.log("Closed connection to db.");
+        }
     }
 }
 
