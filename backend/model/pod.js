@@ -23,7 +23,7 @@ class Pod {
         const db = await getDb();
 
         const query = {
-            _id: Object.createFromHexString(podId),
+            _id: ObjectId.createFromHexString(podId),
         };
 
         try {
