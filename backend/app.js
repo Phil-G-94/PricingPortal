@@ -58,6 +58,15 @@ app.use((err, req, res, next) => {
         .json({ message, data });
 });
 
-dbConnect(() => {
-    app.listen(process.env.PORT || 8080);
-});
+(async function startServer() {
+    try {
+        await dbConnect();
+
+        app.listen(process.env.PORT || 8080, () => {
+            console.log("Server is running on port ", process.env.PORT || 8080);
+        });
+    } catch (error) {
+        console.log(error);
+        process.exitCode = 1;
+    }
+})();
