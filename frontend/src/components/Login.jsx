@@ -8,6 +8,7 @@ function Login() {
     const passwordRef = useRef();
     const navigate = useNavigate();
     const [responseMessage, setResponseMessage] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
     const remainingMilliseconds = 60 * 60 * 1000;
     const tokenExpiryDate = new Date(
@@ -16,6 +17,8 @@ function Login() {
 
     const onSubmitHandler = async (event) => {
         event.preventDefault();
+
+        setIsLoading(true);
 
         const formData = new FormData(event.target);
         const formDataObject = Object.fromEntries(formData);
@@ -41,8 +44,6 @@ function Login() {
                     setResponseMessage(message);
                 }
 
-                console.log(message);
-
                 return;
             }
 
@@ -54,8 +55,6 @@ function Login() {
             );
 
             navigate("/components");
-
-            return jsonResponse;
         } catch (err) {
             console.error(err);
         } finally {
@@ -111,8 +110,11 @@ function Login() {
                         {responseMessage}
                     </p>
                 )}
+
+                {isLoading && <div className="spinner"></div>}
+
                 <button className="btn" type="submit">
-                    Log in
+                    {isLoading ? "Logging in" : "Log in"}
                 </button>
             </form>
         </>

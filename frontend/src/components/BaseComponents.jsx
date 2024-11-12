@@ -56,6 +56,7 @@ function BaseComponents({ componentData }) {
                                 type="checkbox"
                                 value={`${cmp.name} : ${cmp.cost}`}
                                 placeholder={cmp.cost}
+                                hidden={true}
                                 required
                             />
                         </label>

@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 function Navigation() {
     return (
-        <header>
+        <header className="centred-text">
             <nav>
                 <ul className="nav flex_row_center">
                     <li>

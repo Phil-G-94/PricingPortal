@@ -28,13 +28,50 @@ function PodsDisplay({ podDataUpdateTrigger }) {
                 );
             }
 
-            setPodsData((prevData) => {
-                prevData.filter((pod) => pod._id !== podId);
-            });
-            console.log(podsData);
+            const updatedPods = podsData.filter(
+                (pod) => pod._id !== podId
+            );
+
+            setPodsData(updatedPods);
+
+            console.log();
         } catch (error) {
             console.error(error);
             setResponseMessage("Error deleting pod.");
+        }
+    };
+
+    const onEditPodHandler = async (podId) => {
+        try {
+            const response = await fetch(
+                `https://pricingportal.onrender.com/pods/${podId}`,
+                {
+                    method: "PUT",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+
+            const jsonResponse = await response.json();
+
+            if (!response.ok) {
+                const { message } = jsonResponse;
+
+                if (message) {
+                    setResponseMessage(message);
+                }
+
+                return;
+            }
+
+            console.log(
+                "Logging from onEditPodHandler",
+                jsonResponse
+            );
+        } catch (error) {
+            console.error(error);
         }
     };
 
@@ -83,6 +120,7 @@ function PodsDisplay({ podDataUpdateTrigger }) {
                             key={pod._id}
                             pod={pod}
                             onDeletePodHandler={onDeletePodHandler}
+                            onEditPodHandler={onEditPodHandler}
                         />
                     );
                 })}

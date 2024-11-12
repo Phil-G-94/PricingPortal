@@ -17,7 +17,6 @@ async function dbConnect() {
         console.log("Opened connection to db.");
 
         _db = client.db("pricingPortal");
-
     } catch (err) {
         console.error(err);
     }

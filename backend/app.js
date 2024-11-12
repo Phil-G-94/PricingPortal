@@ -9,28 +9,29 @@ import { dbConnect } from "./database/connection.js";
 
 const app = express();
 
-app.set('trust proxy', 1);
+app.set("trust proxy", 1);
 
 const allowedOrigins = [
     "https://pricingportal.netlify.app",
-    "http://localhost:5173"
+    "http://localhost:5173",
 ];
 
-app.use(cors({
-    origin: (origin, callback) => {
-        if (!origin) return callback(null, true);
+app.use(
+    cors({
+        origin: (origin, callback) => {
+            if (!origin) return callback(null, true);
 
-        if (allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-    credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization'],
-
-}));
+            if (allowedOrigins.includes(origin)) {
+                callback(null, true);
+            } else {
+                callback(new Error("Not allowed by CORS"));
+            }
+        },
+        methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+        credentials: true,
+        allowedHeaders: ["Content-Type", "Authorization"],
+    })
+);
 
 app.use(helmet());
 
@@ -63,7 +64,10 @@ app.use((err, req, res, next) => {
         await dbConnect();
 
         app.listen(process.env.PORT || 8080, () => {
-            console.log("Server is running on port ", process.env.PORT || 8080);
+            console.log(
+                "Server is running on port ",
+                process.env.PORT || 8080
+            );
         });
     } catch (error) {
         console.log(error);

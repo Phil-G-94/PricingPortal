@@ -7,9 +7,12 @@ function Signup() {
     const emailRef = useRef();
     const passwordRef = useRef();
     const [responseMessage, setResponseMessage] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
     const onSubmitHandler = async (event) => {
         event.preventDefault();
+
+        setIsLoading(true);
 
         const formData = new FormData(event.target);
         const formDataObject = Object.fromEntries(formData);
@@ -34,15 +37,16 @@ function Signup() {
                 if (data && data[0].msg) {
                     setResponseMessage(data[0].msg);
                 }
-            }
 
-            return jsonResponse;
+                return;
+            }
         } catch (err) {
             console.error(err);
         } finally {
             nameRef.current.value = "";
             emailRef.current.value = "";
             passwordRef.current.value = "";
+            setIsLoading(false);
             setTimeout(() => {
                 setResponseMessage("");
             }, 6000);
@@ -51,7 +55,6 @@ function Signup() {
 
     return (
         <>
-            {/* <h2>Sign up</h2> */}
             <form
                 action="/signup"
                 className="flex_col_items_content_center"
@@ -89,7 +92,6 @@ function Signup() {
                         required
                     />
                 </label>
-
                 <label htmlFor="password" className="input-group">
                     <Icon
                         path={mdiLock}
@@ -107,15 +109,14 @@ function Signup() {
                         required
                     />
                 </label>
-
                 {responseMessage !== "" && (
                     <p className="response-message">
                         {responseMessage}
                     </p>
                 )}
-
+                {isLoading && <div className="spinner"></div>}
                 <button className="btn" type="submit">
-                    Sign up
+                    {isLoading ? "Signing up" : "Sign up"}
                 </button>
             </form>
         </>

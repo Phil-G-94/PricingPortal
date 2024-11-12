@@ -32,12 +32,31 @@ const deletePod = async (req, res, next) => {
     if (!pod) {
         const error = new Error();
         error.message = "No pod to delete.";
-        error.cause =
-            "The pod you want to delete doesn't exist.";
+        error.cause = "The pod you want to delete doesn't exist.";
         return next(error);
     }
 
     res.status(200).json({ message: "Pod deleted." });
 };
 
-export { getPods, deletePod };
+const editPod = async (req, res, next) => {
+    const { podId } = req.params;
+
+    const pod = await Pod.fetchPodByPodId(podId);
+
+    if (!pod) {
+        const error = new Error();
+        error.message = "No pod found with that id.";
+        error.cause = "The pod you want to edit doesn't exist.";
+        return next(error);
+    }
+
+    console.log("Logging from EditPod controller: ", pod);
+
+    res.status(200).json({
+        message: "Pod edited succesfully",
+        pod: pod,
+    });
+};
+
+export { getPods, deletePod, editPod };

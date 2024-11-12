@@ -8,6 +8,7 @@
     --inevi-lavender: #dfd8e8;
     --inevi-gray: #757575;
     --inevi-red: #f0473f;
+    --inevi-amber: #ffbf00;
 }
 
 /* font style classes */
@@ -104,11 +105,6 @@ li {
     list-style: none;
 }
 
-header,
-footer {
-    text-align: center;
-}
-
 header {
     padding: var(--metric-box-spacing);
     background-color: var(--inevi-dark-purple);
@@ -152,6 +148,10 @@ select {
 
 /* alignment util classes */
 
+.centred-text {
+    text-align: center;
+}
+
 /* element class styles */
 
 .nav {
@@ -177,7 +177,8 @@ select {
 }
 
 .btn,
-.btn-warning {
+.btn-warning,
+.btn-caution {
     background-color: var(--inevi-white);
     color: var(--inevi-dark-purple-accent);
     padding-left: 2em;
@@ -195,6 +196,11 @@ select {
 
 .btn-warning:hover {
     background-color: var(--inevi-red);
+    color: var(--inevi-white);
+}
+
+.btn-caution {
+    background-color: var(--inevi-amber);
     color: var(--inevi-white);
 }
 
@@ -229,6 +235,29 @@ select {
     display: flex;
     flex-direction: column;
 }
+
+/* animations */
+
+.spinner {
+    border: 0.25rem solid var(--inevi-white);
+    border-top: 0.25rem solid var(--inevi-dark-purple);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    width: max-content;
+    height: max-content;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* media queries */
 
 @media (min-width: 45em) {
     main form {

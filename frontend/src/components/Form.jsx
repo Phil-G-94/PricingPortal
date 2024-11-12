@@ -12,6 +12,7 @@ function Form() {
     const [responseMessage, setResponseMessage] = useState("");
     const [podDataUpdateTrigger, setPodDataUpdateTrigger] =
         useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const token = localStorage.getItem("token");
 
@@ -53,6 +54,8 @@ function Form() {
     const onSubmitHandler = async (event) => {
         event.preventDefault();
 
+        setIsLoading(true);
+
         const formData = new FormData(event.target);
 
         const formDataObject = Object.fromEntries(formData.entries());
@@ -83,6 +86,8 @@ function Form() {
             setRetailPrice(data.totalRetailPrice);
         } catch (err) {
             console.error(err);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -99,9 +104,15 @@ function Form() {
 
                 <ResourceComponents componentData={componentData} />
 
+                {isLoading && (
+                    <div
+                        className="spinner"
+                        style={{ alignSelf: "center" }}
+                    ></div>
+                )}
                 {responseMessage === "" && (
                     <button className="btn" type="submit">
-                        Get Price
+                        {isLoading ? "Getting price" : "Get price"}
                     </button>
                 )}
 

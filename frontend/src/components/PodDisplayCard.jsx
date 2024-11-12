@@ -1,5 +1,9 @@
 import PropTypes from "prop-types";
-function PodDisplayCard({ pod, onDeletePodHandler }) {
+function PodDisplayCard({
+    pod,
+    onDeletePodHandler,
+    onEditPodHandler,
+}) {
     return (
         <article>
             <div>
@@ -37,6 +41,13 @@ function PodDisplayCard({ pod, onDeletePodHandler }) {
                 >
                     Delete pod
                 </button>
+
+                <button
+                    className="btn-caution"
+                    onClick={() => onEditPodHandler(pod._id)}
+                >
+                    Edit pod
+                </button>
             </div>
         </article>
     );
@@ -45,6 +56,7 @@ function PodDisplayCard({ pod, onDeletePodHandler }) {
 PodDisplayCard.propTypes = {
     pod: PropTypes.object.isRequired,
     onDeletePodHandler: PropTypes.func.isRequired,
+    onEditPodHandler: PropTypes.func.isRequired,
 };
 
 export default PodDisplayCard;
