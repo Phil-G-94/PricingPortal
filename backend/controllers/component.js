@@ -31,7 +31,26 @@ const getComponents = async (req, res, next) => {
 const postComponents = async (req, res, next) => {
     const errorResult = validationResult(req);
 
+
+
+    const parseComponent = (data, quantity = 1) => {
+        const [name, cost] = data?.split(" : ") || ["", "0"];
+        return { name, cost: +cost * quantity };
+    };
+
+    const chassis = req.body.chassis;
+    const motherboard = req.body.motherboard;
+    const coolingCabling = req.body.coolingCabling;
+    const islc = req.body.islc;
+    const CPU = req.body.CPU;
+    const GPU = req.body.GPU;
+    const RAM = req.body.RAM;
+    const SSD = req.body.SSD;
+
+
+    /*
     const ramQuantity = +req.body["RAM_quantity"];
+
     const ssdQuantity = +req.body["SSD_quantity"];
 
     const chassis = {
@@ -76,6 +95,8 @@ const postComponents = async (req, res, next) => {
         cost: +req.body.SSD?.split(" : ")[1] * ssdQuantity,
     };
 
+    */
+
     const spec = {
         baseComponents: {
             chassis,
@@ -90,6 +111,7 @@ const postComponents = async (req, res, next) => {
             SSD,
         },
     };
+
 
     const costSorter = (dataObject) => {
         const costData = [];
