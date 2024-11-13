@@ -199,7 +199,7 @@ select {
     color: var(--inevi-white);
 }
 
-.btn-caution {
+.btn-caution:hover {
     background-color: var(--inevi-amber);
     color: var(--inevi-white);
 }

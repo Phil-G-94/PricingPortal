@@ -31,27 +31,26 @@ const getComponents = async (req, res, next) => {
 const postComponents = async (req, res, next) => {
     const errorResult = validationResult(req);
 
+    const ramQuantity = +req.body["RAM_quantity"];
 
+    const ssdQuantity = +req.body["SSD_quantity"];
 
     const parseComponent = (data, quantity = 1) => {
         const [name, cost] = data?.split(" : ") || ["", "0"];
         return { name, cost: +cost * quantity };
     };
 
-    const chassis = req.body.chassis;
-    const motherboard = req.body.motherboard;
-    const coolingCabling = req.body.coolingCabling;
-    const islc = req.body.islc;
-    const CPU = req.body.CPU;
-    const GPU = req.body.GPU;
-    const RAM = req.body.RAM;
-    const SSD = req.body.SSD;
-
+    const chassis = parseComponent(req.body.chassis);
+    const motherboard = parseComponent(req.body.motherboard);
+    const coolingCabling = parseComponent(req.body.coolingCabling);
+    const islc = parseComponent(req.body.islc);
+    const CPU = parseComponent(req.body.CPU);
+    const GPU = parseComponent(req.body.GPU);
+    const RAM = parseComponent(req.body.RAM, ramQuantity);
+    const SSD = parseComponent(req.body.SSD, ssdQuantity);
 
     /*
-    const ramQuantity = +req.body["RAM_quantity"];
 
-    const ssdQuantity = +req.body["SSD_quantity"];
 
     const chassis = {
         name: req.body.chassis?.split(" : ")[0],
