@@ -1,12 +1,21 @@
 import PropTypes from "prop-types";
+
+import { useState } from "react";
+
+import EditPod from "./EditPod";
+import Modal from "./Modal";
+
 function PodDisplayCard({
     pod,
+    componentData,
     onDeletePodHandler,
     onEditPodHandler,
 }) {
-    return (
+    const [isEditing, setIsEditing] = useState(false);
+
+    return !isEditing ? (
         <article>
-            <div>
+            <section>
                 <h4>Pod ID: {pod._id}</h4>
                 <p>
                     <b>CPU:</b>
@@ -44,17 +53,25 @@ function PodDisplayCard({
 
                 <button
                     className="btn-caution"
-                    onClick={() => onEditPodHandler(pod._id)}
+                    onClick={() => {
+                        onEditPodHandler(pod._id);
+                        setIsEditing(true);
+                    }}
                 >
                     Edit pod
                 </button>
-            </div>
+            </section>
         </article>
+    ) : (
+        <Modal>
+            <EditPod componentData={componentData} />
+        </Modal>
     );
 }
 
 PodDisplayCard.propTypes = {
     pod: PropTypes.object.isRequired,
+    componentData: PropTypes.array.isRequired,
     onDeletePodHandler: PropTypes.func.isRequired,
     onEditPodHandler: PropTypes.func.isRequired,
 };

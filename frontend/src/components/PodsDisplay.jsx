@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import PodDisplayCard from "./PodDisplayCard.jsx";
 
-function PodsDisplay({ podDataUpdateTrigger }) {
+function PodsDisplay({ componentData, podDataUpdateTrigger }) {
     const [podsData, setPodsData] = useState([]);
     const [responseMessage, setResponseMessage] = useState("");
     const hasSavedPods =
@@ -119,6 +119,7 @@ function PodsDisplay({ podDataUpdateTrigger }) {
                         <PodDisplayCard
                             key={pod._id}
                             pod={pod}
+                            componentData={componentData}
                             onDeletePodHandler={onDeletePodHandler}
                             onEditPodHandler={onEditPodHandler}
                         />
@@ -135,6 +136,7 @@ function PodsDisplay({ podDataUpdateTrigger }) {
 
 PodsDisplay.propTypes = {
     podDataUpdateTrigger: PropTypes.bool.isRequired,
+    componentData: PropTypes.array.isRequired,
 };
 
 export default PodsDisplay;

@@ -135,6 +135,7 @@ function Form() {
 
             <section className="roboto-light">
                 <PodsDisplay
+                    componentData={componentData}
                     podDataUpdateTrigger={podDataUpdateTrigger}
                 />
             </section>

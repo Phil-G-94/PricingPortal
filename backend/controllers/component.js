@@ -111,7 +111,6 @@ const postComponents = async (req, res, next) => {
         },
     };
 
-
     const costSorter = (dataObject) => {
         const costData = [];
 
