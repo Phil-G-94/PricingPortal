@@ -12,6 +12,10 @@ function PodDisplayCard({
     onEditPodHandler,
 }) {
     const [isEditing, setIsEditing] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
+
+    const openEditModal = () => setShowEditModal(true);
+    const closeEditModal = () => setShowEditModal(false);
 
     return !isEditing ? (
         <article>
@@ -56,6 +60,7 @@ function PodDisplayCard({
                     onClick={() => {
                         onEditPodHandler(pod._id);
                         setIsEditing(true);
+                        openEditModal();
                     }}
                 >
                     Edit pod
@@ -63,8 +68,16 @@ function PodDisplayCard({
             </section>
         </article>
     ) : (
-        <Modal>
-            <EditPod componentData={componentData} />
+        <Modal
+            showEditModal={showEditModal}
+            closeEditModal={closeEditModal}
+        >
+            {showEditModal && (
+                <EditPod
+                    componentData={componentData}
+                    closeEditModal={closeEditModal}
+                />
+            )}
         </Modal>
     );
 }
