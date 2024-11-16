@@ -19,6 +19,28 @@ class Pod {
         }
     }
 
+    async updatePod(podId) {
+        const db = await getDb();
+
+        const query = { _id: ObjectId.createFromHexString(podId) };
+
+        const updatedPod = await db
+            .collection("pods")
+            .updateOne(query, {
+                $set: {
+                    spec: this.spec,
+                    resellerPrice: this.resellerPrice,
+                    retailPrice: this.retailPrice,
+                },
+            });
+
+        if (updatedPod.matchedCount === 0) {
+            throw new Error("Pod not found");
+        }
+
+        return updatedPod;
+    }
+
     static async fetchPodByPodId(podId) {
         const db = await getDb();
 
@@ -27,7 +49,11 @@ class Pod {
         };
 
         try {
-            return db.collection("pods").findOne(query);
+            const podData = await db
+                .collection("pods")
+                .findOne(query);
+
+            return podData ? new Pod(podData) : null;
         } catch (error) {
             console.log(error);
         }

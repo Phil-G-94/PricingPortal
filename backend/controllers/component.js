@@ -49,53 +49,6 @@ const postComponents = async (req, res, next) => {
     const RAM = parseComponent(req.body.RAM, ramQuantity);
     const SSD = parseComponent(req.body.SSD, ssdQuantity);
 
-    /*
-
-
-    const chassis = {
-        name: req.body.chassis?.split(" : ")[0],
-        cost: +req.body.chassis?.split(" : ")[1],
-    };
-
-    const motherboard = {
-        name: req.body.motherboard?.split(" : ")[0],
-        cost: +req.body.motherboard?.split(" : ")[1],
-    };
-
-    const coolingCabling = {
-        name: req.body.coolingCabling?.split(" : ")[0],
-        cost: +req.body.coolingCabling?.split(" : ")[1],
-    };
-
-    const islc = {
-        name: req.body.islc?.split(" : ")[0],
-        cost: +req.body.islc?.split(" : ")[1],
-    };
-
-    const CPU = {
-        name: req.body.CPU?.split(" : ")[0],
-        cost: +req.body.CPU?.split(" : ")[1],
-    };
-
-    const GPU = {
-        name: req.body.GPU?.split(" : ")[0],
-        cost: +req.body.GPU?.split(" : ")[1],
-    };
-
-    const RAM = {
-        name: req.body.RAM?.split(" : ")[0],
-        quantity: ramQuantity,
-        cost: +req.body.RAM?.split(" : ")[1] * ramQuantity,
-    };
-
-    const SSD = {
-        name: req.body.SSD?.split(" : ")[0],
-        quantity: ssdQuantity,
-        cost: +req.body.SSD?.split(" : ")[1] * ssdQuantity,
-    };
-
-    */
-
     const spec = {
         baseComponents: {
             chassis,
