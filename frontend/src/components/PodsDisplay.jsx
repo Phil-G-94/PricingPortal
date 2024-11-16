@@ -41,40 +41,6 @@ function PodsDisplay({ componentData, podDataUpdateTrigger }) {
         }
     };
 
-    const onEditPodHandler = async (podId) => {
-        try {
-            const response = await fetch(
-                `https://pricingportal.onrender.com/pods/${podId}`,
-                {
-                    method: "PUT",
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                        "Content-Type": "application/json",
-                    },
-                }
-            );
-
-            const jsonResponse = await response.json();
-
-            if (!response.ok) {
-                const { message } = jsonResponse;
-
-                if (message) {
-                    setResponseMessage(message);
-                }
-
-                return;
-            }
-
-            console.log(
-                "Logging from onEditPodHandler",
-                jsonResponse
-            );
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
     useEffect(() => {
         try {
             const fetchPodsData = async () => {
@@ -121,7 +87,6 @@ function PodsDisplay({ componentData, podDataUpdateTrigger }) {
                             pod={pod}
                             componentData={componentData}
                             onDeletePodHandler={onDeletePodHandler}
-                            onEditPodHandler={onEditPodHandler}
                         />
                     );
                 })}

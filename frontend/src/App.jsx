@@ -24,6 +24,10 @@ function App() {
                         path="components"
                         element={<ComponentsPage />}
                     />
+                    <Route
+                        path="/pods/:podId"
+                        element={<ComponentsPage />}
+                    />
                 </Route>
             </Route>
         )

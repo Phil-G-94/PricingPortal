@@ -1,8 +1,15 @@
 import PropTypes from "prop-types";
 import { createPortal } from "react-dom";
 
-const Backdrop = () => {
-    return <div className="backdrop"></div>;
+const Backdrop = ({ closeEditModal }) => {
+    return (
+        <div
+            className="backdrop"
+            onClick={() => {
+                closeEditModal();
+            }}
+        ></div>
+    );
 };
 
 const ModalOverlay = ({ children }) => {
@@ -14,12 +21,15 @@ const ModalOverlay = ({ children }) => {
     );
 };
 
-function Modal({ children }) {
+function Modal({ children, closeEditModal }) {
     const portalElement = document.getElementById("modal-root");
 
     return (
         <>
-            {createPortal(<Backdrop />, portalElement)}
+            {createPortal(
+                <Backdrop closeEditModal={closeEditModal} />,
+                portalElement
+            )}
             {createPortal(
                 <ModalOverlay>{children}</ModalOverlay>,
                 portalElement
@@ -28,12 +38,17 @@ function Modal({ children }) {
     );
 }
 
+Backdrop.propTypes = {
+    closeEditModal: PropTypes.func.isRequired,
+};
+
 ModalOverlay.propTypes = {
     children: PropTypes.object.isRequired,
 };
 
 Modal.propTypes = {
     children: PropTypes.object.isRequired,
+    closeEditModal: PropTypes.func.isRequired,
 };
 
 export default Modal;

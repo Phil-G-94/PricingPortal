@@ -5,19 +5,13 @@ import { useState } from "react";
 import EditPod from "./EditPod";
 import Modal from "./Modal";
 
-function PodDisplayCard({
-    pod,
-    componentData,
-    onDeletePodHandler,
-    onEditPodHandler,
-}) {
-    const [isEditing, setIsEditing] = useState(false);
+function PodDisplayCard({ pod, componentData, onDeletePodHandler }) {
     const [showEditModal, setShowEditModal] = useState(false);
 
     const openEditModal = () => setShowEditModal(true);
     const closeEditModal = () => setShowEditModal(false);
 
-    return !isEditing ? (
+    return (
         <article>
             <section>
                 <h4>Pod ID: {pod._id}</h4>
@@ -58,27 +52,25 @@ function PodDisplayCard({
                 <button
                     className="btn-caution"
                     onClick={() => {
-                        onEditPodHandler(pod._id);
-                        setIsEditing(true);
                         openEditModal();
                     }}
                 >
                     Edit pod
                 </button>
             </section>
-        </article>
-    ) : (
-        <Modal
-            showEditModal={showEditModal}
-            closeEditModal={closeEditModal}
-        >
             {showEditModal && (
-                <EditPod
-                    componentData={componentData}
+                <Modal
+                    showEditModal={showEditModal}
                     closeEditModal={closeEditModal}
-                />
+                >
+                    <EditPod
+                        componentData={componentData}
+                        podId={pod._id}
+                        closeEditModal={closeEditModal}
+                    />
+                </Modal>
             )}
-        </Modal>
+        </article>
     );
 }
 
@@ -86,7 +78,6 @@ PodDisplayCard.propTypes = {
     pod: PropTypes.object.isRequired,
     componentData: PropTypes.array.isRequired,
     onDeletePodHandler: PropTypes.func.isRequired,
-    onEditPodHandler: PropTypes.func.isRequired,
 };
 
 export default PodDisplayCard;
