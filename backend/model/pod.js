@@ -2,11 +2,12 @@ import { ObjectId } from "mongodb";
 import { getDb } from "../database/connection.js";
 
 class Pod {
-    constructor(spec, resellerPrice, retailPrice, user, userId) {
+    constructor(spec, resellerPrice, retailPrice, user, createdAt) {
         this.spec = spec;
         this.resellerPrice = resellerPrice;
         this.retailPrice = retailPrice;
         this.user = user;
+        this.createdAt = createdAt;
     }
 
     async save() {

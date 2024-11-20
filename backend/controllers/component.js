@@ -29,6 +29,8 @@ const getComponents = async (req, res, next) => {
 };
 
 const postComponents = async (req, res, next) => {
+    const dateNow = new Date();
+
     const errorResult = validationResult(req);
 
     const ramQuantity = +req.body["RAM_quantity"];
@@ -107,12 +109,13 @@ const postComponents = async (req, res, next) => {
     }
 
     try {
-        const pod = new Pod(
+        const pod = new Pod({
             spec,
             totalResellerPrice,
             totalRetailPrice,
-            user
-        );
+            user,
+            createdAt: dateNow,
+        });
 
         await pod.save();
 
