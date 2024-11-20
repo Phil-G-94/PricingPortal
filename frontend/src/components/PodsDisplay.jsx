@@ -75,27 +75,31 @@ function PodsDisplay({ componentData, podDataUpdateTrigger }) {
     }, [token, podDataUpdateTrigger]);
 
     return (
-        <section>
-            {responseMessage && <p>{responseMessage}</p>}
-
+        <>
             <h3 className="centred-text">Your Saved Pods</h3>
-            {hasSavedPods &&
-                podsData?.map((pod) => {
-                    return (
-                        <PodDisplayCard
-                            key={pod._id}
-                            pod={pod}
-                            componentData={componentData}
-                            onDeletePodHandler={onDeletePodHandler}
-                        />
-                    );
-                })}
-            {!hasSavedPods && (
-                <p className="centred-text">
-                    No pods saved. Choose a spec and get a price!
-                </p>
-            )}
-        </section>
+            <section className="grid">
+                {responseMessage && <p>{responseMessage}</p>}
+
+                {hasSavedPods &&
+                    podsData?.map((pod) => {
+                        return (
+                            <PodDisplayCard
+                                key={pod._id}
+                                pod={pod}
+                                componentData={componentData}
+                                onDeletePodHandler={
+                                    onDeletePodHandler
+                                }
+                            />
+                        );
+                    })}
+                {!hasSavedPods && (
+                    <p className="centred-text">
+                        No pods saved. Choose a spec and get a price!
+                    </p>
+                )}
+            </section>
+        </>
     );
 }
 

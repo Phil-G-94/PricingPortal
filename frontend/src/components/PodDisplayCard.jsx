@@ -12,7 +12,7 @@ function PodDisplayCard({ pod, componentData, onDeletePodHandler }) {
     const closeEditModal = () => setShowEditModal(false);
 
     return (
-        <article>
+        <article className="grid-item">
             <section>
                 <h4>Pod ID: {pod._id}</h4>
                 <p>

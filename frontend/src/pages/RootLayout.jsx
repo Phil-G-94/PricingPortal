@@ -6,7 +6,6 @@ function RootLayout() {
 
     if (!token) {
         return (
-            /* removed className="flex_col" */
             <main>
                 <Navigation />
                 <Outlet />
@@ -15,7 +14,6 @@ function RootLayout() {
     }
 
     return (
-        /* removed className="flex_col" */
         <main>
             <Navigation />
             <Outlet />

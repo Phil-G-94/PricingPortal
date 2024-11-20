@@ -2,7 +2,13 @@ import { ObjectId } from "mongodb";
 import { getDb } from "../database/connection.js";
 
 class Pod {
-    constructor({ spec, resellerPrice, retailPrice, user, createdAt }) {
+    constructor({
+        spec,
+        resellerPrice,
+        retailPrice,
+        user,
+        createdAt,
+    }) {
         this.spec = spec;
         this.resellerPrice = resellerPrice;
         this.retailPrice = retailPrice;
@@ -33,6 +39,7 @@ class Pod {
                     resellerPrice: this.resellerPrice,
                     retailPrice: this.retailPrice,
                 },
+                $createdAt: new Date(),
             });
 
         if (updatedPod.matchedCount === 0) {

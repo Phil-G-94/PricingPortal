@@ -111,8 +111,8 @@ const postComponents = async (req, res, next) => {
     try {
         const pod = new Pod({
             spec,
-            totalResellerPrice,
-            totalRetailPrice,
+            resellerPrice,
+            retailPrice,
             user,
             createdAt: dateNow,
         });
