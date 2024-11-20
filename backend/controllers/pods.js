@@ -98,9 +98,9 @@ const editPod = async (req, res, next) => {
 
     const margin = 3500;
 
-    const totalResellerPrice =
+    const resellerPrice =
         baseComponentCost + resourceComponentCost + margin;
-    const totalRetailPrice =
+    const retailPrice =
         baseComponentCost + resourceComponentCost + (1000 + margin);
 
     const pod = await Pod.fetchPodByPodId(podId);
@@ -114,8 +114,8 @@ const editPod = async (req, res, next) => {
 
     try {
         pod.spec = spec;
-        pod.resellerPrice = totalResellerPrice;
-        pod.retailPrice = totalRetailPrice;
+        pod.resellerPrice = resellerPrice;
+        pod.retailPrice = retailPrice;
         await pod.updatePod(podId);
     } catch (error) {
         console.log(error);

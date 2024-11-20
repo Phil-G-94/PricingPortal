@@ -89,9 +89,9 @@ const postComponents = async (req, res, next) => {
 
     const margin = 3500;
 
-    const totalResellerPrice =
+    const resellerPrice =
         baseComponentCost + resourceComponentCost + margin;
-    const totalRetailPrice =
+    const retailPrice =
         baseComponentCost + resourceComponentCost + (1000 + margin);
 
     const user = await User.findUserById(req.userId);
@@ -122,8 +122,8 @@ const postComponents = async (req, res, next) => {
         res.status(200).json({
             message: "Successful post",
             spec,
-            totalResellerPrice,
-            totalRetailPrice,
+            resellerPrice,
+            retailPrice,
             errors: errorResult.array(),
         });
     } catch (err) {

@@ -230,10 +230,12 @@ select {
 
 .modal {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 25%;
+    left: 25%;
+    transform: translate(-25%, -25%);
     background-color: white;
+    width: 90%;
+    max-width: 500px;
     z-index: 1;
     border-radius: 14px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);

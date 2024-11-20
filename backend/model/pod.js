@@ -38,8 +38,8 @@ class Pod {
                     spec: this.spec,
                     resellerPrice: this.resellerPrice,
                     retailPrice: this.retailPrice,
+                    updatedAt: new Date(),
                 },
-                $createdAt: new Date(),
             });
 
         if (updatedPod.matchedCount === 0) {
