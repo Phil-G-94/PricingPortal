@@ -222,21 +222,23 @@ select {
     padding: 0;
     top: 0;
     left: 0;
-    min-width: 100%;
-    min-height: 100%;
-    z-index: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
     background-color: rgba(0, 0, 0, 0.75);
 }
 
 .modal {
     position: fixed;
-    top: 25%;
-    left: 25%;
-    transform: translate(-25%, -25%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background-color: white;
     width: 90%;
     max-width: 500px;
-    z-index: 1;
+    min-width: 25%;
+    margin: 0;
+    z-index: 1000;
     border-radius: 14px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     animation: slide-down 300ms ease-out forwards;
@@ -299,11 +301,11 @@ select {
 @keyframes slide-down {
     from {
         opacity: 0;
-        transform: translateY(-3rem);
+        transform: translate(-50%, -40%);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translate(-50%, -50%);
     }
 }
 

@@ -13,7 +13,7 @@ function EditPod({ componentData, closeEditModal, podId }) {
 
         try {
             const response = await fetch(
-                `http://localhost:8080/pods/${podId}`,
+                `https://pricingportal.onrender.com/pods/${podId}`,
                 {
                     method: "PUT",
                     headers: {
