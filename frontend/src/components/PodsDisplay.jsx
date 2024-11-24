@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import PodDisplayCard from "./PodDisplayCard.jsx";
 
-function PodsDisplay({ componentData, podDataUpdateTrigger }) {
+function PodsDisplay({
+    componentData,
+    podDataUpdateTrigger,
+    setPodDataUpdateTrigger,
+}) {
     const [podsData, setPodsData] = useState([]);
     const [responseMessage, setResponseMessage] = useState("");
     const hasSavedPods =
@@ -33,8 +37,6 @@ function PodsDisplay({ componentData, podDataUpdateTrigger }) {
             );
 
             setPodsData(updatedPods);
-
-            console.log();
         } catch (error) {
             console.error(error);
             setResponseMessage("Error deleting pod.");
@@ -90,6 +92,9 @@ function PodsDisplay({ componentData, podDataUpdateTrigger }) {
                                 onDeletePodHandler={
                                     onDeletePodHandler
                                 }
+                                setPodDataUpdateTrigger={
+                                    setPodDataUpdateTrigger
+                                }
                             />
                         );
                     })}
@@ -104,8 +109,9 @@ function PodsDisplay({ componentData, podDataUpdateTrigger }) {
 }
 
 PodsDisplay.propTypes = {
-    podDataUpdateTrigger: PropTypes.bool.isRequired,
     componentData: PropTypes.array.isRequired,
+    podDataUpdateTrigger: PropTypes.bool.isRequired,
+    setPodDataUpdateTrigger: PropTypes.func.isRequired,
 };
 
 export default PodsDisplay;

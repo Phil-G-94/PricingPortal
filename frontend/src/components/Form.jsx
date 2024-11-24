@@ -143,6 +143,7 @@ function Form() {
                 <PodsDisplay
                     componentData={componentData}
                     podDataUpdateTrigger={podDataUpdateTrigger}
+                    setPodDataUpdateTrigger={setPodDataUpdateTrigger}
                 />
             </section>
         </>

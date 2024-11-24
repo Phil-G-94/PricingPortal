@@ -8,7 +8,12 @@ import { mdiPencil, mdiTrashCan } from "@mdi/js";
 import EditPod from "./EditPod";
 import Modal from "./Modal";
 
-function PodDisplayCard({ pod, componentData, onDeletePodHandler }) {
+function PodDisplayCard({
+    pod,
+    componentData,
+    onDeletePodHandler,
+    setPodDataUpdateTrigger,
+}) {
     const [showEditModal, setShowEditModal] = useState(false);
 
     const openEditModal = () => setShowEditModal(true);
@@ -80,6 +85,9 @@ function PodDisplayCard({ pod, componentData, onDeletePodHandler }) {
                         componentData={componentData}
                         podId={pod._id}
                         closeEditModal={closeEditModal}
+                        setPodDataUpdateTrigger={
+                            setPodDataUpdateTrigger
+                        }
                     />
                 </Modal>
             )}
@@ -91,6 +99,7 @@ PodDisplayCard.propTypes = {
     pod: PropTypes.object.isRequired,
     componentData: PropTypes.array.isRequired,
     onDeletePodHandler: PropTypes.func.isRequired,
+    setPodDataUpdateTrigger: PropTypes.func.isRequired,
 };
 
 export default PodDisplayCard;

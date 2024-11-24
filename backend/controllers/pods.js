@@ -42,6 +42,8 @@ const deletePod = async (req, res, next) => {
 const editPod = async (req, res, next) => {
     const { podId } = req.params;
 
+    console.log(req.body);
+
     const ramQuantity = +req.body["RAM_quantity"];
 
     const ssdQuantity = +req.body["SSD_quantity"];
