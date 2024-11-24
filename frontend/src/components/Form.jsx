@@ -3,6 +3,8 @@ import BaseComponents from "./BaseComponents.jsx";
 import ResourceComponents from "./ResourceComponents.jsx";
 import SpecDisplay from "./SpecDisplay.jsx";
 import PodsDisplay from "./PodsDisplay.jsx";
+import Icon from "@mdi/react";
+import { mdiCalculator } from "@mdi/js";
 
 function Form() {
     const [componentData, setComponentData] = useState([]);
@@ -82,8 +84,8 @@ function Form() {
             const data = await response.json();
             setPodDataUpdateTrigger((prev) => !prev);
             setSpecData(data.spec);
-            setResellerPrice(data.totalResellerPrice);
-            setRetailPrice(data.totalRetailPrice);
+            setResellerPrice(data.resellerPrice);
+            setRetailPrice(data.retailPrice);
         } catch (err) {
             console.error(err);
         } finally {
@@ -112,7 +114,11 @@ function Form() {
                 )}
                 {responseMessage === "" && (
                     <button className="btn" type="submit">
-                        {isLoading ? "Getting price" : "Get price"}
+                        <Icon
+                            path={mdiCalculator}
+                            size={1}
+                            title="Calculate price"
+                        />
                     </button>
                 )}
 

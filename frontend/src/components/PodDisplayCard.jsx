@@ -2,6 +2,9 @@ import PropTypes from "prop-types";
 
 import { useState } from "react";
 
+import Icon from "@mdi/react";
+import { mdiPencil, mdiTrashCan } from "@mdi/js";
+
 import EditPod from "./EditPod";
 import Modal from "./Modal";
 
@@ -42,21 +45,31 @@ function PodDisplayCard({ pod, componentData, onDeletePodHandler }) {
                     <b>Created by:</b> {pod.user.name}
                 </p>
 
-                <button
-                    className="btn-warning"
-                    onClick={() => onDeletePodHandler(pod._id)}
-                >
-                    Delete pod
-                </button>
+                <div className="flex_row_center">
+                    <button
+                        className="btn-warning"
+                        onClick={() => onDeletePodHandler(pod._id)}
+                    >
+                        <Icon
+                            path={mdiTrashCan}
+                            size={1}
+                            title="Delete"
+                        />
+                    </button>
 
-                <button
-                    className="btn-caution"
-                    onClick={() => {
-                        openEditModal();
-                    }}
-                >
-                    Edit pod
-                </button>
+                    <button
+                        className="btn-caution"
+                        onClick={() => {
+                            openEditModal();
+                        }}
+                    >
+                        <Icon
+                            path={mdiPencil}
+                            size={1}
+                            title="Edit"
+                        />
+                    </button>
+                </div>
             </section>
             {showEditModal && (
                 <Modal
