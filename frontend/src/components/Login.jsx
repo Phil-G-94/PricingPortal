@@ -65,10 +65,9 @@ function Login() {
 
     return (
         <>
-            {/* <h2>Log in</h2> */}
             <form
                 action="/login"
-                className="flex_col_items_content_center"
+                className="flex_col_items_content_center login-form"
                 onSubmit={onSubmitHandler}
             >
                 <label htmlFor="email" className="input-group">
@@ -111,11 +110,13 @@ function Login() {
                     </p>
                 )}
 
-                {isLoading && <div className="spinner"></div>}
-
-                <button className="btn" type="submit">
-                    {isLoading ? "Logging in" : "Log in"}
-                </button>
+                {isLoading ? (
+                    <div className="spinner"></div>
+                ) : (
+                    <button className="btn" type="submit">
+                        Log in
+                    </button>
+                )}
             </form>
         </>
     );

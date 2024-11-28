@@ -112,16 +112,6 @@ header {
     border-radius: 0.6em;
 }
 
-form {
-    background-color: var(--inevi-lavender);
-}
-
-form,
-div {
-    padding: var(--metric-box-spacing);
-    margin: var(--metric-box-spacing);
-}
-
 main {
     min-block-size: calc(100vh - 6em);
 }
@@ -166,6 +156,14 @@ select {
 
 .nav li a:hover {
     color: var(--inevi-white);
+}
+
+.component-form,
+.signup-form,
+.login-form {
+    background-color: var(--inevi-lavender);
+    padding: var(--metric-box-spacing);
+    margin: var(--metric-box-spacing);
 }
 
 .response-message {
@@ -245,8 +243,9 @@ select {
     border-top: 0.25rem solid var(--inevi-dark-purple);
     border-radius: 50%;
     animation: spin 1s linear infinite;
-    width: max-content;
-    height: max-content;
+    width: 1.5rem;
+    height: 1.5rem;
+    align-self: center;
 }
 
 /* containers */
@@ -271,16 +270,16 @@ select {
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     gap: 2rem;
 }
 
 .grid-item {
-    box-shadow:
-        0 4px 6px rgba(0, 0, 0, 0.1),
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1),
         0 1px 3px rgba(0, 0, 0, 0.06);
 
     border-radius: 0.5rem;
+    padding: 0.75rem;
 }
 
 /* animations */
@@ -308,14 +307,26 @@ select {
 
 /* media queries */
 
-@media (min-width: 45em) {
+@media (min-width: 40rem) {
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+}
+
+@media (min-width: 48rem) {
     main form {
         flex: 2;
         gap: 1.2em;
-        background-color: var(--inevi-lavender);
-        color: var(--inevi-dark-purple);
     }
     main div {
         flex: 1;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
     }
 }

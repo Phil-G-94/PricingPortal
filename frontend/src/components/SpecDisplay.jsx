@@ -22,15 +22,16 @@ function SpecDisplay({ specData, resellerPrice, retailPrice }) {
     });
 
     return (
-        <div>
+        <section className="flex_col_items_content_center">
             <h3 className="centred-text">Your Spec</h3>
-            <ul>{baseComponentData}</ul>
-            <ul>{resourceComponentData}</ul>
-
+            <ul>
+                {baseComponentData}
+                {resourceComponentData}
+            </ul>
             <p>Reseller Price: £{resellerPrice}</p>
 
             <p>Retail Price: £{retailPrice}</p>
-        </div>
+        </section>
     );
 }
 

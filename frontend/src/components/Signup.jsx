@@ -57,7 +57,7 @@ function Signup() {
         <>
             <form
                 action="/signup"
-                className="flex_col_items_content_center"
+                className="flex_col_items_content_center signup-form"
                 onSubmit={onSubmitHandler}
             >
                 <label htmlFor="name" className="input-group">
@@ -114,10 +114,13 @@ function Signup() {
                         {responseMessage}
                     </p>
                 )}
-                {isLoading && <div className="spinner"></div>}
-                <button className="btn" type="submit">
-                    {isLoading ? "Signing up" : "Sign up"}
-                </button>
+                {isLoading ? (
+                    <div className="spinner"></div>
+                ) : (
+                    <button className="btn" type="submit">
+                        Sign up
+                    </button>
+                )}
             </form>
         </>
     );

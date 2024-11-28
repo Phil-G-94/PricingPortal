@@ -9,21 +9,21 @@ function Navigation() {
     return (
         <header className="centred-text">
             <nav>
-                {token ? (
-                    <ul className="nav flex_row_center">
-                        <li>
-                            <NavLink to="/components">
-                                Components Page
-                            </NavLink>
-                        </li>
-                    </ul>
-                ) : (
+                {token === null ? (
                     <ul className="nav flex_row_center">
                         <li>
                             <NavLink to="/signup"> Sign up </NavLink>
                         </li>
                         <li>
                             <NavLink to="/login"> Log in </NavLink>
+                        </li>
+                    </ul>
+                ) : (
+                    <ul className="nav flex_row_center">
+                        <li>
+                            <NavLink to="/components">
+                                Components Page
+                            </NavLink>
                         </li>
                     </ul>
                 )}
