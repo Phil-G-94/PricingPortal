@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import BaseComponents from "./BaseComponents.jsx";
 import ResourceComponents from "./ResourceComponents.jsx";
-import SpecDisplay from "./SpecDisplay.jsx";
+// import SpecDisplay from "./SpecDisplay.jsx";
 import PodsDisplay from "./PodsDisplay.jsx";
 import Icon from "@mdi/react";
 import { mdiCalculator } from "@mdi/js";
 
 function Form() {
     const [componentData, setComponentData] = useState([]);
-    const [specData, setSpecData] = useState({});
-    const [resellerPrice, setResellerPrice] = useState(0);
-    const [retailPrice, setRetailPrice] = useState(0);
+    // const [specData, setSpecData] = useState({});
+    // const [resellerPrice, setResellerPrice] = useState(0);
+    // const [retailPrice, setRetailPrice] = useState(0);
     const [responseMessage, setResponseMessage] = useState("");
     const [podDataUpdateTrigger, setPodDataUpdateTrigger] =
         useState(false);
@@ -81,11 +81,12 @@ function Form() {
                 );
             }
 
-            const data = await response.json();
+            await response.json();
+            // const data = await response.json();
             setPodDataUpdateTrigger((prev) => !prev);
-            setSpecData(data.spec);
-            setResellerPrice(data.resellerPrice);
-            setRetailPrice(data.retailPrice);
+            // setSpecData(data.spec);
+            // setResellerPrice(data.resellerPrice);
+            // setRetailPrice(data.retailPrice);
         } catch (err) {
             console.error(err);
         } finally {
@@ -99,20 +100,16 @@ function Form() {
             <form
                 action="/"
                 method="POST"
-                className="flex_col roboto-medium"
+                className="flex_col component-form roboto-medium"
                 onSubmit={onSubmitHandler}
             >
                 <BaseComponents componentData={componentData} />
 
                 <ResourceComponents componentData={componentData} />
 
-                {isLoading && (
-                    <div
-                        className="spinner"
-                        style={{ alignSelf: "center" }}
-                    ></div>
-                )}
-                {responseMessage === "" && (
+                {isLoading ? (
+                    <div className="spinner"></div>
+                ) : (
                     <button className="btn" type="submit">
                         <Icon
                             path={mdiCalculator}
@@ -129,7 +126,7 @@ function Form() {
                 )}
             </form>
 
-            {!responseMessage && (
+            {/* {!responseMessage && (
                 <section className="roboto-light">
                     <SpecDisplay
                         specData={specData}
@@ -137,7 +134,7 @@ function Form() {
                         retailPrice={retailPrice}
                     />
                 </section>
-            )}
+            )} */}
 
             <section className="roboto-light">
                 <PodsDisplay
