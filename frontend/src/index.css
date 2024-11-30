@@ -243,8 +243,8 @@ select {
     border-top: 0.25rem solid var(--inevi-dark-purple);
     border-radius: 50%;
     animation: spin 1s linear infinite;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
     align-self: center;
 }
 
@@ -316,13 +316,13 @@ select {
 }
 
 @media (min-width: 48rem) {
-    main form {
+    /* main form {
         flex: 2;
         gap: 1.2em;
     }
     main div {
         flex: 1;
-    }
+    } */
 
     .grid {
         display: grid;

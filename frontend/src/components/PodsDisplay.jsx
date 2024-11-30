@@ -98,12 +98,13 @@ function PodsDisplay({
                             />
                         );
                     })}
-                {!hasSavedPods && (
-                    <p className="centred-text">
-                        No pods saved. Choose a spec and get a price!
-                    </p>
-                )}
             </section>
+
+            {!hasSavedPods && (
+                <p className="centred-text">
+                    No pods saved. Choose a spec and get a price!
+                </p>
+            )}
         </>
     );
 }

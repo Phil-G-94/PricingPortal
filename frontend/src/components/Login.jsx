@@ -84,6 +84,7 @@ function Login() {
                         placeholder="email..."
                         autoComplete="on"
                         ref={emailRef}
+                        required
                     />
                 </label>
 
@@ -101,6 +102,7 @@ function Login() {
                         placeholder="password..."
                         autoComplete="on"
                         ref={passwordRef}
+                        required
                     />
                 </label>
 
