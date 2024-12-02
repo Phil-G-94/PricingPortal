@@ -1,16 +1,12 @@
 import { useEffect, useState } from "react";
 import BaseComponents from "./BaseComponents.jsx";
 import ResourceComponents from "./ResourceComponents.jsx";
-// import SpecDisplay from "./SpecDisplay.jsx";
 import PodsDisplay from "./PodsDisplay.jsx";
 import Icon from "@mdi/react";
 import { mdiCalculator } from "@mdi/js";
 
 function Form() {
     const [componentData, setComponentData] = useState([]);
-    // const [specData, setSpecData] = useState({});
-    // const [resellerPrice, setResellerPrice] = useState(0);
-    // const [retailPrice, setRetailPrice] = useState(0);
     const [responseMessage, setResponseMessage] = useState("");
     const [podDataUpdateTrigger, setPodDataUpdateTrigger] =
         useState(false);
@@ -82,11 +78,8 @@ function Form() {
             }
 
             await response.json();
-            // const data = await response.json();
+
             setPodDataUpdateTrigger((prev) => !prev);
-            // setSpecData(data.spec);
-            // setResellerPrice(data.resellerPrice);
-            // setRetailPrice(data.retailPrice);
         } catch (err) {
             console.error(err);
         } finally {
@@ -125,16 +118,6 @@ function Form() {
                     </p>
                 )}
             </form>
-
-            {/* {!responseMessage && (
-                <section className="roboto-light">
-                    <SpecDisplay
-                        specData={specData}
-                        resellerPrice={resellerPrice}
-                        retailPrice={retailPrice}
-                    />
-                </section>
-            )} */}
 
             <section className="roboto-light">
                 <PodsDisplay

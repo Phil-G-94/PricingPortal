@@ -316,14 +316,6 @@ select {
 }
 
 @media (min-width: 48rem) {
-    /* main form {
-        flex: 2;
-        gap: 1.2em;
-    }
-    main div {
-        flex: 1;
-    } */
-
     .grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
