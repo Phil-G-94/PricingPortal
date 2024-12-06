@@ -114,13 +114,16 @@ function Signup() {
                         {responseMessage}
                     </p>
                 )}
-                {isLoading ? (
-                    <div className="spinner"></div>
-                ) : (
-                    <button className="btn" type="submit">
-                        Sign up
-                    </button>
-                )}
+
+                <div className="btn_container">
+                    {isLoading ? (
+                        <div className="spinner"></div>
+                    ) : (
+                        <button className="btn" type="submit">
+                            <p className="btn-text">Sign up</p>
+                        </button>
+                    )}
+                </div>
             </form>
         </>
     );

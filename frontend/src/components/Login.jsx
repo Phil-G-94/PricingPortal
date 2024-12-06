@@ -7,7 +7,7 @@ function Login() {
     const emailRef = useRef();
     const passwordRef = useRef();
     const navigate = useNavigate();
-    const [responseMessage, setResponseMessage] = useState("");
+    const [responseMessage, setResponseMessage] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
     const remainingMilliseconds = 60 * 60 * 1000;
@@ -40,6 +40,8 @@ function Login() {
             if (!response.ok) {
                 const { message } = jsonResponse;
 
+                setIsLoading(false);
+
                 if (message) {
                     setResponseMessage(message);
                 }
@@ -60,6 +62,10 @@ function Login() {
         } finally {
             emailRef.current.value = "";
             passwordRef.current.value = "";
+            setIsLoading(false);
+            setTimeout(() => {
+                setResponseMessage(null);
+            }, 6000);
         }
     };
 
@@ -106,19 +112,23 @@ function Login() {
                     />
                 </label>
 
-                {responseMessage && (
+                {responseMessage !== "" && (
                     <p className="response-message">
                         {responseMessage}
                     </p>
                 )}
 
-                {isLoading ? (
-                    <div className="spinner"></div>
-                ) : (
-                    <button className="btn" type="submit">
-                        Log in
-                    </button>
-                )}
+                <div className="btn_container">
+                    {isLoading ? (
+                        <div className="spinner"></div>
+                    ) : (
+                        <>
+                            <button className="btn" type="submit">
+                                <p className="btn-text">Log In</p>
+                            </button>
+                        </>
+                    )}
+                </div>
             </form>
         </>
     );

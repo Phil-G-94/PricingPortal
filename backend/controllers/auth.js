@@ -52,8 +52,7 @@ const postLogin = async (req, res, next) => {
         if (!passwordComparison) {
             const error = new Error();
             error.statusCode = 401;
-            error.message =
-                "Incorrect credentials. Please try again.";
+            error.message = "Incorrect credentials.";
             return next(error);
         }
 

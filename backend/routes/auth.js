@@ -12,8 +12,9 @@ router.put(
             .isEmail()
             .withMessage("Please enter a valid email")
             .custom(async (value) => {
-                const existingUser =
-                    await User.findUserByEmail(value);
+                const existingUser = await User.findUserByEmail(
+                    value
+                );
 
                 if (existingUser.email === value) {
                     return Promise.reject(

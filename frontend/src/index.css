@@ -168,6 +168,9 @@ select {
 
 .response-message {
     text-align: center;
+    display: inline-block;
+    width: 100px;
+    height: 13px;
 }
 
 .btn,
@@ -243,17 +246,29 @@ select {
     border-top: 0.25rem solid var(--inevi-dark-purple);
     border-radius: 50%;
     animation: spin 1s linear infinite;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 2rem;
+    height: 2rem;
     align-self: center;
 }
 
-/* containers */
+.btn-text {
+    font-size: 0.725rem;
+    display: inline;
+}
 
-.flex_row_center {
+/* containers and container items */
+
+.flex_row_center,
+.btn_container {
     display: flex;
     flex-direction: row;
     place-content: center;
+}
+
+.btn_container {
+    width: 100px;
+    height: 40px;
+    transition: all 0.3s ease;
 }
 
 .flex_col_items_content_center {
