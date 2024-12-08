@@ -1,4 +1,5 @@
 import express, { urlencoded, json } from "express";
+import cookieParser from "cookie-parser";
 import cors from "cors";
 import helmet from "helmet";
 import compression from "compression";
@@ -42,6 +43,8 @@ app.use(express.static("public"));
 app.use(urlencoded({ extended: false }));
 
 app.use(json({}));
+
+// app.use(cookieParser()); required to handle token through cookies instead of localStorage
 
 app.use(componentRoutes);
 app.use(authRoutes);

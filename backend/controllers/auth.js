@@ -62,6 +62,13 @@ const postLogin = async (req, res, next) => {
             { expiresIn: "1hr" }
         );
 
+        /* set token through cookies instead of localStorage */
+        // res.cookie("authToken", token, {
+        //     httpOnly: true,
+        //     secure: process.env.NODE_ENV === "production",
+        //     sameSite: "strict",
+        // });
+
         res.status(200).json({
             message: "Login successful",
             token,
@@ -76,4 +83,15 @@ const postLogin = async (req, res, next) => {
     }
 };
 
-export { putSignup, postLogin };
+const postLogout = (req, res, next) => {
+    res.cookie("authToken", "", {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "none", // because front- and  back-end domains differ, otherwise "strict"
+        expires: new Date(0),
+    });
+
+    res.status(200).json({ message: "Logged out successfully" });
+};
+
+export { putSignup, postLogin, postLogout };

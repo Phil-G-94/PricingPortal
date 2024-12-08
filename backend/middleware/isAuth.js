@@ -14,6 +14,22 @@ const isAuth = (req, res, next) => {
             throw error;
         }
 
+        /*
+            set token through cookies adjustment
+            replace the above with the below;
+
+           // access token through cookie
+
+           const token = req.cookies.authToken;
+
+           if (!token) {
+            const error = new Error("User not authorised.");
+            error.statusCode = 401;
+            throw error;
+           }
+
+        */
+
         // get token
         const token = authHeader.split(" ")[1];
 
@@ -39,7 +55,6 @@ const isAuth = (req, res, next) => {
         // pass error to error handling middleware
         next(err);
     }
-
 };
 
 export { isAuth };
