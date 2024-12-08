@@ -1,6 +1,7 @@
 import express from "express";
 import * as componentController from "../controllers/component.js";
 import validator from "express-validator";
+1;
 import { isAuth } from "../middleware/isAuth.js";
 
 const router = express.Router();
