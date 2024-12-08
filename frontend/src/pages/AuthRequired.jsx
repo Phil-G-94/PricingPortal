@@ -1,4 +1,4 @@
-import { jwtDecode } from "jwt-decode";
+import { isTokenExpired } from "../utils/token";
 import { Navigate, Outlet } from "react-router-dom";
 
 function AuthRequired() {
@@ -7,18 +7,6 @@ function AuthRequired() {
     if (!token) {
         return <Navigate to="/login" replace />;
     }
-
-    const isTokenExpired = () => {
-        try {
-            // decode token
-            const decoded = jwtDecode(token);
-            // check if expired
-            return Date.now() >= decoded.exp * 1000;
-        } catch (err) {
-            console.error("Invalid token: " + err);
-            return true; // treat expired tokens as invalid
-        }
-    };
 
     if (isTokenExpired()) {
         localStorage.removeItem("token");
