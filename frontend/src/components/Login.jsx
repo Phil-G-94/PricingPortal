@@ -10,12 +10,6 @@ function Login() {
     const [responseMessage, setResponseMessage] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
-    // REDUNDANT => using jwt-decode instead
-    // const remainingMilliseconds = 60 * 60 * 1000;
-    // const tokenExpiryDate = new Date(
-    //     new Date().getTime() + remainingMilliseconds
-    // );
-
     const onSubmitHandler = async (event) => {
         event.preventDefault();
 
@@ -52,11 +46,6 @@ function Login() {
 
             localStorage.setItem("token", jsonResponse.token);
             localStorage.setItem("userId", jsonResponse.userId);
-            // REDUNDANT - not manually setting / extracting => using jwt-decode instead
-            // localStorage.setItem(
-            //     "tokenExpiry",
-            //     tokenExpiryDate.toISOString()
-            // );
 
             navigate("/components");
         } catch (err) {

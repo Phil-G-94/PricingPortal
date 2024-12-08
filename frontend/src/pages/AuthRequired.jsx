@@ -26,40 +26,9 @@ function AuthRequired() {
         return <Navigate to="/login" replace />;
     }
 
+    console.log(isTokenExpired());
+
     return <Outlet />;
-
-    // const token = localStorage.getItem("token");
-    // const tokenExpiryDate = localStorage.getItem("tokenExpiry");
-
-    // const remainingTimeToExpiry =
-    //     new Date(tokenExpiryDate).getTime() - new Date().getTime();
-
-    // const isTokenExpired = () => {
-    //     // decode token
-    //     const decoded = jwtDecode(token);
-    //     // true if expired, false if not
-    //     return Date.now() >= decoded.exp * 1000;
-    // };
-
-    // const logoutHandler = () => {
-    //     localStorage.removeItem("token");
-    //     localStorage.removeItem("userId");
-    //     localStorage.removeItem("tokenExpiryDate");
-    // };
-
-    // const autoLogout = (remainingTimeToExpiry) => {
-    //     setTimeout(() => {
-    //         logoutHandler();
-    //     }, remainingTimeToExpiry);
-    // };
-
-    // autoLogout(remainingTimeToExpiry);
-
-    // if (!isTokenExpired) {
-    //     return <Navigate to="/login" />;
-    // }
-
-    // return <Outlet />;
 }
 
 export default AuthRequired;
