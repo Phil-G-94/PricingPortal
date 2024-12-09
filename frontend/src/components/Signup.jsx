@@ -57,13 +57,13 @@ function Signup() {
         <>
             <form
                 action="/signup"
-                className="flex_col_items_content_center signup-form"
+                className="flex_col_place_items_center signup-form"
                 onSubmit={onSubmitHandler}
             >
                 <label htmlFor="name" className="input-group">
                     <Icon
                         path={mdiBadgeAccount}
-                        title="email"
+                        title="name"
                         size={1}
                         className="icon"
                     ></Icon>

@@ -134,8 +134,12 @@ select {
 
 /* alignment util classes */
 
-.centred-text {
+.centered-text {
     text-align: center;
+}
+
+.place-self-center {
+    place-self: center;
 }
 
 /* element class styles */
@@ -258,24 +262,25 @@ select {
 
 /* containers and container items */
 
-.flex_row_center,
-.btn_container {
+.flex_row_center {
     display: flex;
     flex-direction: row;
     place-content: center;
 }
 
 .btn_container {
+    display: flex;
+    flex-direction: row;
+    place-content: center;
     width: 100px;
     height: 40px;
     transition: all 0.3s ease;
 }
 
-.flex_col_items_content_center {
+.flex_col_place_items_center {
     display: flex;
     flex-direction: column;
     place-items: center;
-    justify-content: center;
 }
 
 .flex_col {

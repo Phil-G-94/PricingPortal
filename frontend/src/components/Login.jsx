@@ -37,6 +37,8 @@ function Login() {
 
                 setIsLoading(false);
 
+                console.log(message);
+
                 if (message) {
                     setResponseMessage(message);
                 }
@@ -64,7 +66,7 @@ function Login() {
         <>
             <form
                 action="/login"
-                className="flex_col_items_content_center login-form"
+                className="flex_col_place_items_center login-form"
                 onSubmit={onSubmitHandler}
             >
                 <label htmlFor="email" className="input-group">
@@ -104,7 +106,7 @@ function Login() {
                 </label>
 
                 {responseMessage !== "" && (
-                    <p className="response-message">
+                    <p className="response-message centered-text">
                         {responseMessage}
                     </p>
                 )}

@@ -14,8 +14,6 @@ function AuthRequired() {
         return <Navigate to="/login" replace />;
     }
 
-    console.log(isTokenExpired());
-
     return <Outlet />;
 }
 

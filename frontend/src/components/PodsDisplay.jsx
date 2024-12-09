@@ -78,7 +78,7 @@ function PodsDisplay({
 
     return (
         <>
-            <h3 className="centred-text">Your Saved Pods</h3>
+            <h3 className="centered-text">Your Saved Pods</h3>
             <section className="grid">
                 {responseMessage && <p>{responseMessage}</p>}
 
@@ -101,7 +101,7 @@ function PodsDisplay({
             </section>
 
             {!hasSavedPods && (
-                <p className="centred-text">
+                <p className="centered-text">
                     No pods saved. Choose a spec and get a price!
                 </p>
             )}

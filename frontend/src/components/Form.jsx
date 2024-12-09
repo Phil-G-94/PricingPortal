@@ -100,23 +100,25 @@ function Form() {
 
                 <ResourceComponents componentData={componentData} />
 
-                {isLoading ? (
-                    <div className="spinner"></div>
-                ) : (
-                    <button className="btn" type="submit">
-                        <Icon
-                            path={mdiCalculator}
-                            size={1}
-                            title="Calculate price"
-                        />
-                    </button>
-                )}
-
                 {responseMessage !== "" && (
                     <p className="response-message">
                         {responseMessage}
                     </p>
                 )}
+
+                <div className="btn_container place-self-center">
+                    {isLoading ? (
+                        <div className="spinner"></div>
+                    ) : (
+                        <button className="btn" type="submit">
+                            <Icon
+                                path={mdiCalculator}
+                                size={1}
+                                title="Calculate price"
+                            />
+                        </button>
+                    )}
+                </div>
             </form>
 
             <section className="roboto-light">
