@@ -2,17 +2,15 @@ import { NavLink } from "react-router-dom";
 import { isTokenExpired } from "../utils/token";
 
 function Navigation() {
-    const token = localStorage.getItem("token");
-
-    const validToken = isTokenExpired(token);
+    const validToken = isTokenExpired();
 
     console.log(validToken);
 
     return (
-        <header className="centered-text">
-            <nav>
+        <header>
+            <nav className="navbar">
                 {validToken ? (
-                    <ul className="nav flex_row_center">
+                    <ul className="nav-items flex_row_center">
                         <li>
                             <NavLink to="/signup"> Sign up </NavLink>
                         </li>
@@ -21,7 +19,7 @@ function Navigation() {
                         </li>
                     </ul>
                 ) : (
-                    <ul className="nav flex_row_center">
+                    <ul className="nav-items flex_row_center">
                         <li>
                             <NavLink to="/components">
                                 Components Page

@@ -1,14 +1,14 @@
 import { Outlet } from "react-router-dom";
+import { isTokenExpired } from "../utils/token";
 import Navigation from "../components/Navigation";
+import LoginPage from "./LoginPage";
 
 function RootLayout() {
-    const token = localStorage.getItem("token");
-
-    if (!token) {
+    if (isTokenExpired()) {
         return (
             <main>
                 <Navigation />
-                <Outlet />
+                <LoginPage />
             </main>
         );
     }

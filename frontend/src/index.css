@@ -109,7 +109,6 @@ header {
     padding: var(--metric-box-spacing);
     background-color: var(--inevi-dark-purple);
     font-size: 1.4em;
-    border-radius: 0.6em;
 }
 
 main {
@@ -144,21 +143,27 @@ select {
 
 /* element class styles */
 
-.nav {
+.navbar {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nav-items {
+    display: flex;
     gap: 2em;
     padding: 0px;
     color: var(--inevi-white);
 }
 
-.nav li a {
+.nav-items li a {
     text-decoration: none;
 }
 
-.nav li a:visited {
+.nav-items li a:visited {
     color: var(--inevi-lavender);
 }
 
-.nav li a:hover {
+.nav-items li a:hover {
     color: var(--inevi-white);
 }
 
