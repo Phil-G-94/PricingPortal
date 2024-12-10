@@ -1,17 +1,19 @@
 import { Outlet } from "react-router-dom";
 import { isTokenExpired } from "../utils/token";
 import Navigation from "../components/Navigation";
-import LoginPage from "./LoginPage";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function RootLayout() {
-    if (isTokenExpired()) {
-        return (
-            <main>
-                <Navigation />
-                <LoginPage />
-            </main>
-        );
-    }
+    const navigate = useNavigate();
+
+    const isExpired = isTokenExpired();
+
+    useEffect(() => {
+        if (isExpired === true || isExpired === undefined) {
+            return navigate("/login");
+        }
+    }, [navigate, isExpired]);
 
     return (
         <main>

@@ -2,14 +2,12 @@ import { NavLink } from "react-router-dom";
 import { isTokenExpired } from "../utils/token";
 
 function Navigation() {
-    const validToken = isTokenExpired();
-
-    console.log(validToken);
+    const isExpired = isTokenExpired();
 
     return (
         <header>
             <nav className="navbar">
-                {validToken ? (
+                {isExpired === undefined ? (
                     <ul className="nav-items flex_row_center">
                         <li>
                             <NavLink to="/signup"> Sign up </NavLink>
