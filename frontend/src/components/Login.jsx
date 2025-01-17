@@ -20,7 +20,7 @@ function Login() {
 
         try {
             const response = await fetch(
-                "https://pricingportal.onrender.com/login",
+                "http://localhost:8080/login",
                 {
                     method: "POST",
                     headers: {
@@ -65,41 +65,43 @@ function Login() {
     return (
         <>
             <form
+                id="formLogin"
                 action="/login"
                 className="flex_col_place_items_center login-form"
                 onSubmit={onSubmitHandler}
             >
-                <label htmlFor="email" className="input-group">
+                <label htmlFor="login_email" className="input-group">
                     <Icon
                         path={mdiAccount}
-                        title="email"
+                        title="login_email"
                         size={1}
                         className="icon"
                     ></Icon>
                     <input
                         type="email"
-                        name="email"
-                        id="email"
-                        placeholder="email..."
-                        autoComplete="on"
+                        name="login_email"
+                        id="login_email"
+                        autoComplete="email"
                         ref={emailRef}
                         required
                     />
                 </label>
 
-                <label htmlFor="password" className="input-group">
+                <label
+                    htmlFor="login_password"
+                    className="input-group"
+                >
                     <Icon
                         path={mdiLock}
-                        title="password"
+                        title="login_password"
                         size={1}
                         className="icon"
                     ></Icon>
                     <input
                         type="password"
-                        name="password"
-                        id="password"
-                        placeholder="password..."
-                        autoComplete="on"
+                        name="login_password"
+                        id="login_password"
+                        autoComplete="current-password"
                         ref={passwordRef}
                         required
                     />

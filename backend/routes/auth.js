@@ -28,6 +28,6 @@ router.put(
 
 router.post("/login", authController.postLogin);
 
-router.post("/logout", authController.postLogout);
+// router.post("/logout", authController.postLogout);
 
 export { router };

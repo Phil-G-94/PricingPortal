@@ -5,10 +5,10 @@ import { User } from "../model/user.js";
 import { ObjectId } from "mongodb";
 
 const putSignup = async (req, res, next) => {
-    const { name, email, password } = req.body;
+    const { signup_name, signup_email, signup_password } = req.body;
     const validationErrors = validationResult(req);
     const errors = validationErrors.array();
-    const existingUser = await User.findUserByEmail(email);
+    const existingUser = await User.findUserByEmail(signup_email);
 
     if (existingUser) {
         const error = new Error("Validation failed");
@@ -18,11 +18,11 @@ const putSignup = async (req, res, next) => {
     }
 
     try {
-        const hashedPassword = await bcrypt.hash(password, 13);
+        const hashedPassword = await bcrypt.hash(signup_password, 13);
 
         const user = new User(
-            name,
-            email,
+            signup_name,
+            signup_email,
             hashedPassword,
             new ObjectId()
         );
@@ -39,13 +39,13 @@ const putSignup = async (req, res, next) => {
 };
 
 const postLogin = async (req, res, next) => {
-    const { email, password } = req.body;
+    const { login_email, login_password } = req.body;
 
     try {
-        const user = await User.findUserByEmail(email);
+        const user = await User.findUserByEmail(login_email);
 
         const passwordComparison = await bcrypt.compare(
-            password,
+            login_password,
             user.password
         );
 
@@ -83,15 +83,15 @@ const postLogin = async (req, res, next) => {
     }
 };
 
-const postLogout = (req, res, next) => {
-    res.cookie("authToken", "", {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "none", // because front- and  back-end domains differ, otherwise "strict"
-        expires: new Date(0),
-    });
+// const postLogout = (req, res, next) => {
+//     res.cookie("authToken", "", {
+//         httpOnly: true,
+//         secure: process.env.NODE_ENV === "production",
+//         sameSite: "none", // because front- and  back-end domains differ, otherwise "strict"
+//         expires: new Date(0),
+//     });
 
-    res.status(200).json({ message: "Logged out successfully" });
-};
+//     res.status(200).json({ message: "Logged out successfully" });
+// };
 
-export { putSignup, postLogin, postLogout };
+export { putSignup, postLogin };

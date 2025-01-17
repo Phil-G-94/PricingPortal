@@ -56,11 +56,12 @@ function Signup() {
     return (
         <>
             <form
+                id="formSignup"
                 action="/signup"
                 className="flex_col_place_items_center signup-form"
                 onSubmit={onSubmitHandler}
             >
-                <label htmlFor="name" className="input-group">
+                <label htmlFor="signup_name" className="input-group">
                     <Icon
                         path={mdiBadgeAccount}
                         title="name"
@@ -69,14 +70,14 @@ function Signup() {
                     ></Icon>
                     <input
                         type="text"
-                        name="name"
-                        id="name"
-                        placeholder="name..."
+                        name="signup_name"
+                        id="signup_name"
+                        autoComplete="name"
                         ref={nameRef}
                         required
                     />
                 </label>
-                <label htmlFor="email" className="input-group">
+                <label htmlFor="signup_email" className="input-group">
                     <Icon
                         path={mdiAccount}
                         title="email"
@@ -85,14 +86,17 @@ function Signup() {
                     ></Icon>
                     <input
                         type="email"
-                        name="email"
-                        id="email"
-                        placeholder="email..."
+                        name="signup_email"
+                        id="signup_email"
+                        autoComplete="username"
                         ref={emailRef}
                         required
                     />
                 </label>
-                <label htmlFor="password" className="input-group">
+                <label
+                    htmlFor="signup_password"
+                    className="input-group"
+                >
                     <Icon
                         path={mdiLock}
                         title="email"
@@ -101,10 +105,9 @@ function Signup() {
                     ></Icon>
                     <input
                         type="password"
-                        name="password"
-                        id="password"
-                        placeholder="password..."
-                        autoComplete="on"
+                        name="signup_password"
+                        id="signup_password"
+                        autoComplete="new-password"
                         ref={passwordRef}
                         required
                     />
