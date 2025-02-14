@@ -2,11 +2,13 @@ import express, { urlencoded, json } from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import helmet from "helmet";
-import compression from "compression";
-import { router as componentRoutes } from "./routes/component.js";
-import { router as authRoutes } from "./routes/auth.js";
-import { router as podsRoutes } from "./routes/pods.js";
+import { body } from "express-validator";
+
+import { User } from "./models/user.js";
+import * as authController from "./controllers/auth.js";
 import { dbConnect } from "./database/connection.js";
+import { isAuth } from "./middleware/isAuth.js";
+import router from "./router.js";
 
 const app = express();
 
@@ -16,6 +18,10 @@ const allowedOrigins = [
     "https://pricingportal.netlify.app",
     "http://localhost:5173",
 ];
+
+/**
+ * middleware
+ */
 
 app.use(
     cors({
@@ -36,21 +42,49 @@ app.use(
 
 app.use(helmet());
 
-app.use(compression());
-
 app.use(express.static("public"));
 
 app.use(urlencoded({ extended: false }));
 
 app.use(json({}));
 
-// app.use(cookieParser()); required to handle token through cookies instead of localStorage
+app.use(cookieParser());
 
-app.use(componentRoutes);
-app.use(authRoutes);
-app.use(podsRoutes);
+app.post(
+    "/signup",
+    [
+        body("email")
+            .isEmail()
+            .withMessage("Please enter a valid email")
+            .custom(async (value) => {
+                const existingUser = await User.findUserByEmail(
+                    value
+                );
 
+                if (existingUser.email === value) {
+                    return Promise.reject(
+                        "You're already signed up. Try logging in instead."
+                    );
+                }
+            }),
+    ],
+    authController.postSignup
+);
+/**
+ * routes
+ */
+app.post("/login", authController.postLogin);
+
+app.use("/api", isAuth, router);
+
+/**
+ * error handling middleware
+ */
 app.use((err, req, res, next) => {
+    if (res.headersSent) {
+        return next(err);
+    }
+
     const status = err.statusCode || 500;
 
     const message = err.message;
@@ -62,13 +96,16 @@ app.use((err, req, res, next) => {
         .json({ message, data });
 });
 
+/**
+ * connect to DB and instantiate server
+ */
 (async function startServer() {
     try {
         await dbConnect();
 
         app.listen(process.env.PORT || 8080, () => {
             console.log(
-                "Server is running on port ",
+                "Server is running on port",
                 process.env.PORT || 8080
             );
         });
@@ -77,3 +114,20 @@ app.use((err, req, res, next) => {
         process.exitCode = 1;
     }
 })();
+
+/**
+ * shutdown handling
+ */
+
+const handleShutdown = async (signal) => {
+    console.log(`${signal} received. Closing database connection...`);
+
+    await mongoose.disconnect();
+
+    console.log("Database connection closed. Exiting process.");
+
+    process.exit(0);
+};
+
+process.on("SIGINT", () => handleShutdown("SIGINT"));
+process.on("SIGTERM", () => handleShutdown("SIGTERM"));

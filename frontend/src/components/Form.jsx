@@ -18,11 +18,12 @@ function Form() {
         try {
             const fetchComponentData = async () => {
                 const response = await fetch(
-                    "https://pricingportal.onrender.com/components",
+                    "https://pricingportal.onrender.com/api/components",
                     {
                         headers: {
-                            Authorization: `Bearer ${token}`,
+                            "Content-Type": "application/json",
                         },
+                        credentials: "include",
                     }
                 );
 
@@ -60,13 +61,13 @@ function Form() {
 
         try {
             const response = await fetch(
-                "https://pricingportal.onrender.com/components",
+                "https://pricingportal.onrender.com/api/components",
                 {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`,
                     },
+                    credentials: "include",
                     body: JSON.stringify(formDataObject),
                 }
             );

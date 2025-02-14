@@ -18,7 +18,7 @@ function EditPod({
 
         try {
             const response = await fetch(
-                `https://pricingportal.onrender.com/pods/${podId}`,
+                `https://pricingportal.onrender.com/api/pods/${podId}`,
                 {
                     method: "PUT",
                     headers: {

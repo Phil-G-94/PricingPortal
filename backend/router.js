@@ -1,16 +1,19 @@
 import express from "express";
-import * as componentController from "../controllers/component.js";
 import validator from "express-validator";
-1;
-import { isAuth } from "../middleware/isAuth.js";
+import * as componentController from "./controllers/component.js";
+import * as podsController from "./controllers/pods.js";
 
 const router = express.Router();
 
-router.get("/components", isAuth, componentController.getComponents);
+/**
+ * component routes
+ */
+
+router.get("/components", componentController.getComponents);
 
 router.post(
     "/components",
-    isAuth,
+
     [
         validator
             .body([
@@ -29,4 +32,12 @@ router.post(
     componentController.postComponents
 );
 
-export { router };
+/**
+ * pods routes
+ */
+
+router.get("/pods", podsController.getPods);
+router.delete("/pods/:podId", podsController.deletePod);
+router.put("/pods/:podId", podsController.editPod);
+
+export default router;

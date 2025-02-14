@@ -17,7 +17,7 @@ function PodsDisplay({
     const onDeletePodHandler = async (podId) => {
         try {
             const response = await fetch(
-                `https://pricingportal.onrender.com/pods/${podId}`,
+                `https://pricingportal.onrender.com/api/pods/${podId}`,
                 {
                     method: "DELETE",
                     headers: {
@@ -47,11 +47,12 @@ function PodsDisplay({
         try {
             const fetchPodsData = async () => {
                 const response = await fetch(
-                    "https://pricingportal.onrender.com/pods",
+                    "https://pricingportal.onrender.com/api/pods",
                     {
                         headers: {
-                            Authorization: `Bearer ${token}`,
+                            "Content-Type": "application/json",
                         },
+                        credentials: "include",
                     }
                 );
 

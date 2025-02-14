@@ -1,7 +1,7 @@
 import { validationResult } from "express-validator";
 import { fetchComponents } from "../database/components.js";
-import { Pod } from "../model/pod.js";
-import { User } from "../model/user.js";
+import { Pod } from "../models/pod.js";
+import { User } from "../models/user.js";
 
 const getComponents = async (req, res, next) => {
     try {

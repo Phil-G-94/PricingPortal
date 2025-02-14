@@ -9,7 +9,6 @@ import RootLayout from "./pages/RootLayout.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import SignupPage from "./pages/SignupPage.jsx";
 import ComponentsPage from "./pages/ComponentsPage.jsx";
-import AuthRequired from "./pages/AuthRequired.jsx";
 
 function App() {
     const router = createBrowserRouter(
@@ -18,17 +17,14 @@ function App() {
                 <Route index element={<LoginPage />} />
                 <Route path="login" element={<LoginPage />} />
                 <Route path="signup" element={<SignupPage />} />
-                <Route element={<AuthRequired />}>
-                    <Route
-                        index
-                        path="components"
-                        element={<ComponentsPage />}
-                    />
-                    <Route
-                        path="/pods/:podId"
-                        element={<ComponentsPage />}
-                    />
-                </Route>
+                <Route
+                    path="components"
+                    element={<ComponentsPage />}
+                />
+                <Route
+                    path="pods/:podId"
+                    element={<ComponentsPage />}
+                />
             </Route>
         )
     );

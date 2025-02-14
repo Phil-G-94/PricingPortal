@@ -21,7 +21,7 @@ function Signup() {
             const response = await fetch(
                 "https://pricingportal.onrender.com/signup",
                 {
-                    method: "PUT",
+                    method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                     },

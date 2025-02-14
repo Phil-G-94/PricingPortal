@@ -1,10 +1,10 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { validationResult } from "express-validator";
-import { User } from "../model/user.js";
+import { User } from "../models/user.js";
 import { ObjectId } from "mongodb";
 
-const putSignup = async (req, res, next) => {
+const postSignup = async (req, res, next) => {
     const { signup_name, signup_email, signup_password } = req.body;
     const validationErrors = validationResult(req);
     const errors = validationErrors.array();
@@ -62,12 +62,11 @@ const postLogin = async (req, res, next) => {
             { expiresIn: "1hr" }
         );
 
-        /* set token through cookies instead of localStorage */
-        // res.cookie("authToken", token, {
-        //     httpOnly: true,
-        //     secure: process.env.NODE_ENV === "production",
-        //     sameSite: "strict",
-        // });
+        res.cookie("authToken", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "strict",
+        });
 
         res.status(200).json({
             message: "Login successful",
@@ -94,4 +93,4 @@ const postLogin = async (req, res, next) => {
 //     res.status(200).json({ message: "Logged out successfully" });
 // };
 
-export { putSignup, postLogin };
+export { postSignup, postLogin };

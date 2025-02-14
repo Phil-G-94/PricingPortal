@@ -1,4 +1,4 @@
-import { Pod } from "../model/pod.js";
+import { Pod } from "../models/pod.js";
 
 const getPods = async (req, res, next) => {
     try {
