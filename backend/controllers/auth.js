@@ -64,8 +64,8 @@ const postLogin = async (req, res, next) => {
 
         res.cookie("authToken", token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "strict",
+            secure: true,
+            sameSite: "lax",
         });
 
         res.status(200).json({
