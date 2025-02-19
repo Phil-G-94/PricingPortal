@@ -12,6 +12,9 @@ import router from "./router.js";
 
 const app = express();
 
+/**
+ * cors config
+ */
 app.set("trust proxy", 1);
 
 const allowedOrigins = [
@@ -36,7 +39,12 @@ app.use(
         },
         methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
         credentials: true,
-        allowedHeaders: ["Content-Type", "Authorization"],
+        allowedHeaders: [
+            "Content-Type",
+            "Authorization",
+            "X-Requested-With",
+        ],
+        optionsSuccessStatus: 200,
     })
 );
 
@@ -44,11 +52,15 @@ app.use(helmet());
 
 app.use(express.static("public"));
 
-app.use(urlencoded({ extended: false }));
+app.use(urlencoded({ extended: true }));
 
 app.use(json({}));
 
 app.use(cookieParser());
+
+/**
+ * routes
+ */
 
 app.post(
     "/signup",
@@ -70,9 +82,7 @@ app.post(
     ],
     authController.postSignup
 );
-/**
- * routes
- */
+
 app.post("/login", authController.postLogin);
 
 app.use("/api", isAuth, router);

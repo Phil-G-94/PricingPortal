@@ -65,13 +65,11 @@ const postLogin = async (req, res, next) => {
         res.cookie("authToken", token, {
             httpOnly: true,
             secure: true,
-            sameSite: "lax",
+            sameSite: "none",
         });
 
         res.status(200).json({
             message: "Login successful",
-            token,
-            userId: user._id.toString(),
         });
     } catch (err) {
         if (!err.statusCode) {

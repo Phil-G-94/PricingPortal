@@ -8,8 +8,6 @@ function EditPod({
     podId,
     setPodDataUpdateTrigger,
 }) {
-    const token = localStorage.getItem("token");
-
     const onEditPodHandler = async (event) => {
         event.preventDefault();
 
@@ -22,9 +20,9 @@ function EditPod({
                 {
                     method: "PUT",
                     headers: {
-                        Authorization: `Bearer ${token}`,
                         "Content-Type": "application/json",
                     },
+                    credentials: "include",
                     body: JSON.stringify(formDataObject),
                 }
             );

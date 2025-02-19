@@ -47,9 +47,6 @@ function Login() {
                 return;
             }
 
-            localStorage.setItem("token", jsonResponse.token);
-            localStorage.setItem("userId", jsonResponse.userId);
-
             navigate("/components");
         } catch (err) {
             console.error(err);

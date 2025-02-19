@@ -23,6 +23,7 @@ function PodsDisplay({
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
+                    credentials: "include",
                 }
             );
 
