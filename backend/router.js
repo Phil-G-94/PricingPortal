@@ -5,6 +5,10 @@ import * as podsController from "./controllers/pods.js";
 
 const router = express.Router();
 
+/**
+ * check auth route
+ */
+
 router.get("/check-auth", (req, res) => {
     res.status(200).json({ authenticated: true });
 });
