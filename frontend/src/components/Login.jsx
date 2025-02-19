@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Icon from "@mdi/react";
 import { mdiAccount, mdiLock } from "@mdi/js";
+import useAuth from "../hooks/useAuth";
 
 function Login() {
     const emailRef = useRef();
@@ -9,6 +10,7 @@ function Login() {
     const navigate = useNavigate();
     const [responseMessage, setResponseMessage] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const { fetchAuth } = useAuth();
 
     const onSubmitHandler = async (event) => {
         event.preventDefault();
@@ -46,6 +48,8 @@ function Login() {
 
                 return;
             }
+
+            await fetchAuth();
 
             navigate("/components");
         } catch (err) {
