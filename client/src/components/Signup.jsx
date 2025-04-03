@@ -55,19 +55,9 @@ function Signup() {
 
     return (
         <>
-            <form
-                id="formSignup"
-                action="/signup"
-                className="flex_col_place_items_center signup-form"
-                onSubmit={onSubmitHandler}
-            >
-                <label htmlFor="signup_name" className="input-group">
-                    <Icon
-                        path={mdiBadgeAccount}
-                        title="name"
-                        size={1}
-                        className="icon"
-                    ></Icon>
+            <form id="formSignup" action="/signup" onSubmit={onSubmitHandler}>
+                <label htmlFor="signup_name">
+                    <Icon path={mdiBadgeAccount} title="name" size={1}></Icon>
                     <input
                         type="text"
                         name="signup_name"
@@ -77,13 +67,8 @@ function Signup() {
                         required
                     />
                 </label>
-                <label htmlFor="signup_email" className="input-group">
-                    <Icon
-                        path={mdiAccount}
-                        title="email"
-                        size={1}
-                        className="icon"
-                    ></Icon>
+                <label htmlFor="signup_email">
+                    <Icon path={mdiAccount} title="email" size={1}></Icon>
                     <input
                         type="email"
                         name="signup_email"
@@ -93,13 +78,8 @@ function Signup() {
                         required
                     />
                 </label>
-                <label htmlFor="signup_password" className="input-group">
-                    <Icon
-                        path={mdiLock}
-                        title="email"
-                        size={1}
-                        className="icon"
-                    ></Icon>
+                <label htmlFor="signup_password">
+                    <Icon path={mdiLock} title="email" size={1}></Icon>
                     <input
                         type="password"
                         name="signup_password"
@@ -109,17 +89,13 @@ function Signup() {
                         required
                     />
                 </label>
-                {responseMessage !== "" && (
-                    <p className="response-message">{responseMessage}</p>
-                )}
+                {responseMessage !== "" && <p>{responseMessage}</p>}
 
-                <div className="btn_container">
+                <div>
                     {isLoading ? (
-                        <div className="spinner"></div>
+                        <div></div>
                     ) : (
-                        <button className="btn" type="submit">
-                            <p className="btn-text">Sign up</p>
-                        </button>
+                        <button type="submit">Sign up</button>
                     )}
                 </div>
             </form>

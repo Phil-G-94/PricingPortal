@@ -66,19 +66,9 @@ function Login() {
 
     return (
         <>
-            <form
-                id="formLogin"
-                action="/login"
-                className="flex_col_place_items_center login-form"
-                onSubmit={onSubmitHandler}
-            >
-                <label htmlFor="login_email" className="input-group">
-                    <Icon
-                        path={mdiAccount}
-                        title="login_email"
-                        size={1}
-                        className="icon"
-                    ></Icon>
+            <form id="formLogin" action="/login" onSubmit={onSubmitHandler}>
+                <label htmlFor="login_email">
+                    <Icon path={mdiAccount} title="login_email" size={1}></Icon>
                     <input
                         type="email"
                         name="login_email"
@@ -89,13 +79,8 @@ function Login() {
                     />
                 </label>
 
-                <label htmlFor="login_password" className="input-group">
-                    <Icon
-                        path={mdiLock}
-                        title="login_password"
-                        size={1}
-                        className="icon"
-                    ></Icon>
+                <label htmlFor="login_password">
+                    <Icon path={mdiLock} title="login_password" size={1}></Icon>
                     <input
                         type="password"
                         name="login_password"
@@ -106,20 +91,14 @@ function Login() {
                     />
                 </label>
 
-                {responseMessage !== "" && (
-                    <p className="response-message centered-text">
-                        {responseMessage}
-                    </p>
-                )}
+                {responseMessage !== "" && <p>{responseMessage}</p>}
 
-                <div className="btn_container">
+                <div>
                     {isLoading ? (
-                        <div className="spinner"></div>
+                        <div></div>
                     ) : (
                         <>
-                            <button className="btn" type="submit">
-                                <p className="btn-text">Log In</p>
-                            </button>
+                            <button type="submit">Log In</button>
                         </>
                     )}
                 </div>

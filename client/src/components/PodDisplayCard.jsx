@@ -20,7 +20,7 @@ function PodDisplayCard({
     const closeEditModal = () => setShowEditModal(false);
 
     return (
-        <article className="grid-item">
+        <article>
             <section>
                 <h4>Pod ID: {pod._id}</h4>
                 <p>
@@ -50,16 +50,12 @@ function PodDisplayCard({
                     <b>Created by:</b> {pod.user.name}
                 </p>
 
-                <div className="flex_row_center">
-                    <button
-                        className="btn-warning"
-                        onClick={() => onDeletePodHandler(pod._id)}
-                    >
+                <div>
+                    <button onClick={() => onDeletePodHandler(pod._id)}>
                         <Icon path={mdiTrashCan} size={1} title="Delete" />
                     </button>
 
                     <button
-                        className="btn-caution"
                         onClick={() => {
                             openEditModal();
                         }}

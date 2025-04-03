@@ -3,8 +3,8 @@ import { NavLink } from "react-router-dom";
 function Navigation() {
     return (
         <header>
-            <nav className="navbar">
-                <ul className="nav-items flex_row_center">
+            <nav>
+                <ul>
                     <li>
                         <NavLink to="/signup"> Sign up </NavLink>
                     </li>

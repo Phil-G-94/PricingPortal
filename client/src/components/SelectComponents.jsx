@@ -5,7 +5,7 @@ import PodsDisplay from "./PodsDisplay.jsx";
 import Icon from "@mdi/react";
 import { mdiCalculator } from "@mdi/js";
 
-function Form() {
+function SelectComponents() {
     const [componentData, setComponentData] = useState([]);
     const [responseMessage, setResponseMessage] = useState("");
     const [podDataUpdateTrigger, setPodDataUpdateTrigger] = useState(false);
@@ -88,25 +88,18 @@ function Form() {
     return (
         <>
             <h2>Component Selection</h2>
-            <form
-                action="/"
-                method="POST"
-                className="flex_col component-form roboto-medium"
-                onSubmit={onSubmitHandler}
-            >
+            <form action="/" method="POST" onSubmit={onSubmitHandler}>
                 <BaseComponents componentData={componentData} />
 
                 <ResourceComponents componentData={componentData} />
 
-                {responseMessage !== "" && (
-                    <p className="response-message">{responseMessage}</p>
-                )}
+                {responseMessage !== "" && <p>{responseMessage}</p>}
 
-                <div className="btn_container place-self-center">
+                <div>
                     {isLoading ? (
-                        <div className="spinner"></div>
+                        <div>{/*spinner */}</div>
                     ) : (
-                        <button className="btn" type="submit">
+                        <button type="submit">
                             <Icon
                                 path={mdiCalculator}
                                 size={1}
@@ -117,7 +110,7 @@ function Form() {
                 </div>
             </form>
 
-            <section className="roboto-light">
+            <section>
                 <PodsDisplay
                     componentData={componentData}
                     podDataUpdateTrigger={podDataUpdateTrigger}
@@ -128,4 +121,4 @@ function Form() {
     );
 }
 
-export default Form;
+export default SelectComponents;

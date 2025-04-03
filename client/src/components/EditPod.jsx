@@ -43,21 +43,12 @@ function EditPod({ componentData, closeEditModal, podId, setPodDataUpdateTrigger
 
     return (
         <>
-            <form
-                action={`/pods/${podId}`}
-                method="PUT"
-                className="flex_col roboto-medium"
-                onSubmit={onEditPodHandler}
-            >
+            <form action={`/pods/${podId}`} method="PUT" onSubmit={onEditPodHandler}>
                 <BaseComponents componentData={componentData} />
                 <ResourceComponents componentData={componentData} />
 
-                <button className="btn" onClick={() => closeEditModal()}>
-                    Close
-                </button>
-                <button className="btn" type="submit">
-                    Update pod spec
-                </button>
+                <button onClick={() => closeEditModal()}>Close</button>
+                <button type="submit">Update pod spec</button>
             </form>
         </>
     );

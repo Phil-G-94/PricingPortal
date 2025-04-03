@@ -4,7 +4,6 @@ import { createPortal } from "react-dom";
 const Backdrop = ({ closeEditModal }) => {
     return (
         <div
-            className="backdrop"
             onClick={() => {
                 closeEditModal();
             }}
@@ -14,8 +13,8 @@ const Backdrop = ({ closeEditModal }) => {
 
 const ModalOverlay = ({ children }) => {
     return (
-        <div className="modal">
-            <h3 className="centred-text">Edit Pod</h3>
+        <div>
+            <h3>Edit Pod</h3>
             {children}
         </div>
     );
