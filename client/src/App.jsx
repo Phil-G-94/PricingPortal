@@ -20,14 +20,8 @@ function App() {
                 <Route path="login" element={<LoginPage />} />
                 <Route path="signup" element={<SignupPage />} />
                 <Route element={<RequireAuth />}>
-                    <Route
-                        path="components"
-                        element={<ComponentsPage />}
-                    />
-                    <Route
-                        path="pods/:podId"
-                        element={<ComponentsPage />}
-                    />
+                    <Route path="components" element={<ComponentsPage />} />
+                    <Route path="pods/:podId" element={<ComponentsPage />} />
                 </Route>
             </Route>
         )

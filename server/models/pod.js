@@ -2,13 +2,7 @@ import { ObjectId } from "mongodb";
 import { getDb } from "../database/connection.js";
 
 class Pod {
-    constructor({
-        spec,
-        resellerPrice,
-        retailPrice,
-        user,
-        createdAt,
-    }) {
+    constructor({ spec, resellerPrice, retailPrice, user, createdAt }) {
         this.spec = spec;
         this.resellerPrice = resellerPrice;
         this.retailPrice = retailPrice;
@@ -31,16 +25,14 @@ class Pod {
 
         const query = { _id: ObjectId.createFromHexString(podId) };
 
-        const updatedPod = await db
-            .collection("pods")
-            .updateOne(query, {
-                $set: {
-                    spec: this.spec,
-                    resellerPrice: this.resellerPrice,
-                    retailPrice: this.retailPrice,
-                    updatedAt: new Date(),
-                },
-            });
+        const updatedPod = await db.collection("pods").updateOne(query, {
+            $set: {
+                spec: this.spec,
+                resellerPrice: this.resellerPrice,
+                retailPrice: this.retailPrice,
+                updatedAt: new Date(),
+            },
+        });
 
         if (updatedPod.matchedCount === 0) {
             throw new Error("Pod not found");
@@ -57,9 +49,7 @@ class Pod {
         };
 
         try {
-            const podData = await db
-                .collection("pods")
-                .findOne(query);
+            const podData = await db.collection("pods").findOne(query);
 
             return podData ? new Pod(podData) : null;
         } catch (error) {

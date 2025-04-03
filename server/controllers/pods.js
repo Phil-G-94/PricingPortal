@@ -1,23 +1,18 @@
-import { validationResult } from "express-validator";
-import { fetchComponents } from "../database/components.js";
 import { Pod } from "../models/pod.js";
-import { User } from "../models/user.js";
 
-const getComponents = async (req, res, next) => {
+const getPods = async (req, res, next) => {
     try {
-        const components = await fetchComponents();
+        const pods = await Pod.fetchPodsByUserId(req.userId);
 
-        if (components.length === 0) {
+        if (!pods) {
             const error = new Error();
-            error.message =
-                "Could not fetch components from the database.";
-            error.statusCode = 500;
+            error.message = "No pods to display";
+            error.cause = "This user has no pods saved to the database.";
             return next(error);
         }
 
         res.status(200).json({
-            message: "Successful fetch.",
-            components,
+            pods,
         });
     } catch (err) {
         if (!err.statusCode) {
@@ -28,10 +23,25 @@ const getComponents = async (req, res, next) => {
     }
 };
 
-const postComponents = async (req, res, next) => {
-    const dateNow = new Date();
+const deletePod = async (req, res, next) => {
+    const { podId } = req.params;
 
-    const errorResult = validationResult(req);
+    const pod = await Pod.fetchPodByPodIdAndDelete(podId);
+
+    if (!pod) {
+        const error = new Error();
+        error.message = "No pod to delete.";
+        error.cause = "The pod you want to delete doesn't exist.";
+        return next(error);
+    }
+
+    res.status(200).json({ message: "Pod deleted." });
+};
+
+const editPod = async (req, res, next) => {
+    const { podId } = req.params;
+
+    console.log(req.body);
 
     const ramQuantity = +req.body["RAM_quantity"];
 
@@ -89,50 +99,30 @@ const postComponents = async (req, res, next) => {
 
     const margin = 3500;
 
-    const resellerPrice =
-        baseComponentCost + resourceComponentCost + margin;
-    const retailPrice =
-        baseComponentCost + resourceComponentCost + (1000 + margin);
+    const resellerPrice = baseComponentCost + resourceComponentCost + margin;
+    const retailPrice = baseComponentCost + resourceComponentCost + (1000 + margin);
 
-    const user = await User.findUserById(req.userId);
+    const pod = await Pod.fetchPodByPodId(podId);
 
-    if (!user) {
-        throw new Error("User does not exist.");
-    }
-
-    if (!errorResult.isEmpty()) {
-        const error = new Error(
-            "Validation failed. Please check your input values"
-        );
-        error.statusCode = 422;
-        error.message = errorResult.array();
+    if (!pod) {
+        const error = new Error();
+        error.message = "No pod found with that id.";
+        error.cause = "The pod you want to edit doesn't exist.";
+        return next(error);
     }
 
     try {
-        const pod = new Pod({
-            spec,
-            resellerPrice,
-            retailPrice,
-            user,
-            createdAt: dateNow,
-        });
-
-        await pod.save();
-
-        res.status(200).json({
-            message: "Successful post",
-            spec,
-            resellerPrice,
-            retailPrice,
-            errors: errorResult.array(),
-        });
-    } catch (err) {
-        if (!err.statusCode) {
-            err.statusCode = 500;
-        }
-
-        next(err);
+        pod.spec = spec;
+        pod.resellerPrice = resellerPrice;
+        pod.retailPrice = retailPrice;
+        await pod.updatePod(podId);
+    } catch (error) {
+        console.log(error);
     }
+
+    res.status(200).json({
+        message: "Pod edited succesfully",
+    });
 };
 
-export { getComponents, postComponents };
+export { getPods, deletePod, editPod };

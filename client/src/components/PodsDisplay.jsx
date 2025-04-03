@@ -9,8 +9,7 @@ function PodsDisplay({
 }) {
     const [podsData, setPodsData] = useState([]);
     const [responseMessage, setResponseMessage] = useState("");
-    const hasSavedPods =
-        podsData !== undefined && podsData.length !== 0;
+    const hasSavedPods = podsData !== undefined && podsData.length !== 0;
 
     const token = localStorage.getItem("token");
 
@@ -28,14 +27,10 @@ function PodsDisplay({
             );
 
             if (!response.ok) {
-                throw new Error(
-                    "Something went wrong trying to delete the pod..."
-                );
+                throw new Error("Something went wrong trying to delete the pod...");
             }
 
-            const updatedPods = podsData.filter(
-                (pod) => pod._id !== podId
-            );
+            const updatedPods = podsData.filter((pod) => pod._id !== podId);
 
             setPodsData(updatedPods);
         } catch (error) {
@@ -91,12 +86,8 @@ function PodsDisplay({
                                 key={pod._id}
                                 pod={pod}
                                 componentData={componentData}
-                                onDeletePodHandler={
-                                    onDeletePodHandler
-                                }
-                                setPodDataUpdateTrigger={
-                                    setPodDataUpdateTrigger
-                                }
+                                onDeletePodHandler={onDeletePodHandler}
+                                setPodDataUpdateTrigger={setPodDataUpdateTrigger}
                             />
                         );
                     })}

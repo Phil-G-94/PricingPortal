@@ -12,9 +12,7 @@ function Navigation() {
                         <NavLink to="/login"> Log in </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/components">
-                            Components Page
-                        </NavLink>
+                        <NavLink to="/components">Components Page</NavLink>
                     </li>
                 </ul>
             </nav>

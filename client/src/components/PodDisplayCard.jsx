@@ -55,11 +55,7 @@ function PodDisplayCard({
                         className="btn-warning"
                         onClick={() => onDeletePodHandler(pod._id)}
                     >
-                        <Icon
-                            path={mdiTrashCan}
-                            size={1}
-                            title="Delete"
-                        />
+                        <Icon path={mdiTrashCan} size={1} title="Delete" />
                     </button>
 
                     <button
@@ -68,26 +64,17 @@ function PodDisplayCard({
                             openEditModal();
                         }}
                     >
-                        <Icon
-                            path={mdiPencil}
-                            size={1}
-                            title="Edit"
-                        />
+                        <Icon path={mdiPencil} size={1} title="Edit" />
                     </button>
                 </div>
             </section>
             {showEditModal && (
-                <Modal
-                    showEditModal={showEditModal}
-                    closeEditModal={closeEditModal}
-                >
+                <Modal showEditModal={showEditModal} closeEditModal={closeEditModal}>
                     <EditPod
                         componentData={componentData}
                         podId={pod._id}
                         closeEditModal={closeEditModal}
-                        setPodDataUpdateTrigger={
-                            setPodDataUpdateTrigger
-                        }
+                        setPodDataUpdateTrigger={setPodDataUpdateTrigger}
                     />
                 </Modal>
             )}

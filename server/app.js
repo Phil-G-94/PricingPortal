@@ -39,11 +39,7 @@ app.use(
         },
         methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
         credentials: true,
-        allowedHeaders: [
-            "Content-Type",
-            "Authorization",
-            "X-Requested-With",
-        ],
+        allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
         optionsSuccessStatus: 200,
     })
 );
@@ -69,9 +65,7 @@ app.post(
             .isEmail()
             .withMessage("Please enter a valid email")
             .custom(async (value) => {
-                const existingUser = await User.findUserByEmail(
-                    value
-                );
+                const existingUser = await User.findUserByEmail(value);
 
                 if (existingUser.email === value) {
                     return Promise.reject(
@@ -114,10 +108,7 @@ app.use((err, req, res, next) => {
         await dbConnect();
 
         app.listen(process.env.PORT || 8080, () => {
-            console.log(
-                "Server is running on port",
-                process.env.PORT || 8080
-            );
+            console.log("Server is running on port", process.env.PORT || 8080);
         });
     } catch (error) {
         console.log(error);
@@ -131,8 +122,6 @@ app.use((err, req, res, next) => {
 
 const handleShutdown = async (signal) => {
     console.log(`${signal} received. Closing database connection...`);
-
-    await mongoose.disconnect();
 
     console.log("Database connection closed. Exiting process.");
 

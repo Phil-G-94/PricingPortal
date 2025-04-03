@@ -2,12 +2,7 @@ import PropTypes from "prop-types";
 import BaseComponents from "./BaseComponents";
 import ResourceComponents from "./ResourceComponents";
 
-function EditPod({
-    componentData,
-    closeEditModal,
-    podId,
-    setPodDataUpdateTrigger,
-}) {
+function EditPod({ componentData, closeEditModal, podId, setPodDataUpdateTrigger }) {
     const onEditPodHandler = async (event) => {
         event.preventDefault();
 
@@ -57,10 +52,7 @@ function EditPod({
                 <BaseComponents componentData={componentData} />
                 <ResourceComponents componentData={componentData} />
 
-                <button
-                    className="btn"
-                    onClick={() => closeEditModal()}
-                >
+                <button className="btn" onClick={() => closeEditModal()}>
                     Close
                 </button>
                 <button className="btn" type="submit">

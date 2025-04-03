@@ -4,17 +4,12 @@ const isAuth = (req, res, next) => {
     try {
         const token = req.cookies.authToken;
 
-        console.log(token);
-
         if (!token) {
             res.status(401).json({ message: "Unauthorised access." });
         }
 
         // verify token
-        const verifiedToken = jwt.verify(
-            token,
-            process.env.JWT_SECRET
-        );
+        const verifiedToken = jwt.verify(token, process.env.JWT_SECRET);
 
         // attach user to the req object
         req.userId = verifiedToken.userId;

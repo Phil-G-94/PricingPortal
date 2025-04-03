@@ -24,10 +24,9 @@ function AuthProvider({ children }) {
                 setIsAuthed(false);
             }
         } catch (error) {
-            throw new Error(
-                "Failed to confirm authentication status.",
-                { cause: error }
-            );
+            throw new Error("Failed to confirm authentication status.", {
+                cause: error,
+            });
         } finally {
             setLoadingAuth(false);
         }
@@ -38,9 +37,7 @@ function AuthProvider({ children }) {
     }, []);
 
     return (
-        <AuthContext.Provider
-            value={{ isAuthed, loadingAuth, fetchAuth }}
-        >
+        <AuthContext.Provider value={{ isAuthed, loadingAuth, fetchAuth }}>
             {children}
         </AuthContext.Provider>
     );

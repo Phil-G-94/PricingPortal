@@ -30,10 +30,7 @@ function Modal({ children, closeEditModal }) {
                 <Backdrop closeEditModal={closeEditModal} />,
                 portalElement
             )}
-            {createPortal(
-                <ModalOverlay>{children}</ModalOverlay>,
-                portalElement
-            )}
+            {createPortal(<ModalOverlay>{children}</ModalOverlay>, portalElement)}
         </>
     );
 }

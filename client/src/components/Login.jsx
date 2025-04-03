@@ -89,10 +89,7 @@ function Login() {
                     />
                 </label>
 
-                <label
-                    htmlFor="login_password"
-                    className="input-group"
-                >
+                <label htmlFor="login_password" className="input-group">
                     <Icon
                         path={mdiLock}
                         title="login_password"

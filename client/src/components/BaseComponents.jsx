@@ -45,10 +45,7 @@ function BaseComponents({ componentData }) {
                 .filter((cmp) => cmp.type === "cooling and cabling")
                 .map((cmp) => {
                     return (
-                        <label
-                            key={cmp._id}
-                            htmlFor={`coolingCabling_${cmp._id}`}
-                        >
+                        <label key={cmp._id} htmlFor={`coolingCabling_${cmp._id}`}>
                             Cooling/Cabling
                             <input
                                 name="coolingCabling"
@@ -67,10 +64,7 @@ function BaseComponents({ componentData }) {
                 .filter((cmp) => cmp.type === "islc")
                 .map((cmp) => {
                     return (
-                        <label
-                            key={cmp._id}
-                            htmlFor={`islc_${cmp._id}`}
-                        >
+                        <label key={cmp._id} htmlFor={`islc_${cmp._id}`}>
                             ISLC
                             <input
                                 name="islc"

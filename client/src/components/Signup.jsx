@@ -93,10 +93,7 @@ function Signup() {
                         required
                     />
                 </label>
-                <label
-                    htmlFor="signup_password"
-                    className="input-group"
-                >
+                <label htmlFor="signup_password" className="input-group">
                     <Icon
                         path={mdiLock}
                         title="email"
@@ -113,9 +110,7 @@ function Signup() {
                     />
                 </label>
                 {responseMessage !== "" && (
-                    <p className="response-message">
-                        {responseMessage}
-                    </p>
+                    <p className="response-message">{responseMessage}</p>
                 )}
 
                 <div className="btn_container">

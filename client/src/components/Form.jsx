@@ -8,8 +8,7 @@ import { mdiCalculator } from "@mdi/js";
 function Form() {
     const [componentData, setComponentData] = useState([]);
     const [responseMessage, setResponseMessage] = useState("");
-    const [podDataUpdateTrigger, setPodDataUpdateTrigger] =
-        useState(false);
+    const [podDataUpdateTrigger, setPodDataUpdateTrigger] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
     const token = localStorage.getItem("token");
@@ -73,9 +72,7 @@ function Form() {
             );
 
             if (!response.ok) {
-                throw new Error(
-                    "Could not submit your component selection."
-                );
+                throw new Error("Could not submit your component selection.");
             }
 
             await response.json();
@@ -102,9 +99,7 @@ function Form() {
                 <ResourceComponents componentData={componentData} />
 
                 {responseMessage !== "" && (
-                    <p className="response-message">
-                        {responseMessage}
-                    </p>
+                    <p className="response-message">{responseMessage}</p>
                 )}
 
                 <div className="btn_container place-self-center">

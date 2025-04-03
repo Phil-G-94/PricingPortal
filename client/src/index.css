@@ -1,6 +1,4 @@
-/* variables */
-
-:root {
+variables :root {
     --metric-box-spacing: 1rem;
     --inevi-dark-purple: #3c1277;
     --inevi-dark-purple-accent: #542f88;
@@ -300,8 +298,7 @@ select {
 }
 
 .grid-item {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1),
-        0 1px 3px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
 
     border-radius: 0.5rem;
     padding: 0.75rem;
