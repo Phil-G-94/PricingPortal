@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Icon from "@mdi/react";
 import { mdiAccount, mdiLock } from "@mdi/js";
 import useAuth from "../hooks/useAuth";
+import Loader from "./Loader";
 
 function Login() {
     const emailRef = useRef();
@@ -65,45 +66,65 @@ function Login() {
     };
 
     return (
-        <>
-            <form id="formLogin" action="/login" onSubmit={onSubmitHandler}>
-                <label htmlFor="login_email">
+        <form
+            id="formLogin"
+            action="/login"
+            onSubmit={onSubmitHandler}
+            className="border-2 p-4 flex flex-col items-center gap-4 w-full max-w-xs mx-auto"
+        >
+            <label htmlFor="login_email" className="flex flex-col w-full">
+                <span className="flex items-center gap-2">
                     <Icon path={mdiAccount} title="login_email" size={1}></Icon>
-                    <input
-                        type="email"
-                        name="login_email"
-                        id="login_email"
-                        autoComplete="email"
-                        ref={emailRef}
-                        required
-                    />
-                </label>
+                    Email
+                </span>
 
-                <label htmlFor="login_password">
+                <input
+                    type="email"
+                    name="login_email"
+                    id="login_email"
+                    autoComplete="email"
+                    ref={emailRef}
+                    required
+                    className="border-2 rounded-md p-2 w-full"
+                />
+            </label>
+
+            <label htmlFor="login_password" className="flex flex-col w-full">
+                <span className="flex items-center gap-2">
                     <Icon path={mdiLock} title="login_password" size={1}></Icon>
-                    <input
-                        type="password"
-                        name="login_password"
-                        id="login_password"
-                        autoComplete="current-password"
-                        ref={passwordRef}
-                        required
-                    />
-                </label>
+                    Password
+                </span>
 
-                {responseMessage !== "" && <p>{responseMessage}</p>}
+                <input
+                    type="password"
+                    name="login_password"
+                    id="login_password"
+                    autoComplete="current-password"
+                    ref={passwordRef}
+                    required
+                    className="border-2 rounded-md p-2 w-full"
+                />
+            </label>
 
-                <div>
-                    {isLoading ? (
-                        <div></div>
-                    ) : (
-                        <>
-                            <button type="submit">Log In</button>
-                        </>
-                    )}
-                </div>
-            </form>
-        </>
+            {responseMessage !== "" && (
+                <p className="text-red-500">{responseMessage}</p>
+            )}
+
+            <div className="w-full flex justify-center">
+                {isLoading ? (
+                    <Loader />
+                ) : (
+                    <>
+                        <button
+                            type="submit"
+                            className="bg-inevi_dark_purple text-white text-lg px-4 py-2 rounded-md w-full"
+                        >
+                            Log In
+                        </button>
+                    </>
+                )}
+            </div>
+        </form>
     );
 }
 

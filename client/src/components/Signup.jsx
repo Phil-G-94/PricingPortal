@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import Icon from "@mdi/react";
 import { mdiBadgeAccount, mdiAccount, mdiLock } from "@mdi/js";
+import Loader from "./Loader";
 
 function Signup() {
     const nameRef = useRef();
@@ -54,52 +55,75 @@ function Signup() {
     };
 
     return (
-        <>
-            <form id="formSignup" action="/signup" onSubmit={onSubmitHandler}>
-                <label htmlFor="signup_name">
+        <form
+            id="formSignup"
+            action="/signup"
+            onSubmit={onSubmitHandler}
+            className="border-2 p-4 flex flex-col items-center gap-4 w-full max-w-xs mx-auto"
+        >
+            <label htmlFor="signup_name" className="flex flex-col w-full">
+                <span className="flex items-center gap-2">
                     <Icon path={mdiBadgeAccount} title="name" size={1}></Icon>
-                    <input
-                        type="text"
-                        name="signup_name"
-                        id="signup_name"
-                        autoComplete="name"
-                        ref={nameRef}
-                        required
-                    />
-                </label>
-                <label htmlFor="signup_email">
-                    <Icon path={mdiAccount} title="email" size={1}></Icon>
-                    <input
-                        type="email"
-                        name="signup_email"
-                        id="signup_email"
-                        autoComplete="username"
-                        ref={emailRef}
-                        required
-                    />
-                </label>
-                <label htmlFor="signup_password">
-                    <Icon path={mdiLock} title="email" size={1}></Icon>
-                    <input
-                        type="password"
-                        name="signup_password"
-                        id="signup_password"
-                        autoComplete="new-password"
-                        ref={passwordRef}
-                        required
-                    />
-                </label>
-                {responseMessage !== "" && <p>{responseMessage}</p>}
+                    Name
+                </span>
+                <input
+                    type="text"
+                    name="signup_name"
+                    id="signup_name"
+                    autoComplete="name"
+                    ref={nameRef}
+                    required
+                    className="border-2 rounded-md p-2 w-full"
+                />
+            </label>
 
-                <div>
-                    {isLoading ? (
-                        <div></div>
-                    ) : (
-                        <button type="submit">Sign up</button>
-                    )}
-                </div>
-            </form>
-        </>
+            <label htmlFor="signup_email" className="flex flex-col w-full">
+                <span className="flex items-center gap-2">
+                    <Icon path={mdiAccount} title="email" size={1}></Icon>
+                    Email
+                </span>
+                <input
+                    type="email"
+                    name="signup_email"
+                    id="signup_email"
+                    autoComplete="username"
+                    ref={emailRef}
+                    required
+                    className="border-2 rounded-md p-2 w-full"
+                />
+            </label>
+
+            <label htmlFor="signup_password" className="flex flex-col w-full">
+                <span className="flex items-center gap-2">
+                    <Icon path={mdiLock} title="password" size={1}></Icon>
+                    Password
+                </span>
+                <input
+                    type="password"
+                    name="signup_password"
+                    id="signup_password"
+                    autoComplete="new-password"
+                    ref={passwordRef}
+                    required
+                    className="border-2 rounded-md p-2 w-full"
+                />
+            </label>
+
+            {responseMessage && <p className="text-red-500">{responseMessage}</p>}
+
+            <div className="w-full flex justify-center">
+                {isLoading ? (
+                    <Loader />
+                ) : (
+                    <button
+                        type="submit"
+                        className="bg-inevi_dark_purple text-white text-lg px-4 py-2 rounded-md w-full"
+                    >
+                        Sign up
+                    </button>
+                )}
+            </div>
+        </form>
     );
 }
 

@@ -7,8 +7,8 @@ function Navigation() {
     const [isOpen, setIsOpen] = useState("");
 
     return (
-        <header className="flex justify-end-safe md:flex-row p-6">
-            <nav className="m-2 border-2">
+        <header className="flex justify-end md:flex-row">
+            <nav className="m-2 border-2 p-1 text-center text-sm md:text-lg">
                 <ul className="hidden list-none gap-6 md:flex md:flex-row">
                     <li>
                         <NavLink to="/signup"> Sign up </NavLink>
