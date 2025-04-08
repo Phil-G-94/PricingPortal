@@ -106,23 +106,29 @@ function Login() {
                 />
             </label>
 
-            {responseMessage !== "" && (
-                <p className="text-red-500">{responseMessage}</p>
-            )}
-
-            <div className="w-full flex justify-center">
-                {isLoading ? (
-                    <Loader />
-                ) : (
-                    <>
-                        <button
-                            type="submit"
-                            className="bg-inevi_dark_purple text-white text-lg px-4 py-2 rounded-md w-full"
-                        >
-                            Log In
-                        </button>
-                    </>
-                )}
+            <div className="flex justify-center">
+                <div className="relative w-full h-12 flex items-center justify-center">
+                    {responseMessage ? (
+                        <p className="text-red-500">{responseMessage}</p>
+                    ) : (
+                        <>
+                            <button
+                                type="submit"
+                                style={{
+                                    visibility: isLoading ? "hidden" : "visible",
+                                }}
+                                className="bg-inevi_dark_purple text-white text-lg px-4 py-2 rounded-md w-full"
+                            >
+                                Log in
+                            </button>
+                            {isLoading && (
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                    <Loader />
+                                </div>
+                            )}
+                        </>
+                    )}
+                </div>
             </div>
         </form>
     );

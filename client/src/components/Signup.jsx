@@ -39,6 +39,8 @@ function Signup() {
                     setResponseMessage(data[0].msg);
                 }
 
+                console.log(data);
+
                 return;
             }
         } catch (err) {
@@ -109,19 +111,29 @@ function Signup() {
                 />
             </label>
 
-            {responseMessage && <p className="text-red-500">{responseMessage}</p>}
-
-            <div className="w-full flex justify-center">
-                {isLoading ? (
-                    <Loader />
-                ) : (
-                    <button
-                        type="submit"
-                        className="bg-inevi_dark_purple text-white text-lg px-4 py-2 rounded-md w-full"
-                    >
-                        Sign up
-                    </button>
-                )}
+            <div className="flex justify-center">
+                <div className="relative w-full h-12 flex items-center justify-center">
+                    {responseMessage ? (
+                        <p className="text-red-500">{responseMessage}</p>
+                    ) : (
+                        <>
+                            <button
+                                type="submit"
+                                style={{
+                                    visibility: isLoading ? "hidden" : "visible",
+                                }}
+                                className="bg-inevi_dark_purple text-white text-lg px-4 py-2 rounded-md w-full"
+                            >
+                                Sign up
+                            </button>
+                            {isLoading && (
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                    <Loader />
+                                </div>
+                            )}
+                        </>
+                    )}
+                </div>
             </div>
         </form>
     );
