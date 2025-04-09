@@ -20,7 +20,7 @@ function PodDisplayCard({
     const closeEditModal = () => setShowEditModal(false);
 
     return (
-        <article>
+        <article className="border-2 p-2 rounded-md drop-shadow-2xl">
             <section>
                 <h4>Pod ID: {pod._id}</h4>
                 <p>
@@ -50,7 +50,7 @@ function PodDisplayCard({
                     <b>Created by:</b> {pod.user.name}
                 </p>
 
-                <div>
+                <div className="flex flex-row justify-center">
                     <button onClick={() => onDeletePodHandler(pod._id)}>
                         <Icon path={mdiTrashCan} size={1} title="Delete" />
                     </button>

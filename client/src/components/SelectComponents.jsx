@@ -89,42 +89,46 @@ function SelectComponents() {
     return (
         <section>
             <h2 className="text-2xl text-center">Component Selection</h2>
-            <form
-                action="/"
-                method="POST"
-                onSubmit={onSubmitHandler}
-                className="border-2 p-4 flex flex-col gap-4 w-full max-w-xs mx-auto"
-            >
-                <BaseComponents componentData={componentData} />
+            <section>
+                <form
+                    action="/"
+                    method="POST"
+                    onSubmit={onSubmitHandler}
+                    className="border-2 p-4 flex flex-col gap-4 w-full max-w-xs mx-auto"
+                >
+                    <BaseComponents componentData={componentData} />
 
-                <ResourceComponents componentData={componentData} />
+                    <ResourceComponents componentData={componentData} />
 
-                {responseMessage !== "" && (
-                    <p className="text-red-500">{responseMessage}</p>
-                )}
+                    {responseMessage !== "" && (
+                        <p className="text-red-500">{responseMessage}</p>
+                    )}
 
-                <div className="flex justify-center">
-                    <div className="relative w-12 h-12 flex items-center justify-center">
-                        <button
-                            type="submit"
-                            style={{ visibility: isLoading ? "hidden" : "visible" }}
-                            className="absolute inset-0 flex items-center justify-center"
-                        >
-                            <Icon
-                                path={mdiCalculator}
-                                size={2}
-                                title="Calculate price"
-                            />
-                        </button>
+                    <div className="flex justify-center">
+                        <div className="relative w-12 h-12 flex items-center justify-center">
+                            <button
+                                type="submit"
+                                style={{
+                                    visibility: isLoading ? "hidden" : "visible",
+                                }}
+                                className="absolute inset-0 flex items-center justify-center"
+                            >
+                                <Icon
+                                    path={mdiCalculator}
+                                    size={2}
+                                    title="Calculate price"
+                                />
+                            </button>
 
-                        {isLoading && (
-                            <div className="absolute inset-0 flex items-center justify-center">
-                                <Loader />
-                            </div>
-                        )}
+                            {isLoading && (
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                    <Loader />
+                                </div>
+                            )}
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </section>
 
             <section>
                 <PodsDisplay
