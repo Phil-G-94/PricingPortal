@@ -8,12 +8,15 @@ function AuthProvider({ children }) {
 
     const fetchAuth = async () => {
         try {
-            const response = await fetch("http://localhost:8080/api/check-auth", {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                credentials: "include",
-            });
+            const response = await fetch(
+                "https://pricingportal.onrender.com/api/check-auth",
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    credentials: "include",
+                }
+            );
 
             if (response.ok) {
                 setIsAuthed(true);
