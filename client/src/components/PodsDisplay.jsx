@@ -15,16 +15,13 @@ function PodsDisplay({
 
     const onDeletePodHandler = async (podId) => {
         try {
-            const response = await fetch(
-                `https://pricingportal.onrender.com/api/pods/${podId}`,
-                {
-                    method: "DELETE",
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                    credentials: "include",
-                }
-            );
+            const response = await fetch(`http://localhost:8080/api/pods/${podId}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+                credentials: "include",
+            });
 
             if (!response.ok) {
                 throw new Error("Something went wrong trying to delete the pod...");
@@ -42,15 +39,12 @@ function PodsDisplay({
     useEffect(() => {
         try {
             const fetchPodsData = async () => {
-                const response = await fetch(
-                    "https://pricingportal.onrender.com/api/pods",
-                    {
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        credentials: "include",
-                    }
-                );
+                const response = await fetch("http://localhost:8080/api/pods", {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    credentials: "include",
+                });
 
                 const jsonResponse = await response.json();
 
@@ -73,15 +67,11 @@ function PodsDisplay({
         }
     }, [token, podDataUpdateTrigger]);
 
-    console.log(podsData);
-
     return (
         <>
             <h3 className="text-center text-2xl">Your Saved Pods</h3>
             <section>
-                {responseMessage && <p>{responseMessage}</p>}
-
-                <div className="grid grid-cols-1 place-items-center gap-4 md:grid-cols-3">
+                <div className="grid grid-cols-1 place-items-center md:grid-cols-2 gap-4">
                     {hasSavedPods &&
                         podsData?.map((pod) => {
                             return (
@@ -94,10 +84,17 @@ function PodsDisplay({
                                 />
                             );
                         })}
+                    {responseMessage && (
+                        <p className="text-red-500">{responseMessage}</p>
+                    )}
                 </div>
             </section>
 
-            {!hasSavedPods && <p>No pods saved. Choose a spec and get a price!</p>}
+            {!hasSavedPods && (
+                <p className="text-center">
+                    No pods saved. Choose a spec and get a price!
+                </p>
+            )}
         </>
     );
 }

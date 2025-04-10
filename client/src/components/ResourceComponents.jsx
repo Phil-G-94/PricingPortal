@@ -49,6 +49,18 @@ function ResourceComponents({ componentData }) {
                 </select>
             </label>
 
+            <label htmlFor="GPU_quantity" className="flex flex-col w-full">
+                GPU Quantity
+                <input
+                    type="number"
+                    name="GPU_quantity"
+                    id="GPU_quantity"
+                    defaultValue="7"
+                    max="7"
+                    className="border-2 rounded-md p-2 w-full"
+                />
+            </label>
+
             <label htmlFor="RAM" className="flex flex-col w-full">
                 RAM
                 <select

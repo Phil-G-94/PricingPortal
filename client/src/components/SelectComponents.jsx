@@ -18,7 +18,7 @@ function SelectComponents() {
         try {
             const fetchComponentData = async () => {
                 const response = await fetch(
-                    "https://pricingportal.onrender.com/api/components",
+                    "http://localhost:8080/api/components",
                     {
                         headers: {
                             "Content-Type": "application/json",
@@ -60,17 +60,14 @@ function SelectComponents() {
         const formDataObject = Object.fromEntries(formData.entries());
 
         try {
-            const response = await fetch(
-                "https://pricingportal.onrender.com/api/components",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    credentials: "include",
-                    body: JSON.stringify(formDataObject),
-                }
-            );
+            const response = await fetch("http://localhost:8080/api/components", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+                body: JSON.stringify(formDataObject),
+            });
 
             if (!response.ok) {
                 throw new Error("Could not submit your component selection.");
@@ -87,56 +84,61 @@ function SelectComponents() {
     };
 
     return (
-        <section>
-            <h2 className="text-2xl text-center">Component Selection</h2>
-            <section>
-                <form
-                    action="/"
-                    method="POST"
-                    onSubmit={onSubmitHandler}
-                    className="border-2 p-4 flex flex-col gap-4 w-full max-w-xs mx-auto"
-                >
-                    <BaseComponents componentData={componentData} />
+        <section className="container mx-auto">
+            <h2 className="text-4xl text-center">PricingPortal</h2>
+            <div className="grid grid-cols-1 lg:grid-cols-2">
+                <section>
+                    <h3 className="text-center text-2xl">Select your components</h3>
+                    <form
+                        action="/"
+                        method="POST"
+                        onSubmit={onSubmitHandler}
+                        className="border-2 p-4 flex flex-col gap-4 "
+                    >
+                        <div className="grid grid-rows-1">
+                            <BaseComponents componentData={componentData} />
 
-                    <ResourceComponents componentData={componentData} />
-
-                    {responseMessage !== "" && (
-                        <p className="text-red-500">{responseMessage}</p>
-                    )}
-
-                    <div className="flex justify-center">
-                        <div className="relative w-12 h-12 flex items-center justify-center">
-                            <button
-                                type="submit"
-                                style={{
-                                    visibility: isLoading ? "hidden" : "visible",
-                                }}
-                                className="absolute inset-0 flex items-center justify-center"
-                            >
-                                <Icon
-                                    path={mdiCalculator}
-                                    size={2}
-                                    title="Calculate price"
-                                />
-                            </button>
-
-                            {isLoading && (
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                    <Loader />
-                                </div>
-                            )}
+                            <ResourceComponents componentData={componentData} />
                         </div>
-                    </div>
-                </form>
-            </section>
 
-            <section>
-                <PodsDisplay
-                    componentData={componentData}
-                    podDataUpdateTrigger={podDataUpdateTrigger}
-                    setPodDataUpdateTrigger={setPodDataUpdateTrigger}
-                />
-            </section>
+                        {responseMessage !== "" && (
+                            <p className="text-red-500">{responseMessage}</p>
+                        )}
+
+                        <div className="flex justify-center">
+                            <div className="relative w-12 h-12 flex items-center justify-center">
+                                <button
+                                    type="submit"
+                                    style={{
+                                        visibility: isLoading ? "hidden" : "visible",
+                                    }}
+                                    className="absolute inset-0 flex items-center justify-center"
+                                >
+                                    <Icon
+                                        path={mdiCalculator}
+                                        size={2}
+                                        title="Calculate price"
+                                    />
+                                </button>
+
+                                {isLoading && (
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                        <Loader />
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </form>
+                </section>
+
+                <section>
+                    <PodsDisplay
+                        componentData={componentData}
+                        podDataUpdateTrigger={podDataUpdateTrigger}
+                        setPodDataUpdateTrigger={setPodDataUpdateTrigger}
+                    />
+                </section>
+            </div>
         </section>
     );
 }
