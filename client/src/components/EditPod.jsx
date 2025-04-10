@@ -10,14 +10,17 @@ function EditPod({ componentData, closeEditModal, podId, setPodDataUpdateTrigger
         const formDataObject = Object.fromEntries(formData.entries());
 
         try {
-            const response = await fetch(`http://localhost:8080/api/pods/${podId}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                credentials: "include",
-                body: JSON.stringify(formDataObject),
-            });
+            const response = await fetch(
+                `https://pricingportal.onrender.com/api/pods/${podId}`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    credentials: "include",
+                    body: JSON.stringify(formDataObject),
+                }
+            );
 
             const jsonResponse = await response.json();
 

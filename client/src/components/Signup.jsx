@@ -19,13 +19,16 @@ function Signup() {
         const formDataObject = Object.fromEntries(formData);
 
         try {
-            const response = await fetch("http://localhost:8080/signup", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(formDataObject),
-            });
+            const response = await fetch(
+                "https://pricingportal.onrender.com/signup",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(formDataObject),
+                }
+            );
 
             const jsonResponse = await response.json();
 

@@ -60,14 +60,17 @@ function SelectComponents() {
         const formDataObject = Object.fromEntries(formData.entries());
 
         try {
-            const response = await fetch("http://localhost:8080/api/components", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                credentials: "include",
-                body: JSON.stringify(formDataObject),
-            });
+            const response = await fetch(
+                "https://pricingportal.onrender.com/api/components",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    credentials: "include",
+                    body: JSON.stringify(formDataObject),
+                }
+            );
 
             if (!response.ok) {
                 throw new Error("Could not submit your component selection.");
