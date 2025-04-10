@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Icon from "@mdi/react";
 import { mdiAccount, mdiLock } from "@mdi/js";
 import useAuth from "../hooks/useAuth";
+import Loader from "./Loader";
 
 function Login() {
     const emailRef = useRef();
@@ -65,66 +66,71 @@ function Login() {
     };
 
     return (
-        <>
-            <form
-                id="formLogin"
-                action="/login"
-                className="flex_col_place_items_center login-form"
-                onSubmit={onSubmitHandler}
-            >
-                <label htmlFor="login_email" className="input-group">
-                    <Icon
-                        path={mdiAccount}
-                        title="login_email"
-                        size={1}
-                        className="icon"
-                    ></Icon>
-                    <input
-                        type="email"
-                        name="login_email"
-                        id="login_email"
-                        autoComplete="email"
-                        ref={emailRef}
-                        required
-                    />
-                </label>
+        <form
+            id="formLogin"
+            action="/login"
+            onSubmit={onSubmitHandler}
+            className="border-2 p-4 flex flex-col items-center gap-4 w-full max-w-xs mx-auto"
+        >
+            <label htmlFor="login_email" className="flex flex-col w-full">
+                <span className="flex items-center gap-2">
+                    <Icon path={mdiAccount} title="login_email" size={1}></Icon>
+                    Email
+                </span>
 
-                <label htmlFor="login_password" className="input-group">
-                    <Icon
-                        path={mdiLock}
-                        title="login_password"
-                        size={1}
-                        className="icon"
-                    ></Icon>
-                    <input
-                        type="password"
-                        name="login_password"
-                        id="login_password"
-                        autoComplete="current-password"
-                        ref={passwordRef}
-                        required
-                    />
-                </label>
+                <input
+                    type="email"
+                    name="login_email"
+                    id="login_email"
+                    autoComplete="email"
+                    ref={emailRef}
+                    required
+                    className="border-2 rounded-md p-2 w-full"
+                />
+            </label>
 
-                {responseMessage !== "" && (
-                    <p className="response-message centered-text">
-                        {responseMessage}
-                    </p>
-                )}
+            <label htmlFor="login_password" className="flex flex-col w-full">
+                <span className="flex items-center gap-2">
+                    <Icon path={mdiLock} title="login_password" size={1}></Icon>
+                    Password
+                </span>
 
-                <div className="btn_container">
-                    {isLoading ? (
-                        <div className="spinner"></div>
+                <input
+                    type="password"
+                    name="login_password"
+                    id="login_password"
+                    autoComplete="current-password"
+                    ref={passwordRef}
+                    required
+                    className="border-2 rounded-md p-2 w-full"
+                />
+            </label>
+
+            <div className="flex justify-center">
+                <div className="relative w-full h-12 flex items-center justify-center">
+                    {responseMessage ? (
+                        <p className="text-red-500">{responseMessage}</p>
                     ) : (
                         <>
-                            <button className="btn" type="submit">
-                                <p className="btn-text">Log In</p>
+                            <button
+                                type="submit"
+                                style={{
+                                    visibility: isLoading ? "hidden" : "visible",
+                                }}
+                                className="bg-inevi_dark_purple text-white text-lg px-4 py-2 rounded-md w-full"
+                            >
+                                Log in
                             </button>
+                            {isLoading && (
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                    <Loader />
+                                </div>
+                            )}
                         </>
                     )}
                 </div>
-            </form>
-        </>
+            </div>
+        </form>
     );
 }
 

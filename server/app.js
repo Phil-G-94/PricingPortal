@@ -2,9 +2,6 @@ import express, { urlencoded, json } from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import helmet from "helmet";
-import { body } from "express-validator";
-
-import { User } from "./models/user.js";
 import * as authController from "./controllers/auth.js";
 import { dbConnect } from "./database/connection.js";
 import { isAuth } from "./middleware/isAuth.js";
@@ -58,24 +55,7 @@ app.use(cookieParser());
  * routes
  */
 
-app.post(
-    "/signup",
-    [
-        body("email")
-            .isEmail()
-            .withMessage("Please enter a valid email")
-            .custom(async (value) => {
-                const existingUser = await User.findUserByEmail(value);
-
-                if (existingUser.email === value) {
-                    return Promise.reject(
-                        "You're already signed up. Try logging in instead."
-                    );
-                }
-            }),
-    ],
-    authController.postSignup
-);
+app.post("/signup", authController.postSignup);
 
 app.post("/login", authController.postLogin);
 

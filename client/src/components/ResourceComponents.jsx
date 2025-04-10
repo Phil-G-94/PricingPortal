@@ -2,10 +2,14 @@ import PropTypes from "prop-types";
 
 function ResourceComponents({ componentData }) {
     return (
-        <>
-            <label htmlFor="CPU">
+        <section className="flex flex-col gap-2">
+            <label htmlFor="CPU" className="flex flex-col w-full">
                 CPU
-                <select name="CPU" id="CPU">
+                <select
+                    name="CPU"
+                    id="CPU"
+                    className="border-2 rounded-md p-2 w-full"
+                >
                     {componentData
                         .filter((cmp) => cmp.type === "CPU")
                         .map((cmp) => {
@@ -22,9 +26,13 @@ function ResourceComponents({ componentData }) {
                 </select>
             </label>
 
-            <label htmlFor="GPU">
+            <label htmlFor="GPU" className="flex flex-col w-full">
                 GPU
-                <select name="GPU" id="GPU">
+                <select
+                    name="GPU"
+                    id="GPU"
+                    className="border-2 rounded-md p-2 w-full"
+                >
                     {componentData
                         .filter((cmp) => cmp.type === "GPU")
                         .map((cmp) => {
@@ -41,9 +49,25 @@ function ResourceComponents({ componentData }) {
                 </select>
             </label>
 
-            <label htmlFor="RAM">
+            <label htmlFor="GPU_quantity" className="flex flex-col w-full">
+                GPU Quantity
+                <input
+                    type="number"
+                    name="GPU_quantity"
+                    id="GPU_quantity"
+                    defaultValue="7"
+                    max="7"
+                    className="border-2 rounded-md p-2 w-full"
+                />
+            </label>
+
+            <label htmlFor="RAM" className="flex flex-col w-full">
                 RAM
-                <select name="RAM" id="RAM">
+                <select
+                    name="RAM"
+                    id="RAM"
+                    className="border-2 rounded-md p-2 w-full"
+                >
                     {componentData
                         .filter((cmp) => cmp.type === "RAM")
                         .map((cmp) => {
@@ -60,7 +84,7 @@ function ResourceComponents({ componentData }) {
                 </select>
             </label>
 
-            <label htmlFor="RAM_quantity">
+            <label htmlFor="RAM_quantity" className="flex flex-col w-full">
                 RAM Quantity
                 <input
                     type="number"
@@ -69,12 +93,17 @@ function ResourceComponents({ componentData }) {
                     min="1"
                     max="8"
                     defaultValue="4"
+                    className="border-2 rounded-md p-2 w-full"
                 />
             </label>
 
-            <label htmlFor="SSD">
+            <label htmlFor="SSD" className="flex flex-col w-full">
                 SSD
-                <select name="SSD" id="SSD">
+                <select
+                    name="SSD"
+                    id="SSD"
+                    className="border-2 rounded-md p-2 w-full"
+                >
                     {componentData
                         .filter((cmp) => cmp.type === "SSD")
                         .map((cmp) => {
@@ -89,7 +118,7 @@ function ResourceComponents({ componentData }) {
                         })}
                 </select>
             </label>
-            <label htmlFor="SSD_quantity">
+            <label htmlFor="SSD_quantity" className="flex flex-col w-full">
                 SSD Quantity
                 <input
                     type="number"
@@ -98,9 +127,10 @@ function ResourceComponents({ componentData }) {
                     min="1"
                     max="8"
                     defaultValue="3"
+                    className="border-2 rounded-md p-2 w-full"
                 />
             </label>
-        </>
+        </section>
     );
 }
 

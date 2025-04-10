@@ -1,7 +1,7 @@
-import Form from "../components/Form.jsx";
+import SelectComponents from "../components/SelectComponents.jsx";
 
 function ComponentsPage() {
-    return <Form />;
+    return <SelectComponents />;
 }
 
 export default ComponentsPage;

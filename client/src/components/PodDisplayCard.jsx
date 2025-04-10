@@ -20,46 +20,46 @@ function PodDisplayCard({
     const closeEditModal = () => setShowEditModal(false);
 
     return (
-        <article className="grid-item">
-            <section>
-                <h4>Pod ID: {pod._id}</h4>
+        <article className="border-2 p-2 rounded-md drop-shadow-2xl">
+            <section className="w-min-sm">
+                <h4 className="font-bold">Pod ID: {pod._id}</h4>
                 <p>
-                    <b>CPU:</b>
+                    <span className="font-bold">CPU:</span>
                     {pod.spec.resourceComponents.CPU.name}
                 </p>
                 <p>
-                    <b>GPU:</b>
+                    <span className="font-bold">GPU:</span>
                     {pod.spec.resourceComponents.GPU.name}
                 </p>
                 <p>
+                    <span className="font-bold">RAM:</span>
                     {pod.spec.resourceComponents.RAM.name} x
                     {pod.spec.resourceComponents.RAM.quantity}
                 </p>
                 <p>
+                    <span className="font-bold">Storage:</span>
                     {pod.spec.resourceComponents.SSD.name} x
                     {pod.spec.resourceComponents.SSD.quantity}
                 </p>
 
                 <p>
-                    <b>Reseller price:</b> £{pod.resellerPrice}
+                    <span className="font-bold">Reseller price:</span> £
+                    {pod.resellerPrice}
                 </p>
                 <p>
-                    <b>Retail price:</b> £{pod.retailPrice}
+                    <span className="font-bold">Retail price:</span> £
+                    {pod.retailPrice}
                 </p>
                 <p>
-                    <b>Created by:</b> {pod.user.name}
+                    <span className="font-bold">Created by:</span> {pod.user.name}
                 </p>
 
-                <div className="flex_row_center">
-                    <button
-                        className="btn-warning"
-                        onClick={() => onDeletePodHandler(pod._id)}
-                    >
+                <div className="flex flex-row justify-center">
+                    <button onClick={() => onDeletePodHandler(pod._id)}>
                         <Icon path={mdiTrashCan} size={1} title="Delete" />
                     </button>
 
                     <button
-                        className="btn-caution"
                         onClick={() => {
                             openEditModal();
                         }}
