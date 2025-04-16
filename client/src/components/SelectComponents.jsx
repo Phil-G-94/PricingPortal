@@ -18,7 +18,7 @@ function SelectComponents() {
         try {
             const fetchComponentData = async () => {
                 const response = await fetch(
-                    "http://localhost:8080/api/components",
+                    "https://pricingportal.onrender.com/api/components",
                     {
                         headers: {
                             "Content-Type": "application/json",
