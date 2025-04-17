@@ -8,16 +8,39 @@ function Navigation() {
 
     return (
         <header className="flex justify-end md:flex-row">
-            <nav className="m-2 border-2 p-1 text-center text-sm md:text-lg">
+            <nav className="m-2 p-1 text-center text-sm md:text-lg">
                 <ul className="hidden list-none gap-6 md:flex md:flex-row">
                     <li>
-                        <NavLink to="/signup"> Sign up </NavLink>
+                        <NavLink
+                            to="/signup"
+                            className="font-bold px-2 py-1 rounded-md hover:bg-inevi_dark_purple hover:text-inevi_white"
+                        >
+                            Sign up
+                        </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/login"> Log in </NavLink>
+                        <NavLink
+                            to="/login"
+                            className="font-bold px-2 py-1 rounded-md hover:bg-inevi_dark_purple hover:text-inevi_white"
+                        >
+                            Log in
+                        </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/components">Components Page</NavLink>
+                        <NavLink
+                            to="/"
+                            className="font-bold px-2 py-1 rounded-md hover:bg-inevi_dark_purple hover:text-inevi_white"
+                        >
+                            Home
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            to="/components"
+                            className="font-bold px-2 py-1 rounded-md hover:bg-inevi_dark_purple hover:text-inevi_white"
+                        >
+                            Quote Tool
+                        </NavLink>
                     </li>
                 </ul>
 
@@ -40,23 +63,47 @@ function Navigation() {
                 </span>
 
                 <ul
-                    className={`md:hidden relative transition-all ${
-                        isOpen ? "opacity-100 visible" : "opacity-0 invisible"
+                    className={`md:hidden relative w-full z-10 transition-all duration-300 ${
+                        isOpen
+                            ? "opacity-100 visible pointer-events-auto"
+                            : "opacity-0 invisible pointer-events-none"
                     }`}
                 >
                     <li>
-                        <NavLink to="/signup" onClick={() => setIsOpen(false)}>
+                        <NavLink
+                            to="/"
+                            onClick={() => setIsOpen(false)}
+                            className="font-bold text-lg px-2 py-1 rounded-md active:bg-inevi_dark_purple active:text-inevi_white"
+                        >
+                            Home
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            to="/signup"
+                            onClick={() => setIsOpen(false)}
+                            className="font-bold text-lg px-2 py-1 rounded-md active:bg-inevi_dark_purple active:text-inevi_white"
+                        >
                             Sign up
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/login" onClick={() => setIsOpen(false)}>
+                        <NavLink
+                            to="/login"
+                            onClick={() => setIsOpen(false)}
+                            className="font-bold text-lg px-2 py-1 rounded-md active:bg-inevi_dark_purple active:text-inevi_white"
+                        >
                             Log in
                         </NavLink>
                     </li>
+
                     <li>
-                        <NavLink to="/components" onClick={() => setIsOpen(false)}>
-                            Components Page
+                        <NavLink
+                            to="/components"
+                            onClick={() => setIsOpen(false)}
+                            className="font-bold text-lg px-2 py-1 rounded-md active:bg-inevi_dark_purple active:text-inevi_white"
+                        >
+                            Quote Tool
                         </NavLink>
                     </li>
                 </ul>

@@ -60,7 +60,7 @@ function Signup() {
             id="formSignup"
             action="/signup"
             onSubmit={onSubmitHandler}
-            className="border-2 p-4 flex flex-col items-center gap-4 w-full max-w-xs mx-auto"
+            className="p-4 flex flex-col items-center gap-4 w-full max-w-xs mx-auto"
         >
             <label htmlFor="signup_name" className="flex flex-col w-full">
                 <span className="flex items-center gap-2">
@@ -121,7 +121,7 @@ function Signup() {
                                 style={{
                                     visibility: isLoading ? "hidden" : "visible",
                                 }}
-                                className="bg-inevi_dark_purple text-white text-lg px-4 py-2 rounded-md w-full"
+                                className="bg-inevi_dark_purple text-inevi_white font-semibold text-lg px-4 py-2 rounded-md w-full active:bg-inevi_dark_lavender"
                             >
                                 Sign up
                             </button>
