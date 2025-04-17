@@ -4,6 +4,8 @@ import ResourceComponents from "./ResourceComponents";
 import Icon from "@mdi/react";
 import { mdiClose, mdiContentSaveEdit } from "@mdi/js";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+
 function EditPod({ componentData, closeEditModal, podId, setPodDataUpdateTrigger }) {
     const onEditPodHandler = async (event) => {
         event.preventDefault();
@@ -12,17 +14,14 @@ function EditPod({ componentData, closeEditModal, podId, setPodDataUpdateTrigger
         const formDataObject = Object.fromEntries(formData.entries());
 
         try {
-            const response = await fetch(
-                `https://pricingportal.onrender.com/api/pods/${podId}`,
-                {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    credentials: "include",
-                    body: JSON.stringify(formDataObject),
-                }
-            );
+            const response = await fetch(`${API_BASE_URL}/api/pods/${podId}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+                body: JSON.stringify(formDataObject),
+            });
 
             const jsonResponse = await response.json();
 

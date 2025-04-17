@@ -6,6 +6,8 @@ import Icon from "@mdi/react";
 import { mdiCalculator } from "@mdi/js";
 import Loader from "./Loader.jsx";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+
 function SelectComponents() {
     const [componentData, setComponentData] = useState([]);
     const [responseMessage, setResponseMessage] = useState("");
@@ -17,15 +19,12 @@ function SelectComponents() {
     useEffect(() => {
         try {
             const fetchComponentData = async () => {
-                const response = await fetch(
-                    "https://pricingportal.onrender.com/api/components",
-                    {
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        credentials: "include",
-                    }
-                );
+                const response = await fetch(`${API_BASE_URL}/api/components`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    credentials: "include",
+                });
 
                 const jsonResponse = await response.json();
 
@@ -60,17 +59,14 @@ function SelectComponents() {
         const formDataObject = Object.fromEntries(formData.entries());
 
         try {
-            const response = await fetch(
-                "https://pricingportal.onrender.com/api/components",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    credentials: "include",
-                    body: JSON.stringify(formDataObject),
-                }
-            );
+            const response = await fetch(`${API_BASE_URL}/api/components`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+                body: JSON.stringify(formDataObject),
+            });
 
             if (!response.ok) {
                 throw new Error("Could not submit your component selection.");

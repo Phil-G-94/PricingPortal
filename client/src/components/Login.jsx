@@ -5,6 +5,8 @@ import { mdiAccount, mdiLock } from "@mdi/js";
 import useAuth from "../hooks/useAuth";
 import Loader from "./Loader";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+
 function Login() {
     const emailRef = useRef();
     const passwordRef = useRef();
@@ -22,17 +24,14 @@ function Login() {
         const formDataObject = Object.fromEntries(formData);
 
         try {
-            const response = await fetch(
-                "https://pricingportal.onrender.com/login",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    credentials: "include",
-                    body: JSON.stringify(formDataObject),
-                }
-            );
+            const response = await fetch(`${API_BASE_URL}/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+                body: JSON.stringify(formDataObject),
+            });
 
             const jsonResponse = await response.json();
 

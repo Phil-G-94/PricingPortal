@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import PodDisplayCard from "./PodDisplayCard.jsx";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+
+console.log(API_BASE_URL);
+
 function PodsDisplay({
     componentData,
     podDataUpdateTrigger,
@@ -15,16 +19,13 @@ function PodsDisplay({
 
     const onDeletePodHandler = async (podId) => {
         try {
-            const response = await fetch(
-                `https://pricingportal.onrender.com/api/pods/${podId}`,
-                {
-                    method: "DELETE",
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                    credentials: "include",
-                }
-            );
+            const response = await fetch(`${API_BASE_URL}/api/pods/${podId}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+                credentials: "include",
+            });
 
             if (!response.ok) {
                 throw new Error("Something went wrong trying to delete the pod...");
@@ -42,15 +43,12 @@ function PodsDisplay({
     useEffect(() => {
         try {
             const fetchPodsData = async () => {
-                const response = await fetch(
-                    "https://pricingportal.onrender.com/api/pods",
-                    {
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        credentials: "include",
-                    }
-                );
+                const response = await fetch(`${API_BASE_URL}/api/pods`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    credentials: "include",
+                });
 
                 const jsonResponse = await response.json();
 

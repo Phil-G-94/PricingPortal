@@ -3,6 +3,8 @@ import Icon from "@mdi/react";
 import { mdiBadgeAccount, mdiAccount, mdiLock } from "@mdi/js";
 import Loader from "./Loader";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+
 function Signup() {
     const nameRef = useRef();
     const emailRef = useRef();
@@ -19,16 +21,13 @@ function Signup() {
         const formDataObject = Object.fromEntries(formData);
 
         try {
-            const response = await fetch(
-                "https://pricingportal.onrender.com/signup",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(formDataObject),
-                }
-            );
+            const response = await fetch(`${API_BASE_URL}/signup`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formDataObject),
+            });
 
             const jsonResponse = await response.json();
 

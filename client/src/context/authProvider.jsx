@@ -2,21 +2,20 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import AuthContext from "./authCtx";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+
 function AuthProvider({ children }) {
     const [isAuthed, setIsAuthed] = useState(false);
     const [loadingAuth, setLoadingAuth] = useState(true);
 
     const fetchAuth = async () => {
         try {
-            const response = await fetch(
-                "https://pricingportal.onrender.com/api/check-auth",
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    credentials: "include",
-                }
-            );
+            const response = await fetch(`${API_BASE_URL}/api/check-auth`, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+            });
 
             if (response.ok) {
                 setIsAuthed(true);
