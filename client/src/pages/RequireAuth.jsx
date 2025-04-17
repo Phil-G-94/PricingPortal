@@ -12,7 +12,7 @@ function RequireAuth() {
         if (loadingAuth) return;
 
         if (!isAuthed) {
-            navigate("/login", {
+            navigate("/", {
                 state: location.pathname,
                 replace: true,
             });

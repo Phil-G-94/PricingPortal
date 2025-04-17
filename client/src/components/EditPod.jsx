@@ -51,13 +51,13 @@ function EditPod({ componentData, closeEditModal, podId, setPodDataUpdateTrigger
                 <div className="flex flex-row items-center justify-center gap-4 m-2">
                     <button
                         onClick={closeEditModal}
-                        className="bg-inevi_dark_purple text-white text-lg px-4 py-2 rounded-md max-w-fit"
+                        className="bg-inevi_dark_purple active:bg-inevi_dark_lavender text-inevi_white text-lg px-4 py-2 rounded-md max-w-fit"
                     >
                         <Icon path={mdiClose} size={1} title="Close" />
                     </button>
                     <button
                         type="submit"
-                        className="bg-inevi_dark_purple text-white text-lg px-4 py-2 rounded-md max-w-fit"
+                        className="bg-inevi_dark_purple active:bg-inevi_dark_lavender text-inevi_white text-lg px-4 py-2 rounded-md max-w-fit"
                     >
                         <Icon path={mdiContentSaveEdit} size={1} title="Save" />
                     </button>

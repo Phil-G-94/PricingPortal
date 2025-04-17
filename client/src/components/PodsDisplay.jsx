@@ -15,14 +15,12 @@ function PodsDisplay({
     const [responseMessage, setResponseMessage] = useState("");
     const hasSavedPods = podsData !== undefined && podsData.length !== 0;
 
-    const token = localStorage.getItem("token");
-
     const onDeletePodHandler = async (podId) => {
         try {
             const response = await fetch(`${API_BASE_URL}/api/pods/${podId}`, {
                 method: "DELETE",
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
                 },
                 credentials: "include",
             });
@@ -69,11 +67,11 @@ function PodsDisplay({
         } catch (error) {
             console.error(error);
         }
-    }, [token, podDataUpdateTrigger]);
+    }, [podDataUpdateTrigger]);
 
     return (
         <>
-            <h3 className="text-center text-2xl">Your Saved Pods</h3>
+            <h2 className="text-center text-2xl">Saved Pods</h2>
             <section>
                 <div className="grid grid-cols-1 place-items-center md:grid-cols-2 gap-4">
                     {hasSavedPods &&

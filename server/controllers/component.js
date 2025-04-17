@@ -28,9 +28,7 @@ const getComponents = async (req, res, next) => {
 };
 
 const postComponents = async (req, res, next) => {
-    console.log(req.body);
-
-    const dateNow = new Date();
+    const dateNow = new Date().toLocaleDateString();
 
     const errorResult = validationResult(req);
 
@@ -68,8 +66,6 @@ const postComponents = async (req, res, next) => {
             SSD,
         },
     };
-
-    console.log(spec);
 
     const costSorter = (dataObject) => {
         const costData = [];

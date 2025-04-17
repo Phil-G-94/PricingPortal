@@ -84,15 +84,15 @@ function SelectComponents() {
 
     return (
         <section className="container mx-auto">
-            <h2 className="text-4xl text-center">PricingPortal</h2>
+            <h1 className="text-4xl text-center">Quote Tool</h1>
             <div className="grid grid-cols-1 lg:grid-cols-2">
                 <section>
-                    <h3 className="text-center text-2xl">Select your components</h3>
+                    <h2 className="text-center text-2xl">Component Selector</h2>
                     <form
                         action="/"
                         method="POST"
                         onSubmit={onSubmitHandler}
-                        className="border-2 p-4 flex flex-col gap-4 "
+                        className="mx-2 p-4 flex flex-col gap-4 "
                     >
                         <div className="grid grid-rows-1">
                             <BaseComponents componentData={componentData} />
@@ -101,7 +101,9 @@ function SelectComponents() {
                         </div>
 
                         {responseMessage !== "" && (
-                            <p className="text-red-500">{responseMessage}</p>
+                            <p className="text-red-500 text-center">
+                                {responseMessage}
+                            </p>
                         )}
 
                         <div className="flex justify-center">
@@ -111,7 +113,7 @@ function SelectComponents() {
                                     style={{
                                         visibility: isLoading ? "hidden" : "visible",
                                     }}
-                                    className="absolute inset-0 flex items-center justify-center"
+                                    className="absolute inset-0 flex items-center justify-center text-inevi_dark_purple"
                                 >
                                     <Icon
                                         path={mdiCalculator}
