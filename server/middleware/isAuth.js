@@ -1,6 +1,10 @@
 import jwt from "jsonwebtoken";
 
 const isAuth = (req, res, next) => {
+    if (req.method === "OPTIONS") {
+        return next();
+    }
+
     try {
         const token = req.cookies.authToken;
 
