@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
 import BaseComponents from "./BaseComponents";
 import ResourceComponents from "./ResourceComponents";
+import Icon from "@mdi/react";
+import { mdiClose, mdiContentSaveEdit } from "@mdi/js";
 
 function EditPod({ componentData, closeEditModal, podId, setPodDataUpdateTrigger }) {
     const onEditPodHandler = async (event) => {
@@ -47,8 +49,20 @@ function EditPod({ componentData, closeEditModal, podId, setPodDataUpdateTrigger
                 <BaseComponents componentData={componentData} />
                 <ResourceComponents componentData={componentData} />
 
-                <button onClick={() => closeEditModal()}>Close</button>
-                <button type="submit">Update pod spec</button>
+                <div className="flex flex-row items-center justify-center gap-4 m-2">
+                    <button
+                        onClick={closeEditModal}
+                        className="bg-inevi_dark_purple text-white text-lg px-4 py-2 rounded-md max-w-fit"
+                    >
+                        <Icon path={mdiClose} size={1} title="Close" />
+                    </button>
+                    <button
+                        type="submit"
+                        className="bg-inevi_dark_purple text-white text-lg px-4 py-2 rounded-md max-w-fit"
+                    >
+                        <Icon path={mdiContentSaveEdit} size={1} title="Save" />
+                    </button>
+                </div>
             </form>
         </>
     );
