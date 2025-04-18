@@ -19,8 +19,6 @@ function PodDisplayCard({
     const openEditModal = () => setShowEditModal(true);
     const closeEditModal = () => setShowEditModal(false);
 
-    console.log(pod);
-
     return (
         <article className="border-2 p-2 rounded-md drop-shadow-2xl">
             <section className="w-min-sm">

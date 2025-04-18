@@ -4,8 +4,6 @@ import PodDisplayCard from "./PodDisplayCard.jsx";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 
-console.log(API_BASE_URL);
-
 function PodsDisplay({
     componentData,
     podDataUpdateTrigger,

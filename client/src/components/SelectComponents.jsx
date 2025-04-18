@@ -14,8 +14,6 @@ function SelectComponents() {
     const [podDataUpdateTrigger, setPodDataUpdateTrigger] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    const token = localStorage.getItem("token");
-
     useEffect(() => {
         try {
             const fetchComponentData = async () => {
@@ -47,7 +45,7 @@ function SelectComponents() {
         } catch (err) {
             console.error(err);
         }
-    }, [token]);
+    }, []);
 
     const onSubmitHandler = async (event) => {
         event.preventDefault();
