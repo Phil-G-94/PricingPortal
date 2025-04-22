@@ -23,9 +23,19 @@ PricingPortal/
 
 ## <img src="https://gist.githubusercontent.com/Phil-G-94/b0921d2344ee81afb6b7a4c8881f3803/raw/d59ec2cc780d776a946c11afbd94eee3ffbcc0cb/cog.svg" /> Environment Variables
 
+You will need following environment variables set before running the project locally.
+
 ### Server
 
+MDB_USER='yourdbusername'
+MDB_PASS='yourdbpassword'
+MDB_APP='yourdbappname'
+MDB_HOST='yourdbhostname'
+JWT_SECRET='yourjwtsecret'
+
 ### Client
+
+VITE_API_URL='http://localhost:yourport'
 
 ## <img src="https://gist.githubusercontent.com/Phil-G-94/b0921d2344ee81afb6b7a4c8881f3803/raw/d59ec2cc780d776a946c11afbd94eee3ffbcc0cb/laptop.svg" /> Getting Started
 
