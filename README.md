@@ -6,6 +6,10 @@
 
 ---
 
+## <img src="https://gist.githubusercontent.com/Phil-G-94/b0921d2344ee81afb6b7a4c8881f3803/raw/d59ec2cc780d776a946c11afbd94eee3ffbcc0cb/plug.svg" /> Deployment
+
+[Demo](https://pricingportal.netlify.app/)
+
 ## <img src="https://gist.githubusercontent.com/Phil-G-94/b0921d2344ee81afb6b7a4c8881f3803/raw/d59ec2cc780d776a946c11afbd94eee3ffbcc0cb/folder.svg" /> Project Structure
 
 ```txt
@@ -37,7 +41,7 @@ JWT_SECRET='yourjwtsecret'
 
 VITE_API_URL=http://localhost:yourport
 
-## <img src="https://gist.githubusercontent.com/Phil-G-94/b0921d2344ee81afb6b7a4c8881f3803/raw/d59ec2cc780d776a946c11afbd94eee3ffbcc0cb/laptop.svg" /> Getting Started
+## <img src="https://gist.githubusercontent.com/Phil-G-94/b0921d2344ee81afb6b7a4c8881f3803/raw/d59ec2cc780d776a946c11afbd94eee3ffbcc0cb/laptop.svg" /> Local
 
 If you've cloned the repository locally, you'll need to start the server and client separately.
 Navigate to the respective folder(s) in your terminal and run the following commands.
@@ -76,10 +80,6 @@ Install the required packages:
 Start the server:
 
 `npm run start`
-
-## <img src="https://gist.githubusercontent.com/Phil-G-94/b0921d2344ee81afb6b7a4c8881f3803/raw/d59ec2cc780d776a946c11afbd94eee3ffbcc0cb/plug.svg" /> Deployment
-
-[Demo](https://pricingportal.netlify.app/)
 
 ## <img src="https://gist.githubusercontent.com/Phil-G-94/b0921d2344ee81afb6b7a4c8881f3803/raw/d59ec2cc780d776a946c11afbd94eee3ffbcc0cb/creative-commons.svg" />  License
 
