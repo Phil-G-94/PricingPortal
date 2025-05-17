@@ -60,14 +60,14 @@ function PodDisplayCard({
 
                 <div className="flex flex-row justify-center gap-4 m-2">
                     <button
-                        className="bg-inevi_dark_purple text-inevi_white text-lg px-4 py-1 rounded-md max-w-fit hover:bg-red-700"
+                        className="bg-inevi_dark_purple text-inevi_white text-lg px-4 py-1 rounded-md max-w-fit hover:bg-red-700 cursor-pointer"
                         onClick={() => onDeletePodHandler(pod._id)}
                     >
                         <Icon path={mdiTrashCan} size={1} title="Delete" />
                     </button>
 
                     <button
-                        className="bg-inevi_dark_purple text-inevi_white text-lg px-4 py-1 rounded-md max-w-fit hover:bg-amber-500"
+                        className="bg-inevi_dark_purple text-inevi_white text-lg px-4 py-1 rounded-md max-w-fit hover:bg-amber-500 cursor-pointer"
                         onClick={() => {
                             openEditModal();
                         }}
