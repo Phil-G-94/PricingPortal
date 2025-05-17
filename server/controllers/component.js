@@ -2,6 +2,8 @@ import { validationResult } from "express-validator";
 import { fetchComponents } from "../database/components.js";
 import { Pod } from "../models/pod.js";
 import { User } from "../models/user.js";
+import { ObjectId } from "mongodb";
+import { getDb } from "../database/connection.js";
 
 const getComponents = async (req, res, next) => {
     try {
@@ -32,104 +34,146 @@ const postComponents = async (req, res, next) => {
 
     const errorResult = validationResult(req);
 
-    const gpuQuantity = +req.body["GPU_quantity"];
+    // const gpuQuantity = +req.body["GPU_quantity"];
 
-    const ramQuantity = +req.body["RAM_quantity"];
+    // const ramQuantity = +req.body["RAM_quantity"];
 
-    const ssdQuantity = +req.body["SSD_quantity"];
+    // const ssdQuantity = +req.body["SSD_quantity"];
 
-    const parseComponent = (data, quantity = 1) => {
-        const [name, cost] = data?.split(" : ") || ["", "0"];
-        return { name, cost: +cost * quantity, quantity: quantity };
-    };
+    // const parseComponent = (data, quantity = 1) => {
+    //     const [name, cost] = data?.split(" : ") || ["", "0"];
+    //     return { name, cost: +cost * quantity, quantity: quantity };
+    // };
 
-    const chassis = parseComponent(req.body.chassis);
-    const motherboard = parseComponent(req.body.motherboard);
-    const coolingCabling = parseComponent(req.body.coolingCabling);
-    const islc = parseComponent(req.body.islc);
-    const CPU = parseComponent(req.body.CPU);
-    const GPU = parseComponent(req.body.GPU, gpuQuantity);
-    const RAM = parseComponent(req.body.RAM, ramQuantity);
-    const SSD = parseComponent(req.body.SSD, ssdQuantity);
+    // const chassis = parseComponent(req.body.chassis);
+    // const motherboard = parseComponent(req.body.motherboard);
+    // const coolingCabling = parseComponent(req.body.coolingCabling);
+    // const islc = parseComponent(req.body.islc);
+    // const CPU = parseComponent(req.body.CPU);
+    // const GPU = parseComponent(req.body.GPU, gpuQuantity);
+    // const RAM = parseComponent(req.body.RAM, ramQuantity);
+    // const SSD = parseComponent(req.body.SSD, ssdQuantity);
+    // const spec = {
+    //     baseComponents: {
+    //         chassis,
+    //         motherboard,
+    //         coolingCabling,
+    //         islc,
+    //     },
+    //     resourceComponents: {
+    //         CPU,
+    //         GPU,
+    //         RAM,
+    //         SSD,
+    //     },
+    // };
 
-    const spec = {
-        baseComponents: {
-            chassis,
-            motherboard,
-            coolingCabling,
-            islc,
-        },
-        resourceComponents: {
-            CPU,
-            GPU,
-            RAM,
-            SSD,
-        },
-    };
+    // const costSorter = (dataObject) => {
+    //     const costData = [];
 
-    const costSorter = (dataObject) => {
-        const costData = [];
+    //     for (const c of Object.values(dataObject)) {
+    //         costData.push(c.cost);
+    //     }
 
-        for (const c of Object.values(dataObject)) {
-            costData.push(c.cost);
-        }
+    //     return costData;
+    // };
 
-        return costData;
-    };
+    // const baseComponentCost = costSorter(spec.baseComponents).reduce(
+    //     (partialSum, accumulator) => partialSum + accumulator,
+    //     0
+    // );
 
-    const baseComponentCost = costSorter(spec.baseComponents).reduce(
-        (partialSum, accumulator) => partialSum + accumulator,
-        0
-    );
+    // const resourceComponentCost =
+    //     spec.resourceComponents.CPU.cost +
+    //     7 * spec.resourceComponents.GPU.cost +
+    //     spec.resourceComponents.RAM.cost +
+    //     spec.resourceComponents.SSD.cost;
 
-    const resourceComponentCost =
-        spec.resourceComponents.CPU.cost +
-        7 * spec.resourceComponents.GPU.cost +
-        spec.resourceComponents.RAM.cost +
-        spec.resourceComponents.SSD.cost;
+    // const margin = 3500;
 
-    const margin = 3500;
+    // const resellerPrice = baseComponentCost + resourceComponentCost + margin;
+    // const retailPrice = baseComponentCost + resourceComponentCost + (1000 + margin);
 
-    const resellerPrice = baseComponentCost + resourceComponentCost + margin;
-    const retailPrice = baseComponentCost + resourceComponentCost + (1000 + margin);
+    // const user = await User.findUserById(req.userId);
 
-    const user = await User.findUserById(req.userId);
+    // if (!user) {
+    //     throw new Error("User does not exist.");
+    // }
 
-    if (!user) {
-        throw new Error("User does not exist.");
-    }
+    // if (!errorResult.isEmpty()) {
+    //     const error = new Error("Validation failed. Please check your input values");
+    //     error.statusCode = 422;
+    //     error.message = errorResult.array();
+    // }
 
-    if (!errorResult.isEmpty()) {
-        const error = new Error("Validation failed. Please check your input values");
-        error.statusCode = 422;
-        error.message = errorResult.array();
-    }
+    // try {
+    //     const pod = new Pod({
+    //         spec,
+    //         resellerPrice,
+    //         retailPrice,
+    //         user,
+    //         createdAt: dateNow,
+    //     });
 
-    try {
-        const pod = new Pod({
-            spec,
-            resellerPrice,
-            retailPrice,
-            user,
-            createdAt: dateNow,
-        });
+    //     await pod.save();
 
-        await pod.save();
+    //     res.status(200).json({
+    //         message: "Successful post",
+    //         spec,
+    //         resellerPrice,
+    //         retailPrice,
+    //         errors: errorResult.array(),
+    //     });
+    // } catch (err) {
+    //     if (!err.statusCode) {
+    //         err.statusCode = 500;
+    //     }
 
-        res.status(200).json({
-            message: "Successful post",
-            spec,
-            resellerPrice,
-            retailPrice,
-            errors: errorResult.array(),
-        });
-    } catch (err) {
-        if (!err.statusCode) {
-            err.statusCode = 500;
-        }
+    //     next(err);
+    // }
 
-        next(err);
-    }
+    const db = await getDb();
+
+    const {
+        chassis,
+        motherboard,
+        coolingCabling,
+        islc,
+        CPU,
+        GPU,
+        GPU_quantity,
+        RAM,
+        RAM_quantity,
+        SSD,
+        SSD_quantity,
+    } = req.body;
+
+    // cmp ID array
+    const selectedCmpIds = [
+        chassis,
+        motherboard,
+        coolingCabling,
+        islc,
+        CPU,
+        GPU,
+        GPU_quantity,
+        RAM,
+        RAM_quantity,
+        SSD,
+        SSD_quantity,
+    ]
+        .filter(Boolean)
+        .map((id) =>
+            ObjectId.isValid(id) ? ObjectId.createFromHexString(id) : null
+        )
+        .filter(Boolean);
+
+    const components = await db
+        .collection("components")
+        .find({ _id: { $in: selectedCmpIds } })
+        .toArray();
+
+    console.log(components);
 };
 
 export { getComponents, postComponents };

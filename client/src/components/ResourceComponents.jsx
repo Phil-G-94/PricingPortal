@@ -16,7 +16,7 @@ function ResourceComponents({ componentData }) {
                             return (
                                 <option
                                     label={cmp.name}
-                                    value={`${cmp.name} : ${cmp.cost}`}
+                                    value={cmp._id}
                                     key={cmp._id}
                                 >
                                     {cmp.name}
@@ -39,7 +39,7 @@ function ResourceComponents({ componentData }) {
                             return (
                                 <option
                                     label={cmp.name}
-                                    value={`${cmp.name} : ${cmp.cost}`}
+                                    value={cmp._id}
                                     key={cmp._id}
                                 >
                                     {cmp.name}
@@ -74,7 +74,7 @@ function ResourceComponents({ componentData }) {
                             return (
                                 <option
                                     label={cmp.name}
-                                    value={`${cmp.name} : ${cmp.cost}`}
+                                    value={cmp._id}
                                     key={cmp._id}
                                 >
                                     {cmp.name}
@@ -108,10 +108,7 @@ function ResourceComponents({ componentData }) {
                         .filter((cmp) => cmp.type === "SSD")
                         .map((cmp) => {
                             return (
-                                <option
-                                    value={`${cmp.name} : ${cmp.cost}`}
-                                    key={cmp._id}
-                                >
+                                <option value={cmp._id} key={cmp._id}>
                                     {cmp.name}
                                 </option>
                             );
