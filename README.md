@@ -91,3 +91,7 @@ Start the server:
 Phil Georgiou
 
 ## <img src="https://gist.githubusercontent.com/Phil-G-94/b0921d2344ee81afb6b7a4c8881f3803/raw/d59ec2cc780d776a946c11afbd94eee3ffbcc0cb/book-pen.svg" /> Notes
+ToDo: 
+  1) Rework component(s) responsible for creating or editing pods
+  2) Improvide server-side validation coverage
+  3) Client-side validation improvements?
