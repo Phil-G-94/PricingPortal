@@ -19,28 +19,20 @@ function PodDisplayCard({
     const openEditModal = () => setShowEditModal(true);
     const closeEditModal = () => setShowEditModal(false);
 
+    console.log(pod);
+
     return (
         <article className="border-2 p-2 rounded-md drop-shadow-2xl">
             <section className="w-min-sm">
-                <h4 className="font-bold">Pod ID: {pod._id}</h4>
-                <p>
-                    <span className="font-bold">CPU: </span>
-                    {pod.spec.resourceComponents.CPU.name}
-                </p>
-                <p>
-                    <span className="font-bold">GPU: </span>
-                    {pod.spec.resourceComponents.GPU.name}
-                </p>
-                <p>
-                    <span className="font-bold">RAM: </span>
-                    {pod.spec.resourceComponents.RAM.name} x
-                    {pod.spec.resourceComponents.RAM.quantity}
-                </p>
-                <p>
-                    <span className="font-bold">Storage: </span>
-                    {pod.spec.resourceComponents.SSD.name} x
-                    {pod.spec.resourceComponents.SSD.quantity}
-                </p>
+                <h4 className="font-bold text-xs">Pod ID: {pod._id}</h4>
+                {pod.spec.resourceComponents.map(([type, { name, quantity }]) => {
+                    return (
+                        <p key={name}>
+                            <span className="font-bold">{type} </span>
+                            {name} x {quantity ? quantity : ""}
+                        </p>
+                    );
+                })}
 
                 <p>
                     <span className="font-bold">Reseller price: </span> £
