@@ -2,6 +2,8 @@ import { validationResult } from "express-validator";
 import { fetchComponents } from "../database/components.js";
 import { Pod } from "../models/pod.js";
 import { User } from "../models/user.js";
+import { ObjectId } from "mongodb";
+import { getDb } from "../database/connection.js";
 
 const getComponents = async (req, res, next) => {
     try {
@@ -32,67 +34,100 @@ const postComponents = async (req, res, next) => {
 
     const errorResult = validationResult(req);
 
-    const gpuQuantity = +req.body["GPU_quantity"];
+    const db = await getDb();
 
-    const ramQuantity = +req.body["RAM_quantity"];
+    const {
+        chassis,
+        motherboard,
+        coolingCabling,
+        islc,
+        CPU,
+        GPU,
+        GPU_quantity,
+        RAM,
+        RAM_quantity,
+        SSD,
+        SSD_quantity,
+    } = req.body;
 
-    const ssdQuantity = +req.body["SSD_quantity"];
+    // selected cmp ID array
+    const selectedCmpIds = [
+        chassis,
+        motherboard,
+        coolingCabling,
+        islc,
+        CPU,
+        GPU,
+        GPU_quantity,
+        RAM,
+        RAM_quantity,
+        SSD,
+        SSD_quantity,
+    ]
+        .filter(Boolean)
+        .map((id) =>
+            ObjectId.isValid(id) ? ObjectId.createFromHexString(id) : null
+        )
+        .filter(Boolean);
 
-    const parseComponent = (data, quantity = 1) => {
-        const [name, cost] = data?.split(" : ") || ["", "0"];
-        return { name, cost: +cost * quantity, quantity: quantity };
+    // fetch selected cmps from DB (by id)
+    const selectedCmps = await db
+        .collection("components")
+        .find({ _id: { $in: selectedCmpIds } })
+        .toArray();
+
+    // transform array of cmp objects into 2D array
+    const extractCmpInfo = ({ ids, quantities, selectedCmps }) => {
+        return Object.entries(ids).map(([key, id]) => {
+            const quantity = quantities?.[key] ?? 1; // nullish coalescing - return 11 if !quantities
+
+            const component = selectedCmps.find((cmp) => cmp._id.toString() === id);
+
+            return [
+                key,
+                {
+                    name: component.name,
+                    cost: component.cost * quantity,
+                    quantity,
+                },
+            ];
+        });
     };
 
-    const chassis = parseComponent(req.body.chassis);
-    const motherboard = parseComponent(req.body.motherboard);
-    const coolingCabling = parseComponent(req.body.coolingCabling);
-    const islc = parseComponent(req.body.islc);
-    const CPU = parseComponent(req.body.CPU);
-    const GPU = parseComponent(req.body.GPU, gpuQuantity);
-    const RAM = parseComponent(req.body.RAM, ramQuantity);
-    const SSD = parseComponent(req.body.SSD, ssdQuantity);
+    // sum up all component costs
+    const sumCmpCosts = (components) => {
+        return components.reduce((total, [, { cost }]) => {
+            return total + cost;
+        }, 0);
+    };
 
+    // grasp pod spec
     const spec = {
-        baseComponents: {
-            chassis,
-            motherboard,
-            coolingCabling,
-            islc,
-        },
-        resourceComponents: {
-            CPU,
-            GPU,
-            RAM,
-            SSD,
-        },
+        baseComponents: extractCmpInfo({
+            ids: { chassis, motherboard, coolingCabling, islc },
+            selectedCmps,
+        }),
+
+        resourceComponents: extractCmpInfo({
+            ids: { CPU, GPU, RAM, SSD },
+            quantities: {
+                GPU: +GPU_quantity || 1,
+                RAM: +RAM_quantity || 1,
+                SSD: +SSD_quantity || 1,
+            },
+            selectedCmps,
+        }),
     };
 
-    const costSorter = (dataObject) => {
-        const costData = [];
-
-        for (const c of Object.values(dataObject)) {
-            costData.push(c.cost);
-        }
-
-        return costData;
-    };
-
-    const baseComponentCost = costSorter(spec.baseComponents).reduce(
-        (partialSum, accumulator) => partialSum + accumulator,
-        0
-    );
-
-    const resourceComponentCost =
-        spec.resourceComponents.CPU.cost +
-        7 * spec.resourceComponents.GPU.cost +
-        spec.resourceComponents.RAM.cost +
-        spec.resourceComponents.SSD.cost;
-
+    // cost and price calcs
+    const baseCmpCost = sumCmpCosts(spec.baseComponents);
+    const resourceCmpCost = sumCmpCosts(spec.resourceComponents);
     const margin = 3500;
+    const resellerFee = 1000;
+    const resellerPrice = baseCmpCost + resourceCmpCost + margin;
+    const retailPrice = baseCmpCost + resourceCmpCost + (resellerFee + margin);
 
-    const resellerPrice = baseComponentCost + resourceComponentCost + margin;
-    const retailPrice = baseComponentCost + resourceComponentCost + (1000 + margin);
-
+    // validation
     const user = await User.findUserById(req.userId);
 
     if (!user) {
@@ -105,6 +140,7 @@ const postComponents = async (req, res, next) => {
         error.message = errorResult.array();
     }
 
+    // save pod spec to db
     try {
         const pod = new Pod({
             spec,

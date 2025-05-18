@@ -18,7 +18,7 @@ function BaseComponents({ componentData }) {
                                 <option
                                     key={cmp._id}
                                     label={cmp.name}
-                                    value={`${cmp.name} : ${cmp.cost}`}
+                                    value={cmp._id}
                                 >
                                     {cmp.name}
                                 </option>
@@ -41,7 +41,7 @@ function BaseComponents({ componentData }) {
                             return (
                                 <option
                                     label={cmp.name}
-                                    value={`${cmp.name} : ${cmp.cost}`}
+                                    value={cmp._id}
                                     key={cmp._id}
                                 >
                                     {cmp.name}
@@ -65,7 +65,7 @@ function BaseComponents({ componentData }) {
                                 name="coolingCabling"
                                 id={`coolingCabling_${cmp._id}`}
                                 type="checkbox"
-                                value={`${cmp.name} : ${cmp.cost}`}
+                                value={cmp._id}
                                 placeholder={cmp.cost}
                                 required
                                 defaultChecked={true}
@@ -88,7 +88,7 @@ function BaseComponents({ componentData }) {
                                 name="islc"
                                 id={`islc_${cmp._id}`}
                                 type="checkbox"
-                                value={`${cmp.name} : ${cmp.cost}`}
+                                value={cmp._id}
                                 placeholder={cmp.cost}
                                 required
                                 defaultChecked={true}
