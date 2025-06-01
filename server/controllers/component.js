@@ -7,7 +7,23 @@ import { getDb } from "../database/connection.js";
 
 const getComponents = async (req, res, next) => {
     try {
-        const components = await fetchComponents();
+        const loadedComponents = await fetchComponents();
+        let components;
+        let baseComponents = [];
+        let resourceComponents = [];
+
+        loadedComponents.map(component => {
+            if (component.type === "chassis" || component.type === "motherboard" || component.type === "islc" || component.type === "cooling and cabling") {
+                baseComponents.push(component);
+            } else if (component.type === "GPU" || component.type === "CPU" || component.type === "RAM" || component.type === "SSD") {
+                resourceComponents.push(component);
+            }
+        });
+
+        components = {
+            baseComponents,
+            resourceComponents,
+        };
 
         if (components.length === 0) {
             const error = new Error();
@@ -83,11 +99,13 @@ const postComponents = async (req, res, next) => {
 
             const component = selectedCmps.find((cmp) => cmp._id.toString() === id);
 
+            console.log(component);
+
             return [
                 key,
                 {
-                    name: component.name,
-                    cost: component.cost * quantity,
+                    name: component?.name,
+                    cost: component?.cost * quantity,
                     quantity,
                 },
             ];
