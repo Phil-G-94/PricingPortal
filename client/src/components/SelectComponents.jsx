@@ -9,7 +9,7 @@ import Loader from "./Loader.jsx";
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 function SelectComponents() {
-    const [componentData, setComponentData] = useState([]);
+    const [componentData, setComponentData] = useState({});
     const [responseMessage, setResponseMessage] = useState("");
     const [podDataUpdateTrigger, setPodDataUpdateTrigger] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -93,9 +93,13 @@ function SelectComponents() {
                         className="mx-2 p-4 flex flex-col gap-4 "
                     >
                         <div className="grid grid-rows-1">
-                            <BaseComponents componentData={componentData} />
+                            <BaseComponents
+                                componentData={componentData?.baseComponents}
+                            />
 
-                            <ResourceComponents componentData={componentData} />
+                            <ResourceComponents
+                                componentData={componentData?.resourceComponents}
+                            />
                         </div>
 
                         {responseMessage !== "" && (

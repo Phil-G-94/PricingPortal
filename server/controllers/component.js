@@ -12,10 +12,20 @@ const getComponents = async (req, res, next) => {
         let baseComponents = [];
         let resourceComponents = [];
 
-        loadedComponents.map(component => {
-            if (component.type === "chassis" || component.type === "motherboard" || component.type === "islc" || component.type === "cooling and cabling") {
+        loadedComponents.map((component) => {
+            if (
+                component.type === "chassis" ||
+                component.type === "motherboard" ||
+                component.type === "islc" ||
+                component.type === "cooling and cabling"
+            ) {
                 baseComponents.push(component);
-            } else if (component.type === "GPU" || component.type === "CPU" || component.type === "RAM" || component.type === "SSD") {
+            } else if (
+                component.type === "GPU" ||
+                component.type === "CPU" ||
+                component.type === "RAM" ||
+                component.type === "SSD"
+            ) {
                 resourceComponents.push(component);
             }
         });
@@ -31,6 +41,8 @@ const getComponents = async (req, res, next) => {
             error.statusCode = 500;
             return next(error);
         }
+
+        console.log(components);
 
         res.status(200).json({
             message: "Successful fetch.",

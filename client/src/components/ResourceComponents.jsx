@@ -11,7 +11,7 @@ function ResourceComponents({ componentData }) {
                     className="border-2 rounded-md p-2 w-full"
                 >
                     {componentData
-                        .filter((cmp) => cmp.type === "CPU")
+                        ?.filter((cmp) => cmp.type === "CPU")
                         .map((cmp) => {
                             return (
                                 <option
@@ -34,7 +34,7 @@ function ResourceComponents({ componentData }) {
                     className="border-2 rounded-md p-2 w-full"
                 >
                     {componentData
-                        .filter((cmp) => cmp.type === "GPU")
+                        ?.filter((cmp) => cmp.type === "GPU")
                         .map((cmp) => {
                             return (
                                 <option
@@ -69,7 +69,7 @@ function ResourceComponents({ componentData }) {
                     className="border-2 rounded-md p-2 w-full"
                 >
                     {componentData
-                        .filter((cmp) => cmp.type === "RAM")
+                        ?.filter((cmp) => cmp.type === "RAM")
                         .map((cmp) => {
                             return (
                                 <option
@@ -105,7 +105,7 @@ function ResourceComponents({ componentData }) {
                     className="border-2 rounded-md p-2 w-full"
                 >
                     {componentData
-                        .filter((cmp) => cmp.type === "SSD")
+                        ?.filter((cmp) => cmp.type === "SSD")
                         .map((cmp) => {
                             return (
                                 <option value={cmp._id} key={cmp._id}>
@@ -132,7 +132,7 @@ function ResourceComponents({ componentData }) {
 }
 
 ResourceComponents.propTypes = {
-    componentData: PropTypes.array.isRequired,
+    componentData: PropTypes.array,
 };
 
 export default ResourceComponents;

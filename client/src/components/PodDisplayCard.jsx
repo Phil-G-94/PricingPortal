@@ -19,7 +19,7 @@ function PodDisplayCard({
     const openEditModal = () => setShowEditModal(true);
     const closeEditModal = () => setShowEditModal(false);
 
-    console.log(pod);
+    console.log(pod.spec.resourceComponents);
 
     return (
         <article className="border-2 p-2 rounded-md drop-shadow-2xl">
@@ -84,7 +84,10 @@ function PodDisplayCard({
 
 PodDisplayCard.propTypes = {
     pod: PropTypes.object.isRequired,
-    componentData: PropTypes.array.isRequired,
+    componentData: PropTypes.shape({
+        baseComponents: PropTypes.arrayOf(PropTypes.object),
+        resourceComponents: PropTypes.arrayOf(PropTypes.object),
+    }),
     onDeletePodHandler: PropTypes.func.isRequired,
     setPodDataUpdateTrigger: PropTypes.func.isRequired,
 };

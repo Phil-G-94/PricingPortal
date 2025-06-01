@@ -100,7 +100,11 @@ function PodsDisplay({
 }
 
 PodsDisplay.propTypes = {
-    componentData: PropTypes.array.isRequired,
+    componentData: PropTypes.shape({
+        baseComponents: PropTypes.arrayOf(PropTypes.object),
+        resourceComponents: PropTypes.arrayOf(PropTypes.object),
+    }),
+
     podDataUpdateTrigger: PropTypes.bool.isRequired,
     setPodDataUpdateTrigger: PropTypes.func.isRequired,
 };

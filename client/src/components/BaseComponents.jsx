@@ -12,7 +12,7 @@ function BaseComponents({ componentData }) {
                     className="border-2 rounded-md p-2 w-full"
                 >
                     {componentData
-                        .filter((cmp) => cmp.type === "chassis")
+                        ?.filter((cmp) => cmp.type === "chassis")
                         .map((cmp) => {
                             return (
                                 <option
@@ -36,7 +36,7 @@ function BaseComponents({ componentData }) {
                     className="border-2 rounded-md p-2 w-full"
                 >
                     {componentData
-                        .filter((cmp) => cmp.type === "motherboard")
+                        ?.filter((cmp) => cmp.type === "motherboard")
                         .map((cmp) => {
                             return (
                                 <option
@@ -52,7 +52,7 @@ function BaseComponents({ componentData }) {
             </label>
 
             {componentData
-                .filter((cmp) => cmp.type === "cooling and cabling")
+                ?.filter((cmp) => cmp.type === "cooling and cabling")
                 .map((cmp) => {
                     return (
                         <label
@@ -75,7 +75,7 @@ function BaseComponents({ componentData }) {
                 })}
 
             {componentData
-                .filter((cmp) => cmp.type === "islc")
+                ?.filter((cmp) => cmp.type === "islc")
                 .map((cmp) => {
                     return (
                         <label
@@ -101,7 +101,7 @@ function BaseComponents({ componentData }) {
 }
 
 BaseComponents.propTypes = {
-    componentData: PropTypes.array.isRequired,
+    componentData: PropTypes.array,
 };
 
 export default BaseComponents;
