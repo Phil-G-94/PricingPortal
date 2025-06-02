@@ -46,6 +46,7 @@ router.post(
  */
 
 router.get("/pods", podsController.getPods);
+router.get("/pods/:podId", podsController.getPod);
 router.delete("/pods/:podId", podsController.deletePod);
 router.put("/pods/:podId", podsController.editPod);
 

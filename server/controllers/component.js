@@ -42,8 +42,6 @@ const getComponents = async (req, res, next) => {
       return next(error);
     }
 
-    console.log(components);
-
     res.status(200).json({
       message: "Successful fetch.",
       components,
@@ -105,7 +103,7 @@ const postComponents = async (req, res, next) => {
   // transform array of cmp objects into 2D array
   const extractCmpInfo = ({ ids, quantities, selectedCmps }) => {
     return Object.entries(ids).map(([key, id]) => {
-      const quantity = quantities?.[key] ?? 1; // nullish coalescing - return 11 if !quantities
+      const quantity = quantities?.[key] ?? 1; // nullish coalescing - return 1 if !quantities
 
       const component = selectedCmps.find((cmp) => cmp._id.toString() === id);
       return [
@@ -114,6 +112,7 @@ const postComponents = async (req, res, next) => {
           name: component?.name,
           cost: component?.cost * quantity,
           quantity,
+          id: component._id,
         },
       ];
     });
@@ -126,7 +125,7 @@ const postComponents = async (req, res, next) => {
     }, 0);
   };
 
-  // grasp pod spec
+  // pod spec
   const spec = {
     baseComponents: extractCmpInfo({
       ids: { chassis, motherboard, coolingCabling, islc },
