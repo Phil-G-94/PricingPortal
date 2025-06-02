@@ -14,31 +14,28 @@ const app = express();
  */
 app.set("trust proxy", 1);
 
-const allowedOrigins = [
-    "https://pricingportal.netlify.app",
-    "http://localhost:5173",
-];
+const allowedOrigins = ["https://pricingportal.netlify.app", "http://localhost:5173"];
 
 /**
  * middleware
  */
 
 app.use(
-    cors({
-        origin: (origin, callback) => {
-            if (!origin) return callback(null, true);
+  cors({
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
 
-            if (allowedOrigins.includes(origin)) {
-                callback(null, true);
-            } else {
-                callback(new Error("Not allowed by CORS"));
-            }
-        },
-        methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-        credentials: true,
-        allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
-        optionsSuccessStatus: 200,
-    })
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+    optionsSuccessStatus: 200,
+  })
 );
 
 app.options("*", cors());
@@ -67,35 +64,33 @@ app.use("/api", isAuth, router);
  * error handling middleware
  */
 app.use((err, req, res, next) => {
-    if (res.headersSent) {
-        return next(err);
-    }
+  if (res.headersSent) {
+    return next(err);
+  }
 
-    const status = err.statusCode || 500;
+  const status = err.statusCode || 500;
 
-    const message = err.message;
+  const message = err.message;
 
-    const data = err.data;
+  const data = err.data;
 
-    res.status(status)
-        .set("Content-Type", "application/json")
-        .json({ message, data });
+  res.status(status).set("Content-Type", "application/json").json({ message, data });
 });
 
 /**
  * connect to DB and instantiate server
  */
 (async function startServer() {
-    try {
-        await dbConnect();
+  try {
+    await dbConnect();
 
-        app.listen(process.env.PORT || 8080, () => {
-            console.log("Server is running on port", process.env.PORT || 8080);
-        });
-    } catch (error) {
-        console.log(error);
-        process.exitCode = 1;
-    }
+    app.listen(process.env.PORT || 8080, () => {
+      console.log("Server is running on port", process.env.PORT || 8080);
+    });
+  } catch (error) {
+    console.log(error);
+    process.exitCode = 1;
+  }
 })();
 
 /**
@@ -103,11 +98,11 @@ app.use((err, req, res, next) => {
  */
 
 const handleShutdown = async (signal) => {
-    console.log(`${signal} received. Closing database connection...`);
+  console.log(`${signal} received. Closing database connection...`);
 
-    console.log("Database connection closed. Exiting process.");
+  console.log("Database connection closed. Exiting process.");
 
-    process.exit(0);
+  process.exit(0);
 };
 
 process.on("SIGINT", () => handleShutdown("SIGINT"));

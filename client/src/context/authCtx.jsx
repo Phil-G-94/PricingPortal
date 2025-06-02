@@ -1,9 +1,9 @@
 import { createContext } from "react";
 
 const ctx = {
-    isAuthed: false,
-    loadingAuth: false,
-    fetchAuth: undefined,
+  isAuthed: false,
+  loadingAuth: false,
+  fetchAuth: undefined,
 };
 
 const AuthContext = createContext(ctx);

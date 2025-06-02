@@ -1,6 +1,6 @@
 import Signup from "../components/Signup.jsx";
 
 function SignupPage() {
-    return <Signup />;
+  return <Signup />;
 }
 export default SignupPage;

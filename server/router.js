@@ -10,7 +10,7 @@ const router = express.Router();
  */
 
 router.get("/check-auth", (req, res) => {
-    res.status(200).json({ authenticated: true });
+  res.status(200).json({ authenticated: true });
 });
 
 /**
@@ -20,25 +20,25 @@ router.get("/check-auth", (req, res) => {
 router.get("/components", componentController.getComponents);
 
 router.post(
-    "/components",
+  "/components",
 
-    [
-        validator
-            .body([
-                "chassis",
-                "motherboard",
-                "islc",
-                "CPU",
-                "GPU",
-                "RAM",
-                "RAM_quantity",
-                "SSD",
-                "SSD_quantity",
-            ])
-            .notEmpty()
-            .escape(),
-    ],
-    componentController.postComponents
+  [
+    validator
+      .body([
+        "chassis",
+        "motherboard",
+        "islc",
+        "CPU",
+        "GPU",
+        "RAM",
+        "RAM_quantity",
+        "SSD",
+        "SSD_quantity",
+      ])
+      .notEmpty()
+      .escape(),
+  ],
+  componentController.postComponents
 );
 
 /**

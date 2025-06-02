@@ -2,3 +2,4 @@
 .env
 *access.log
 *logs
+.vscode

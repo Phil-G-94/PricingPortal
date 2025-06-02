@@ -3,23 +3,23 @@ import useAuth from "../hooks/useAuth";
 import { useEffect } from "react";
 
 function RequireAuth() {
-    const { isAuthed, loadingAuth } = useAuth();
+  const { isAuthed, loadingAuth } = useAuth();
 
-    const navigate = useNavigate();
-    const location = useLocation();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-    useEffect(() => {
-        if (loadingAuth) return;
+  useEffect(() => {
+    if (loadingAuth) return;
 
-        if (!isAuthed) {
-            navigate("/", {
-                state: location.pathname,
-                replace: true,
-            });
-        }
-    }, [isAuthed, loadingAuth, navigate, location.pathname]);
+    if (!isAuthed) {
+      navigate("/", {
+        state: location.pathname,
+        replace: true,
+      });
+    }
+  }, [isAuthed, loadingAuth, navigate, location.pathname]);
 
-    return isAuthed ? <Outlet /> : null;
+  return isAuthed ? <Outlet /> : null;
 }
 
 export default RequireAuth;

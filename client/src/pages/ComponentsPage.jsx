@@ -1,7 +1,7 @@
 import SelectComponents from "../components/SelectComponents.jsx";
 
 function ComponentsPage() {
-    return <SelectComponents />;
+  return <SelectComponents />;
 }
 
 export default ComponentsPage;
