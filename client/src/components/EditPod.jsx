@@ -6,7 +6,7 @@ import { mdiClose, mdiContentSaveEdit } from "@mdi/js";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 
-function EditPod({ componentData, closeEditModal, podId, setPodDataUpdateTrigger }) {
+function EditPod({ pod, componentData, closeEditModal, podId, setPodDataUpdateTrigger }) {
   const onEditPodHandler = async (event) => {
     event.preventDefault();
 
@@ -42,11 +42,19 @@ function EditPod({ componentData, closeEditModal, podId, setPodDataUpdateTrigger
     }
   };
 
+  console.log(pod.spec);
+
   return (
     <>
       <form action={`/pods/${podId}`} method="PUT" onSubmit={onEditPodHandler}>
-        <BaseComponents componentData={componentData?.baseComponents} />
-        <ResourceComponents componentData={componentData?.resourceComponents} />
+        <BaseComponents
+          initialComponentData={pod.spec.baseComponents}
+          componentData={componentData.baseComponents}
+        />
+        <ResourceComponents
+          initialComponentData={pod.spec.resourceComponents}
+          componentData={componentData.resourceComponents}
+        />
 
         <div className="flex flex-row items-center justify-center gap-4 m-2">
           <button
@@ -68,6 +76,7 @@ function EditPod({ componentData, closeEditModal, podId, setPodDataUpdateTrigger
 }
 
 EditPod.propTypes = {
+  pod: PropTypes.object,
   componentData: PropTypes.shape({
     baseComponents: PropTypes.arrayOf(PropTypes.object),
     resourceComponents: PropTypes.arrayOf(PropTypes.object),

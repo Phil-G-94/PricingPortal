@@ -63,6 +63,7 @@ function PodDisplayCard({ pod, componentData, onDeletePodHandler, setPodDataUpda
         <Modal showEditModal={showEditModal} closeEditModal={closeEditModal}>
           <EditPod
             componentData={componentData}
+            pod={pod}
             podId={pod._id}
             closeEditModal={closeEditModal}
             setPodDataUpdateTrigger={setPodDataUpdateTrigger}

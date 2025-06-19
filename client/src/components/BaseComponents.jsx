@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-function BaseComponents({ componentData }) {
+function BaseComponents({ initialComponentData, componentData }) {
   return (
     <section className="flex flex-col gap-2">
       <label htmlFor="chassis" className="flex flex-col w-full">
@@ -80,6 +80,7 @@ function BaseComponents({ componentData }) {
 }
 
 BaseComponents.propTypes = {
+  initialComponentData: PropTypes.array,
   componentData: PropTypes.array,
 };
 
